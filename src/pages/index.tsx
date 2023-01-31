@@ -13,13 +13,9 @@ export default function Home() {
       .then((res) => res.json())
       .then((data) => {
         console.log("Fetched data from server: ", data)
-        if (data.scoreboard && data.scoreboard.games) {
-          setGamesData(data.scoreboard.games)
-
-          const gameTimeUTC = new Date(data.scoreboard.gameDate)
-          const options: Intl.DateTimeFormatOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-          const gameDateString = new Intl.DateTimeFormat('en-US', options).format(gameTimeUTC)
-          setGameDate(gameDateString)  
+        if (data) {
+          setGamesData(data.games)
+          setGameDate(data.date)  
         }
         setLoading(false)
     })
@@ -40,5 +36,3 @@ export default function Home() {
     </>
   )
 }
-
-// 0032100001

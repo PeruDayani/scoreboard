@@ -1,15 +1,13 @@
+import { cleanScoreboardByDate } from '@/utils/cleanScoreboard';
+import { Scoreboard } from '@/utils/types';
 import type { NextApiRequest, NextApiResponse } from 'next'
 const nba = require('nba-api-client');
 
-type Data = {
-  name: string
-}
-
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<Scoreboard|Error>
 ) {
-
+  try {
     const query = req.query;
     const { date } = query;
 
@@ -18,5 +16,8 @@ export default async function handler(
       GameDate: date,
       LeagueID: "00"
     })
-    res.status(200).json(data)
+    res.status(200).json(cleanScoreboardByDate(data)) 
+  } catch (error: any) {
+    res.status(404).json(error)
+  }
 }
