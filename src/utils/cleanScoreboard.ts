@@ -11,6 +11,17 @@ function extractTeamData(data: any) : Team {
     }
 }
 
+function gameStatus(data: any) : string {
+    if (data.gameStatusText.includes('Final')) {
+        return 'Done'
+    } else if (data.gameStatusText.includes('ET')) {
+        return 'Scheduled'
+    } else {
+        return 'Live'
+
+    }
+}
+
 function cleanScoreboard(data: any) : Scoreboard {
 
     let date = ''
@@ -24,6 +35,7 @@ function cleanScoreboard(data: any) : Scoreboard {
 
         games = data.scoreboard.games.map((game: any) => ({
             gameId: game.gameId,
+            gameStatus: gameStatus(game),
             gameStatusText: game.gameStatusText,
             homeTeam: extractTeamData(game.homeTeam),
             awayTeam: extractTeamData(game.awayTeam)
@@ -58,6 +70,7 @@ function cleanScoreboardByDate(data: any) : Scoreboard {
 
             games.push({
                 gameId: homeTeam['GAME_ID'],
+                gameStatus: "TODO",
                 gameStatusText: 'Final',
                 homeTeam: extractTeamData(homeTeam),
                 awayTeam: extractTeamData(awayTeam)

@@ -17,6 +17,7 @@ export default async function handler(
       
       res.status(200).json(cleanBoxscore(data))    
     } catch (error: any) {
+      console.log("Error: ", error)
       res.status(404).json(error)
     }
 }

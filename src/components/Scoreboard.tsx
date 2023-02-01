@@ -3,12 +3,11 @@ import { Game } from '@/utils/types'
 
 export default function Scoreboard({date, games}: {date: any, games: any}) {    
 
-    // Move this to a game attribute! 
-    const liveGames = games.filter((game: Game) => !(game.gameStatusText.includes('ET') || game.gameStatusText.includes('Final')))
-    const scheduledGames = games.filter((game: Game) => game.gameStatusText.includes('ET'))
-    const finishedGames = games.filter((game: Game) => game.gameStatusText.includes('Final'))
+    const liveGames = games.filter((game: Game) => game.gameStatus == 'Live')
+    const scheduledGames = games.filter((game: Game) => game.gameStatus == 'Scheduled')
+    const doneGames = games.filter((game: Game) => game.gameStatus == 'Done')
 
-    const sortedFinishedGames = finishedGames.sort(function(firstGame: any, secondGame: any) {
+    const sortedDoneGames = doneGames.sort(function(firstGame: any, secondGame: any) {
         const firstGameDiff = Math.abs(firstGame.homeTeam.score - firstGame.awayTeam.score)
         const secondGameDiff = Math.abs(secondGame.homeTeam.score - secondGame.awayTeam.score)
         return firstGameDiff - secondGameDiff
@@ -21,7 +20,7 @@ export default function Scoreboard({date, games}: {date: any, games: any}) {
             </div>
 
             <div className='flex flex-wrap justify-center'>
-                {sortedFinishedGames.map((game: Game) => <GameRow game={game} key={game.gameId}/>)}
+                {sortedDoneGames.map((game: Game) => <GameRow game={game} key={game.gameId}/>)}
 
                 {liveGames.map((game: Game) => <GameRow game={game} key={game.gameId}/>)}
 

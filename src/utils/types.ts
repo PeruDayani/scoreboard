@@ -9,9 +9,30 @@ type Team = {
 
 type Game = {
     gameId: string,
+    gameStatus: string,
     gameStatusText: string,
     homeTeam: Team,
     awayTeam: Team
+}
+
+type TeamStats = {
+    teamId: String,
+    teamName: String,
+
+    points: Number,
+    assists: Number,
+
+    reboundsTotal: Number,
+    reboundsDefensive: Number,
+    reboundsOffensive: Number,
+
+    threePointersMade: Number,
+    threePointersAttempted: Number,
+
+    blocks: Number,
+    blocksReceived: Number,
+    steals: Number,
+    turnovers: Number,
 }
 
 type PlayerStats = {
@@ -48,4 +69,4 @@ type BoxScoreData = {
     game: Game,
 }
 
-export type { Team, Game, PlayerStats, Scoreboard, BoxScore }
+export type { Team, Game, PlayerStats, TeamStats, Scoreboard, BoxScore }

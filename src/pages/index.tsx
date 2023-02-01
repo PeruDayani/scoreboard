@@ -33,7 +33,7 @@ export default function Home() {
       </Head>
 
       <div className='p-10'>
-        { isLoading ? <FontAwesomeIcon icon={faPersonHiking} shake /> : <Scoreboard date={gameDate} games={gamesData} />}
+        { isLoading ? <FontAwesomeIcon icon={faPersonHiking} shake size="10x"/> : <Scoreboard date={gameDate} games={gamesData} />}
       </div>
     </>
   )

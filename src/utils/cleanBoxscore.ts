@@ -33,6 +33,16 @@ function extractTeamData(data: any) : Team {
     }
 }
 
+function gameStatus(data: any) : string {
+    if (data.includes('Final')) {
+        return 'Done'
+    } else if (data.includes('ET')) {
+        return 'Scheduled'
+    } else {
+        return 'Live'
+    }
+}
+
 function cleanBoxscore (data: any) : BoxScore {
 
     if (data.game && data.game.gameId) {
@@ -44,6 +54,7 @@ function cleanBoxscore (data: any) : BoxScore {
         const gameData = data.game
         const game : Game = {
             gameId: gameData.gameId,
+            gameStatus: gameStatus(gameData.gameStatusText),
             gameStatusText: gameData.gameStatusText,
             homeTeam: extractTeamData(gameData.homeTeam),
             awayTeam: extractTeamData(gameData.awayTeam)
