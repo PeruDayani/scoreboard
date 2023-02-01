@@ -1,6 +1,8 @@
 import Head from 'next/head'
 import { useState, useEffect } from 'react'
 import Scoreboard from '@/components/Scoreboard'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPersonHiking } from '@fortawesome/free-solid-svg-icons'
 
 export default function Home() {
   const [gamesData, setGamesData] = useState([])
@@ -30,8 +32,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className='h-screen bg-purple-200 p-10 text-lg'>
-        { isLoading ? <div className='text-center'> Loading ... </div> : <Scoreboard date={gameDate} games={gamesData} />}
+      <div className='p-10'>
+        { isLoading ? <FontAwesomeIcon icon={faPersonHiking} shake /> : <Scoreboard date={gameDate} games={gamesData} />}
       </div>
     </>
   )

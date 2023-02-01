@@ -1,24 +1,38 @@
+import Image from 'next/image'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUpRightFromSquare, faAt } from '@fortawesome/free-solid-svg-icons';
+
 export default function GameRow({game}: {game: any}) {
-    const highlighsLink = `https://www.youtube.com/results?search_query=${game.awayTeam.teamCity}+${game.awayTeam.teamName}+at+${game.homeTeam.teamCity}+${game.homeTeam.teamName}`
     
+    let gameDifference = Math.ceil((Math.abs(game.homeTeam.score - game.awayTeam.score))/5)*5
+    const highlighsLink = `https://www.youtube.com/results?search_query=${game.awayTeam.teamCity}+${game.awayTeam.teamName}+at+${game.homeTeam.teamCity}+${game.homeTeam.teamName}`
+    const awayTeamImageSrc = `https://cdn.nba.com/logos/nba/${game.awayTeam.teamId}/primary/L/logo.svg`
+    const homeTeamImageSrc = `https://cdn.nba.com/logos/nba/${game.homeTeam.teamId}/primary/L/logo.svg`
+
     return (
-        <div className="py-4 px-6 m-4 shadow-md bg-purple-50 text-center flex justify-between items-center gap-x-10">
-            <div className="w-6">
-                {game.gameStatusText}
+        <div className="min-w-3/4 m-2 p-4 bg-purple-100	rounded-lg flex flex-col font-mono antialiased">
+            <div className="px-4 py-2 flex justify-between">
+                <div>
+                    {game.gameStatusText}
+                </div>
+                <div>
+                    <a href={highlighsLink} target="_blank" rel="noreferrer"> <FontAwesomeIcon icon={faUpRightFromSquare} size="sm"/> </a>
+                </div>
             </div>
-            <div className="w-48">
-                <p> {game.awayTeam.teamCity} {game.awayTeam.teamName} </p>
-                <p> ( {game.awayTeam.record} ) </p>
+            
+            {/* <div className="">
+                <div> {game.awayTeam.teamCity} {game.awayTeam.teamName} </div>
+                <div> {game.homeTeam.teamCity} {game.homeTeam.teamName} </div>
+            </div> */}
+
+            <div className="p-4 flex justify-between items-center">
+                <Image src={awayTeamImageSrc} width="80" height="80" alt="awayTeam"/>
+                <FontAwesomeIcon className='mx-1' icon={faAt} size="sm"/>
+                <Image src={homeTeamImageSrc} width="80" height="80" alt="homeTeam"/>
             </div>
-            <div className="w-48">
-                <p> {game.homeTeam.teamCity} {game.homeTeam.teamName} </p>
-                <p> ( {game.homeTeam.record}  )</p>
-            </div>
-            <div className="w-32">
-                Less than {Math.ceil((Math.abs(game.homeTeam.score - game.awayTeam.score))/5)*5}
-            </div>
-            <div>
-                <a href={highlighsLink} target="_blank" rel="noreferrer"> Link </a>
+
+            <div className="m-auto font-medium">
+                {gameDifference > 0 ? `Less than ${gameDifference}` : 'Tie Game!'}
             </div>
 
         </div>

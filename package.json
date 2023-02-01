@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.2.1",
+    "@fortawesome/free-solid-svg-icons": "^6.2.1",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@next/font": "13.1.6",
     "@types/node": "18.11.18",
     "@types/react": "18.0.27",
@@ -17,6 +20,7 @@
     "cheerio": "^1.0.0-rc.12",
     "eslint": "8.33.0",
     "eslint-config-next": "13.1.6",
+    "fortawesome": "^0.0.1-security",
     "nba-api-client": "^1.1.2",
     "next": "13.1.6",
     "react": "18.2.0",
