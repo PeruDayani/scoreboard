@@ -1,6 +1,8 @@
-// 2022 All Star GameID : 0032100001
+// In milliseconds
+const REFRESH_INTERVAL: number = 60*1000
 
-const REFRESH_INTERVAL: number = 10000
+// All Star Data:
+// 2022 All Star GameID : 0032100001
 const ALL_STAR_GAME_ID: string = '0032100001'
 
 const TEAM_A_CAPTAIN: string = 'Peru Dayani'
