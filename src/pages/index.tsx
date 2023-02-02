@@ -1,27 +1,26 @@
 import Head from 'next/head'
-import { useState, useEffect } from 'react'
 import Scoreboard from '@/components/Scoreboard'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBasketball } from '@fortawesome/free-solid-svg-icons'
+import useSWR from 'swr'
+import { REFRESH_INTERVAL } from '@/utils/constants';
+
+const fetcher = (url: RequestInfo | URL) => fetch(url).then(r => r.json())
+
+function useScoreboard () {
+  const { data, error, isLoading } = useSWR(`/api/scoreboard/`, fetcher, { refreshInterval: REFRESH_INTERVAL })
+
+  return {
+    data: data,
+    isLoading,
+    isError: error
+  }
+}
+
 
 export default function Home() {
-  const [gamesData, setGamesData] = useState([])
-  const [gameDate, setGameDate] = useState('')
-  const [isLoading, setLoading] = useState(false)
-
-  useEffect(() => {
-    setLoading(true)
-    fetch(`api/scoreboard`)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("Fetched data from server: ", data)
-        if (data) {
-          setGamesData(data.games)
-          setGameDate(data.date)  
-        }
-        setLoading(false)
-    })
-  }, [])
+  const { data, isLoading, isError } = useScoreboard()
+  console.log("Recieved data: ", data)
 
   return (
     <>
@@ -33,7 +32,7 @@ export default function Home() {
       </Head>
 
       <div className='p-10 flex justify-center'>
-        { isLoading ? <FontAwesomeIcon icon={faBasketball} bounce size="3x"/> : <Scoreboard date={gameDate} games={gamesData} />}
+        { isLoading ? <FontAwesomeIcon icon={faBasketball} bounce size="3x"/> : <Scoreboard date={data.date} games={data.games} />}
       </div>
     </>
   )

@@ -1,4 +1,6 @@
 // 2022 All Star GameID : 0032100001
+
+const REFRESH_INTERVAL: number = 10000
 const ALL_STAR_GAME_ID: string = '0032100001'
 
 const TEAM_A_CAPTAIN: string = 'Peru Dayani'
@@ -112,4 +114,4 @@ const FANTASY_STATS: {id: string, label: string, invert?: boolean}[] = [
     },
 ]
 
-export {TEAM_A, TEAM_A_CAPTAIN, TEAM_B, TEAM_B_CAPTAIN, ALL_STAR_GAME_ID, FANTASY_STATS, FANTASY_STATS_2022}
+export {TEAM_A, TEAM_A_CAPTAIN, TEAM_B, TEAM_B_CAPTAIN, ALL_STAR_GAME_ID, FANTASY_STATS, FANTASY_STATS_2022, REFRESH_INTERVAL}

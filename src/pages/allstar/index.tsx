@@ -1,25 +1,25 @@
 import Head from 'next/head'
-import { useState, useEffect } from 'react'
 import AllStarScoreboard from '@/components/AllStarScoreboard'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBasketball } from '@fortawesome/free-solid-svg-icons'
+import useSWR from 'swr'
+import { REFRESH_INTERVAL } from '@/utils/constants';
+
+const fetcher = (url: RequestInfo | URL) => fetch(url).then(r => r.json())
+
+function useAllStarData () {
+  const { data, error, isLoading } = useSWR(`/api/allstar/`, fetcher, { refreshInterval: REFRESH_INTERVAL })
+
+  return {
+    data: data,
+    isLoading,
+    isError: error
+  }
+}
 
 export default function AllStar() {
-    const [data, setData] = useState(null)
-    const [isLoading, setLoading] = useState(false)
-  
-    useEffect(() => {
-      setLoading(true)
-      fetch(`api/allstar`)
-        .then((res) => res.json())
-        .then((data) => {
-          if (data) {
-            console.log("Fetched data from server: ", data)
-            setData(data)
-          }
-          setLoading(false)
-      })
-    }, [])
+    const { data, isLoading, isError } = useAllStarData()
+    console.log("Recieved data: ", data)
   
     return (
       <>
