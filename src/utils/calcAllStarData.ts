@@ -1,27 +1,40 @@
-import { PERU_TEAM, HAYDEN_TEAM } from "./constants";
-import { BoxScore, PlayerStats } from "./types";
+import { TEAM_A, TEAM_A_CAPTAIN, TEAM_B, TEAM_B_CAPTAIN } from "./constants";
+import { BoxScore, PlayerStats, TeamStats } from "./types";
 
+function calcTeamStats(players: PlayerStats[]) : TeamStats {
 
-function calcTeamStats(players: any) : any {
+    function sumStat(stat: string) {
+        return players.reduce((a, b) => a + (b[stat as keyof TeamStats] || 0), 0);
+    }
+
     return {
-        points: players.reduce(function (sum: any, player: { points: any; }) { return sum + player.points }, 0),
-        assists: players.reduce(function (sum: any, player: { assists: any; }) { return sum + player.assists }, 0),
+        points: sumStat('points'),
+        assists: sumStat('assists'),
         
-        reboundsTotal: players.reduce(function (sum: any, player: { reboundsTotal: any; }) { return sum + player.reboundsTotal }, 0),
-        reboundsDefensive: players.reduce(function (sum: any, player: { reboundsDefensive: any; }) { return sum + player.reboundsDefensive }, 0),
-        reboundsOffensive: players.reduce(function (sum: any, player: { reboundsOffensive: any; }) { return sum + player.reboundsOffensive }, 0),
-        reboundsWeighted: players.reduce(function (sum: any, player: { reboundsDefensive: any; reboundsOffensive: any; }) { return sum + player.reboundsDefensive + 2*player.reboundsOffensive }, 0),
+        reboundsTotal: sumStat('reboundsTotal'),
+        reboundsDefensive: sumStat('reboundsDefensive'),
+        reboundsOffensive: sumStat('reboundsOffensive'),
+        reboundsWeighted: sumStat('reboundsWeighted'),
+
+        threePointersMade: sumStat('threePointersMade'),
+        threePointersAttempted: sumStat('threePointersAttempted'),
+
+        blocks: sumStat('blocks'),
+        blocksReceived: sumStat('blocksReceived'),
+        steals: sumStat('steals'),
+        turnovers: sumStat('turnovers'),
         
-        threePointersMade: players.reduce(function (sum: any, player: { threePointersMade: any; }) { return sum + player.threePointersMade }, 0),
-        threePointersAttempted: players.reduce(function (sum: any, player: { threePointersAttempted: any; }) { return sum + player.threePointersAttempted }, 0),
-        
-        blocks: players.reduce(function (sum: any, player: { blocks: any; }) { return sum + player.blocks }, 0),
-        blocksReceived: players.reduce(function (sum: any, player: { blocksReceived: any; }) { return sum + player.blocksReceived }, 0),
-        steals: players.reduce(function (sum: any, player: { steals: any; }) { return sum + player.steals }, 0),
-        turnovers: players.reduce(function (sum: any, player: { turnovers: any; }) { return sum + player.turnovers }, 0),
-        
-        stealsBlocks: players.reduce(function (sum: any, player: { steals: any; blocks: any; }) { return sum + player.steals + player.blocks }, 0),
-        stealsBlocksTurnoversBlocksRecieved: players.reduce(function (sum: any, player: { blocks: any; blocksReceived: any; steals: any; turnovers: any; }) { return sum + player.blocks - player.blocksReceived + player.steals - player.turnovers }, 0),
+        stealsBlocks: sumStat('stealsBlocks'),
+        stealsBlocksTurnoversBlocksRecieved: sumStat('stealsBlocksTurnoversBlocksRecieved'),
+    }
+}
+
+function addFantasyPlayerStats(player: PlayerStats): PlayerStats {
+    return {
+        ...player,
+        reboundsWeighted: player.reboundsDefensive + 2*player.reboundsOffensive,
+        stealsBlocks: player.steals + player.blocks,
+        stealsBlocksTurnoversBlocksRecieved: player.steals + player.blocks - player.turnovers - player.blocksReceived
     }
 }
 
@@ -33,29 +46,32 @@ function calcAllStarData(data: BoxScore) : any {
         const awayPlayers: PlayerStats[] = data.game.awayTeam.players
         const allPlayers: PlayerStats[] = homePlayers.concat(awayPlayers)
 
-        const peruTeam: PlayerStats[] = []
-        const haydenTeam: PlayerStats[] = []
+        const teamA: PlayerStats[] = []
+        const teamB: PlayerStats[] = []
 
         allPlayers.forEach((player) => {
-            if (PERU_TEAM.includes(player.name)) {
-                peruTeam.push(player)
-            } else if (HAYDEN_TEAM.includes(player.name)) {
-                haydenTeam.push(player)
+            if (TEAM_A.includes(player.name)) {
+                teamA.push(player)
+            } else if (TEAM_B.includes(player.name)) {
+                teamB.push(player)
             }
         })
+
+        const fantasyTeamA = teamA.map(addFantasyPlayerStats)
+        const fantasyTeamB = teamB.map(addFantasyPlayerStats)
 
         return {
             date: data.date,
             game: data.game,
             fantasyTeamA: {
-                teamCaptain: 'Peru Dayani',
-                teamStats: calcTeamStats(peruTeam),
-                players: peruTeam
+                teamCaptain: TEAM_A_CAPTAIN,
+                teamStats: calcTeamStats(fantasyTeamA),
+                players: fantasyTeamA
             },
             fantasyTeamB: {
-                teamCaptain: 'Hayden Davila',
-                teamStats: calcTeamStats(haydenTeam),
-                players: haydenTeam
+                teamCaptain: TEAM_B_CAPTAIN,
+                teamStats: calcTeamStats(fantasyTeamB),
+                players: fantasyTeamB
             }
         }
 

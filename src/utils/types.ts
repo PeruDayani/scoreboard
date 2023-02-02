@@ -25,6 +25,7 @@ type PlayerStats = {
     reboundsTotal: number,
     reboundsDefensive: number,
     reboundsOffensive: number,
+    reboundsWeighted?: number,
 
     threePointersMade: number,
     threePointersAttempted: number,
@@ -33,6 +34,9 @@ type PlayerStats = {
     blocksReceived: number,
     steals: number,
     turnovers: number,
+
+    stealsBlocks?: number,
+    stealsBlocksTurnoversBlocksRecieved?: number,
 }
 
 type Scoreboard = ScoreboardData | null
@@ -56,7 +60,7 @@ type TeamStats = {
     reboundsTotal: number,
     reboundsDefensive: number,
     reboundsOffensive: number,
-    reboundsWeighted: number,
+    reboundsWeighted?: number,
 
     threePointersMade: number,
     threePointersAttempted: number,
@@ -66,8 +70,8 @@ type TeamStats = {
     steals: number,
     turnovers: number,
 
-    stealsBlocks: number,
-    stealsBlocksTurnoversBlocksRecieved: number,
+    stealsBlocks?: number,
+    stealsBlocksTurnoversBlocksRecieved?: number,
 }
 
 type FantasyTeam = {
@@ -85,4 +89,4 @@ type AllStarDraft = {
 
 type AllStarDraftData = AllStarDraft | null
 
-export type { Team, Game, PlayerStats, AllStarDraftData, TeamStats, Scoreboard, BoxScore }
+export type { Team, Game, PlayerStats, FantasyTeam, AllStarDraftData, TeamStats, Scoreboard, BoxScore }

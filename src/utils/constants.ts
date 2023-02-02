@@ -1,7 +1,8 @@
-const ALL_STAR_GAME_ID = '0032100001'
+// 2022 All Star GameID : 0032100001
+const ALL_STAR_GAME_ID: string = '0032100001'
 
-const PERU_TEAM: string[] = [
-    'Giannis Antetokounmpo',
+const TEAM_A_CAPTAIN: string = 'Peru Dayani'
+const TEAM_A: string[] = [
     'LeBron James',
     'Ja Morant',
     'Nikola Jokic',
@@ -12,9 +13,11 @@ const PERU_TEAM: string[] = [
     'Darius Garland',
     'Chris Paul',
     'Dejounte Murray',
+    'Giannis Antetokounmpo',
 ]
 
-const HAYDEN_TEAM: string[] = [
+const TEAM_B_CAPTAIN: string = 'Hayden Davila'
+const TEAM_B: string[] = [
     'DeMar DeRozan',
     'Stephen Curry',
     'Jimmy Butler',
@@ -29,4 +32,84 @@ const HAYDEN_TEAM: string[] = [
     'LaMelo Ball',
 ]
 
-export {PERU_TEAM, HAYDEN_TEAM, ALL_STAR_GAME_ID}
+const FANTASY_STATS_2022: {id: string, label: string, invert?: boolean}[] = [
+    {
+        id: 'points',
+        label: 'Points'
+    },
+    {
+        id: 'assists',
+        label: 'Assists'
+    },
+    {
+        id: 'reboundsTotal',
+        label: 'Rebounds'
+    },
+    {
+        id: 'threePointersMade',
+        label: `Trey's`
+    },
+    {
+        id: 'stealsBlocks',
+        label: `Hustle`
+    },
+]
+
+const FANTASY_STATS: {id: string, label: string, invert?: boolean}[] = [
+    {
+        id: 'points',
+        label: 'Points'
+    },
+    {
+        id: 'assists',
+        label: 'Assists'
+    },
+    {
+        id: 'reboundsTotal',
+        label: 'Rebounds'
+    },
+    {
+        id: 'threePointersMade',
+        label: `Trey's`
+    },
+    {
+        id: 'stealsBlocks',
+        label: `Hustle (STL+BLK)`
+    },
+    {
+        id: '',
+        label: `More Options`
+    },
+    {
+        id: 'reboundsWeighted',
+        label: 'Rebounds Weighted'
+    },
+    {
+        id: 'threePointersAttempted',
+        label: `Trey's Attempted`
+    },
+    {
+        id: 'blocks',
+        label: `Blocks`
+    },
+    {
+        id: 'blocksReceived',
+        label: `Blocks Recieved`,
+        invert: true
+    },
+    {
+        id: 'steals',
+        label: `Steals`
+    },
+    {
+        id: 'turnovers',
+        label: `Turnovers`,
+        invert: true
+    },
+    {
+        id: 'stealsBlocksTurnoversBlocksRecieved',
+        label: `Hustle (STL+BK-BKR-TO)`
+    },
+]
+
+export {TEAM_A, TEAM_A_CAPTAIN, TEAM_B, TEAM_B_CAPTAIN, ALL_STAR_GAME_ID, FANTASY_STATS, FANTASY_STATS_2022}

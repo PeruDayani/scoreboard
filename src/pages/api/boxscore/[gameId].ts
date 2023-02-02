@@ -2,7 +2,6 @@ import { cleanBoxscore } from '@/utils/cleanBoxscore';
 import { BoxScore } from '@/utils/types';
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-// 2022 All Star GameID : 0032100001
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<BoxScore|Error>
