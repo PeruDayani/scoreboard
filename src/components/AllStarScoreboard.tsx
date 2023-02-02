@@ -85,7 +85,7 @@ export default function AllStarScoreboard({data}: {data: AllStarDraftData}) {
     return (
         <div className='flex flex-col font-mono antialiased'>
 
-            <div className='mx-auto py-2 text-xl italic underline'>
+            <div className='mx-auto py-2 italic underline'>
                 All Star {data?.date.split(' ')[3]}
             </div>
 

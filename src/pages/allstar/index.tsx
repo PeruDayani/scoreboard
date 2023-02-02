@@ -30,8 +30,8 @@ export default function AllStar() {
           <link rel="icon" href="/favicon.ico" />
         </Head>
   
-        <div className='p-16 flex justify-center'>
-            { isLoading ? <FontAwesomeIcon icon={faBasketball} bounce size="8x" /> : <AllStarScoreboard data={data} />}
+        <div className='p-10 flex justify-center'>
+            { isLoading ? <FontAwesomeIcon icon={faBasketball} bounce size="3x" /> : <AllStarScoreboard data={data} />}
         </div>
       </>
     )

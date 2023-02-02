@@ -32,8 +32,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className='p-16 flex justify-center'>
-        { isLoading ? <FontAwesomeIcon icon={faBasketball} bounce size="8x"/> : <Scoreboard date={gameDate} games={gamesData} />}
+      <div className='p-10 flex justify-center'>
+        { isLoading ? <FontAwesomeIcon icon={faBasketball} bounce size="3x"/> : <Scoreboard date={gameDate} games={gamesData} />}
       </div>
     </>
   )

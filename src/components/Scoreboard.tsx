@@ -15,7 +15,7 @@ export default function Scoreboard({date, games}: {date: any, games: any}) {
     
     return (
         <div className='flex flex-col font-mono antialiased'>
-            <div className='mx-auto py-2 text-xl italic underline'>
+            <div className='mx-auto py-2 italic underline'>
                 {date}
             </div>
 
