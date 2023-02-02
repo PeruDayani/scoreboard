@@ -3,7 +3,7 @@ type Team = {
     teamName: string,
     teamCity: string,
     record: string,
-    score: Number,
+    score: number,
     players: PlayerStats[] | []
 }
 
@@ -19,20 +19,20 @@ type PlayerStats = {
     name: string,
     personId: string,
 
-    points: Number,
-    assists: Number,
+    points: number,
+    assists: number,
 
-    reboundsTotal: Number,
-    reboundsDefensive: Number,
-    reboundsOffensive: Number,
+    reboundsTotal: number,
+    reboundsDefensive: number,
+    reboundsOffensive: number,
 
-    threePointersMade: Number,
-    threePointersAttempted: Number,
+    threePointersMade: number,
+    threePointersAttempted: number,
 
-    blocks: Number,
-    blocksReceived: Number,
-    steals: Number,
-    turnovers: Number,
+    blocks: number,
+    blocksReceived: number,
+    steals: number,
+    turnovers: number,
 }
 
 type Scoreboard = ScoreboardData | null
@@ -50,24 +50,24 @@ type BoxScoreData = {
 }
 
 type TeamStats = {
-    points: Number,
-    assists: Number,
+    points: number,
+    assists: number,
 
-    reboundsTotal: Number,
-    reboundsDefensive: Number,
-    reboundsOffensive: Number,
-    reboundsWeighted: Number,
+    reboundsTotal: number,
+    reboundsDefensive: number,
+    reboundsOffensive: number,
+    reboundsWeighted: number,
 
-    threePointersMade: Number,
-    threePointersAttempted: Number,
+    threePointersMade: number,
+    threePointersAttempted: number,
 
-    blocks: Number,
-    blocksReceived: Number,
-    steals: Number,
-    turnovers: Number,
+    blocks: number,
+    blocksReceived: number,
+    steals: number,
+    turnovers: number,
 
-    stealsBlocks: Number,
-    stealsBlocksTurnoversBlocksRecieved: Number,
+    stealsBlocks: number,
+    stealsBlocksTurnoversBlocksRecieved: number,
 }
 
 type FantasyTeam = {

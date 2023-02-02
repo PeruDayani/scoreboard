@@ -33,10 +33,10 @@ function extractTeamData(data: any) : Team {
     }
 }
 
-function gameStatus(data: any) : string {
+function gameStatus(data: any) : string {    
     if (data.includes('Final')) {
         return 'Done'
-    } else if (data.includes('ET')) {
+    } else if (data.includes('ET') || data.includes('P')) {
         return 'Scheduled'
     } else {
         return 'Live'
@@ -52,6 +52,8 @@ function cleanBoxscore (data: any) : BoxScore {
         const date = new Intl.DateTimeFormat('en-US', options).format(dateUTC)
 
         const gameData = data.game
+
+
         const game : Game = {
             gameId: gameData.gameId,
             gameStatus: gameStatus(gameData.gameStatusText),

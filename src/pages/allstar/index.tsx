@@ -2,7 +2,7 @@ import Head from 'next/head'
 import { useState, useEffect } from 'react'
 import AllStarScoreboard from '@/components/AllStarScoreboard'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPersonHiking } from '@fortawesome/free-solid-svg-icons'
+import { faBasketball } from '@fortawesome/free-solid-svg-icons'
 
 export default function AllStar() {
     const [data, setData] = useState(null)
@@ -30,8 +30,8 @@ export default function AllStar() {
           <link rel="icon" href="/favicon.ico" />
         </Head>
   
-        <div className='p-10'>
-          { isLoading ? <FontAwesomeIcon icon={faPersonHiking} shake size="10x" /> : <AllStarScoreboard data={data} />}
+        <div className='p-16 flex justify-center'>
+            { isLoading ? <FontAwesomeIcon icon={faBasketball} bounce size="8x" /> : <AllStarScoreboard data={data} />}
         </div>
       </>
     )

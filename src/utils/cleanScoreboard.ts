@@ -14,7 +14,7 @@ function extractTeamData(data: any) : Team {
 function gameStatus(data: any) : string {
     if (data.gameStatusText.includes('Final')) {
         return 'Done'
-    } else if (data.gameStatusText.includes('ET')) {
+    } else if (data.gameStatusText.includes('ET') || data.gameStatusText.includes('PPD')) {
         return 'Scheduled'
     } else {
         return 'Live'

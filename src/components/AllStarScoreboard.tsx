@@ -83,7 +83,7 @@ export default function AllStarScoreboard({data}: {data: AllStarDraftData}) {
     }
 
     return (
-        <div className='flex flex-col font-mono antialiased min-w-full'>
+        <div className='flex flex-col font-mono antialiased'>
 
             <div className='mx-auto py-2 text-xl italic underline'>
                 All Star {data?.date.split(' ')[3]}
@@ -97,7 +97,6 @@ export default function AllStarScoreboard({data}: {data: AllStarDraftData}) {
                 {
                     displayStats.map((stat) => (
                         <div className="px-6 py-1 flex justify-between items-center" key={stat.id}> 
-                            {/* TODO: Ask Jamie about this */}
                             <div className={isWinning('A', stat.id, stat?.invert)}> <> {fantasyTeamA?.teamStats[stat.id as keyof TeamStats]} </>  </div>
                             <div className="text-xs"> {stat.label} </div>
                             <div className={isWinning('B', stat.id, stat?.invert)} > <> {fantasyTeamB?.teamStats[stat.id as keyof TeamStats]} </>  </div>
@@ -105,7 +104,7 @@ export default function AllStarScoreboard({data}: {data: AllStarDraftData}) {
                     ))
                 }
             </div>
-            
+
             {/* A table each for the player stats */}
         </div>
     )

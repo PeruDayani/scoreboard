@@ -14,12 +14,12 @@ export default function Scoreboard({date, games}: {date: any, games: any}) {
     })
     
     return (
-        <div className='flex flex-col'>
+        <div className='flex flex-col font-mono antialiased'>
             <div className='mx-auto py-2 text-xl italic underline'>
                 {date}
             </div>
 
-            <div className='flex flex-wrap justify-center'>
+            <div className='flex flex-wrap justify-center max-w-5xl m-auto'>
                 {sortedDoneGames.map((game: Game) => <GameRow game={game} key={game.gameId}/>)}
 
                 {liveGames.map((game: Game) => <GameRow game={game} key={game.gameId}/>)}

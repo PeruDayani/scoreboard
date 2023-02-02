@@ -1,8 +1,9 @@
 import Image from 'next/image'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpRightFromSquare, faAt } from '@fortawesome/free-solid-svg-icons';
+import { Game } from '@/utils/types';
 
-export default function GameRow({game}: {game: any}) {
+export default function GameRow({game}: {game: Game}) {
     
     let gameDifference = Math.ceil((Math.abs(game.homeTeam.score - game.awayTeam.score))/5)*5
     const highlighsLink = `https://www.youtube.com/results?search_query=${game.awayTeam.teamCity}+${game.awayTeam.teamName}+at+${game.homeTeam.teamCity}+${game.homeTeam.teamName}`
@@ -31,7 +32,7 @@ export default function GameRow({game}: {game: any}) {
     }
 
     return (
-        <div className="min-w-3/4 m-2 p-4 bg-purple-100	rounded-lg flex flex-col font-mono antialiased">
+        <div className="min-w-3/4 m-2 p-4 bg-purple-100	rounded-lg flex flex-col">
             <div className="px-4 py-2 flex justify-between">
                 <div>
                     {game.gameStatusText}
