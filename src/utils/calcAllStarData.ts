@@ -4,11 +4,24 @@ import { BoxScore, PlayerStats } from "./types";
 
 function calcTeamStats(players: any) : any {
     return {
-        points: players.reduce(function (sum: any, player: { points: any; }) { return sum + player.points; }, 0),
-        assists: players.reduce(function (sum: any, player: { assists: any; }) { return sum + player.assists; }, 0),
-        reboundsTotal: players.reduce(function (sum: any, player: { reboundsTotal: any; }) { return sum + player.reboundsTotal; }, 0),
-        threePointersMade: players.reduce(function (sum: any, player: { threePointersMade: any; }) { return sum + player.threePointersMade; }, 0),
-        stealsBlocksTurnovers: players.reduce(function (sum: any, player: { steals: any; blocks: any; turnovers:any; }) { return sum + player.steals + player.blocks - player.turnovers; }, 0),
+        points: players.reduce(function (sum: any, player: { points: any; }) { return sum + player.points }, 0),
+        assists: players.reduce(function (sum: any, player: { assists: any; }) { return sum + player.assists }, 0),
+        
+        reboundsTotal: players.reduce(function (sum: any, player: { reboundsTotal: any; }) { return sum + player.reboundsTotal }, 0),
+        reboundsDefensive: players.reduce(function (sum: any, player: { reboundsDefensive: any; }) { return sum + player.reboundsDefensive }, 0),
+        reboundsOffensive: players.reduce(function (sum: any, player: { reboundsOffensive: any; }) { return sum + player.reboundsOffensive }, 0),
+        reboundsWeighted: players.reduce(function (sum: any, player: { reboundsDefensive: any; reboundsOffensive: any; }) { return sum + player.reboundsDefensive + 2*player.reboundsOffensive }, 0),
+        
+        threePointersMade: players.reduce(function (sum: any, player: { threePointersMade: any; }) { return sum + player.threePointersMade }, 0),
+        threePointersAttempted: players.reduce(function (sum: any, player: { threePointersAttempted: any; }) { return sum + player.threePointersAttempted }, 0),
+        
+        blocks: players.reduce(function (sum: any, player: { blocks: any; }) { return sum + player.blocks }, 0),
+        blocksReceived: players.reduce(function (sum: any, player: { blocksReceived: any; }) { return sum + player.blocksReceived }, 0),
+        steals: players.reduce(function (sum: any, player: { steals: any; }) { return sum + player.steals }, 0),
+        turnovers: players.reduce(function (sum: any, player: { turnovers: any; }) { return sum + player.turnovers }, 0),
+        
+        stealsBlocks: players.reduce(function (sum: any, player: { steals: any; blocks: any; }) { return sum + player.steals + player.blocks }, 0),
+        stealsBlocksTurnoversBlocksRecieved: players.reduce(function (sum: any, player: { blocks: any; blocksReceived: any; steals: any; turnovers: any; }) { return sum + player.blocks - player.blocksReceived + player.steals - player.turnovers }, 0),
     }
 }
 
@@ -32,11 +45,15 @@ function calcAllStarData(data: BoxScore) : any {
         })
 
         return {
-            peru: {
+            date: data.date,
+            game: data.game,
+            fantasyTeamA: {
+                teamCaptain: 'Peru Dayani',
                 teamStats: calcTeamStats(peruTeam),
                 players: peruTeam
             },
-            hayden: {
+            fantasyTeamB: {
+                teamCaptain: 'Hayden Davila',
                 teamStats: calcTeamStats(haydenTeam),
                 players: haydenTeam
             }
