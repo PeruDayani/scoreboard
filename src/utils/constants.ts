@@ -5,37 +5,40 @@ const REFRESH_INTERVAL: number = 60*1000
 
 // All Star Data:
 // 2022 All Star GameID : 0032100001
-const ALL_STAR_GAME_ID: string = '0032100001'
+const ALL_STAR_GAME_ID: string = '0022200787'
 
 const TEAM_A_CAPTAIN: string = 'Peru Dayani'
 const TEAM_A: string[] = [
-    'LeBron James',
-    'Ja Morant',
-    'Nikola Jokic',
-    'Andrew Wiggins',
-    'Devin Booker',
-    'Karl-Anthony Towns',
-    'Khris Middleton',
-    'Darius Garland',
-    'Chris Paul',
-    'Dejounte Murray',
-    'Giannis Antetokounmpo',
+    "Damian Lillard",
+    "Kyle Kuzma",
+    "Anfernee Simons",
+    "Kendrick Nunn",
+    "Daniel Gafford",
+    "Will Barton",
+    "Shaedon Sharpe",
+    "Taj Gibson",
+    "Nassir Little",
+    "Jabari Walker",
+    "Jordan Goodwin",
+    "Corey Kispert",
+    "Johnny Davis",
 ]
 
 const TEAM_B_CAPTAIN: string = 'Hayden Davila'
 const TEAM_B: string[] = [
-    'DeMar DeRozan',
-    'Stephen Curry',
-    'Jimmy Butler',
-    'Fred VanVleet',
-    'Jarrett Allen',
-    'Luka Doncic',
-    'Jayson Tatum',
-    'Joel Embiid',
-    'Trae Young',
-    'Zach LaVine',
-    'Rudy Gobert',
-    'LaMelo Ball',
+    "Bradley Beal",
+    "Kristaps Porzingis",
+    "Josh Hart",
+    "Drew Eubanks",
+    "Monte Morris",
+    "Gary Payton II",
+    "Delon Wright",
+    "Deni Avdija",
+    "Keon Johnson",
+    "Isaiah Todd",
+    "Greg Brown III",
+    "Vernon Carey Jr.",
+    "John Butler Jr.",
 ]
 
 const FANTASY_STATS_2022: {id: string, label: string, invert?: boolean}[] = [
