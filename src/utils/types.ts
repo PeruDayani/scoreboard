@@ -74,6 +74,9 @@ type TeamStats = {
     stealsBlocksTurnoversBlocksRecieved?: number,
 }
 
+// Use this to access any teamStats obj using variable keys
+type STAT_ID = keyof TeamStats
+
 type FantasyTeam = {
     teamCaptain: string,
     teamStats: TeamStats,
@@ -87,6 +90,11 @@ type AllStarDraft = {
     fantasyTeamB: FantasyTeam
 }
 
-type AllStarDraftData = AllStarDraft | null
+type AllStarDraftData = AllStarDraft
 
-export type { Team, Game, PlayerStats, FantasyTeam, AllStarDraftData, TeamStats, Scoreboard, BoxScore }
+type CustomError = {
+    status: string,
+    reason: string
+}
+
+export type { Team, Game, PlayerStats, FantasyTeam, STAT_ID, AllStarDraftData, CustomError, TeamStats, Scoreboard, BoxScore }

@@ -1,32 +1,39 @@
 import { TEAM_A, TEAM_A_CAPTAIN, TEAM_B, TEAM_B_CAPTAIN } from "./constants";
-import { BoxScore, PlayerStats, TeamStats } from "./types";
+import { BoxScore, PlayerStats, STAT_ID, TeamStats } from "./types";
+import { keys } from 'ts-transformer-keys';
 
 function calcTeamStats(players: PlayerStats[]) : TeamStats {
 
-    function sumStat(stat: string) {
-        return players.reduce((a, b) => a + (b[stat as keyof TeamStats] || 0), 0);
+    function sumStat(stat: STAT_ID) {
+        return players.reduce((a, b) => a + (b[stat] || 0), 0);
     }
 
-    return {
-        points: sumStat('points'),
-        assists: sumStat('assists'),
-        
-        reboundsTotal: sumStat('reboundsTotal'),
-        reboundsDefensive: sumStat('reboundsDefensive'),
-        reboundsOffensive: sumStat('reboundsOffensive'),
-        reboundsWeighted: sumStat('reboundsWeighted'),
+    const keysOfTeamStats = keys<TeamStats>();
+    const teamsStats: any = {}
+    keysOfTeamStats.map((key) => teamsStats[key] = sumStat(key))
 
-        threePointersMade: sumStat('threePointersMade'),
-        threePointersAttempted: sumStat('threePointersAttempted'),
+    return teamsStats
 
-        blocks: sumStat('blocks'),
-        blocksReceived: sumStat('blocksReceived'),
-        steals: sumStat('steals'),
-        turnovers: sumStat('turnovers'),
+    // return {
+    //     points: sumStat('points'),
+    //     assists: sumStat('assists'),
         
-        stealsBlocks: sumStat('stealsBlocks'),
-        stealsBlocksTurnoversBlocksRecieved: sumStat('stealsBlocksTurnoversBlocksRecieved'),
-    }
+    //     reboundsTotal: sumStat('reboundsTotal'),
+    //     reboundsDefensive: sumStat('reboundsDefensive'),
+    //     reboundsOffensive: sumStat('reboundsOffensive'),
+    //     reboundsWeighted: sumStat('reboundsWeighted'),
+
+    //     threePointersMade: sumStat('threePointersMade'),
+    //     threePointersAttempted: sumStat('threePointersAttempted'),
+
+    //     blocks: sumStat('blocks'),
+    //     blocksReceived: sumStat('blocksReceived'),
+    //     steals: sumStat('steals'),
+    //     turnovers: sumStat('turnovers'),
+        
+    //     stealsBlocks: sumStat('stealsBlocks'),
+    //     stealsBlocksTurnoversBlocksRecieved: sumStat('stealsBlocksTurnoversBlocksRecieved'),
+    // }
 }
 
 function addFantasyPlayerStats(player: PlayerStats): PlayerStats {

@@ -1,14 +1,18 @@
 import { FANTASY_STATS, FANTASY_STATS_2022 } from "@/utils/constants";
-import { AllStarDraftData, TeamStats } from "@/utils/types";
+import { AllStarDraftData, TeamStats, STAT_ID } from "@/utils/types";
 import AllStarPlayerStats from "./AllStarPlayerStats"
 
-export default function AllStarScoreboard({data}: {data: AllStarDraftData}) {  
+export default function AllStarScoreboard({data}: {data: AllStarDraftData}) {
     
-    const fantasyTeamA = data?.fantasyTeamA
-    const fantasyTeamB = data?.fantasyTeamB
+    if (data == null ) {
+        return (<div> Nope </div>)
+    }
+    
+    const fantasyTeamA = data.fantasyTeamA
+    const fantasyTeamB = data.fantasyTeamB
 
-    function isWinning (team: string, statId: string, invert: boolean = false) : string {
-        let teamAScore = fantasyTeamA?.teamStats[statId as keyof TeamStats] || 0
+    function isWinning (team: string, statId: STAT_ID, invert: boolean = false) : string {
+        let teamAScore = fantasyTeamA?.teamStats[statId] || 0
         let teamBScore = fantasyTeamB?.teamStats[statId as keyof TeamStats] || 0
 
         if (invert) {

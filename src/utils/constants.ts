@@ -1,3 +1,5 @@
+import { STAT_ID } from "./types"
+
 // In milliseconds
 const REFRESH_INTERVAL: number = 60*1000
 
@@ -59,7 +61,7 @@ const FANTASY_STATS_2022: {id: string, label: string, invert?: boolean}[] = [
     },
 ]
 
-const FANTASY_STATS: {id: string, label: string, invert?: boolean}[] = [
+const FANTASY_STATS: {id: STAT_ID, label: string, invert?: boolean}[] = [
     {
         id: 'points',
         label: 'Points'
@@ -79,10 +81,6 @@ const FANTASY_STATS: {id: string, label: string, invert?: boolean}[] = [
     {
         id: 'stealsBlocks',
         label: `Hustle (STL+BLK)`
-    },
-    {
-        id: '',
-        label: `More Options`
     },
     {
         id: 'reboundsWeighted',

@@ -8,7 +8,7 @@ import { REFRESH_INTERVAL } from '@/utils/constants';
 const fetcher = (url: RequestInfo | URL) => fetch(url).then(r => r.json())
 
 function useScoreboard () {
-  const { data, error, isLoading } = useSWR(`/api/scoreboard/`, fetcher, { refreshInterval: REFRESH_INTERVAL })
+  const { data, error, isLoading } = useSWR(`/api/scoreboard/`, fetcher)
 
   return {
     data: data,

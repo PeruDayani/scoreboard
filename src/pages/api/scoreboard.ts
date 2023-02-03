@@ -1,10 +1,10 @@
 import { cleanScoreboard } from '@/utils/cleanScoreboard'
-import { Scoreboard } from '@/utils/types'
+import { Scoreboard, CustomError } from '@/utils/types'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Scoreboard|Error>
+  res: NextApiResponse<Scoreboard|CustomError>
 ) {
   try {
     const  url = `https://cdn.nba.com/static/json/liveData/scoreboard/todaysScoreboard_00.json`
@@ -14,6 +14,6 @@ export default async function handler(
 
     res.status(200).json(data)
   } catch (error: any) {
-    res.status(404).json(error)
+    res.status(404).json({status: '404', reason: error})
   }
 }
