@@ -8,32 +8,32 @@ function calcTeamStats(players: PlayerStats[]) : TeamStats {
         return players.reduce((a, b) => a + (b[stat] || 0), 0);
     }
 
-    const keysOfTeamStats = keys<TeamStats>();
-    const teamsStats: any = {}
-    keysOfTeamStats.map((key) => teamsStats[key] = sumStat(key))
+    // const keysOfTeamStats = keys<TeamStats>();
+    // const teamsStats: any = {}
+    // keysOfTeamStats.map((key) => teamsStats[key] = sumStat(key))
 
-    return teamsStats
+    // return teamsStats
 
-    // return {
-    //     points: sumStat('points'),
-    //     assists: sumStat('assists'),
+    return {
+        points: sumStat('points'),
+        assists: sumStat('assists'),
         
-    //     reboundsTotal: sumStat('reboundsTotal'),
-    //     reboundsDefensive: sumStat('reboundsDefensive'),
-    //     reboundsOffensive: sumStat('reboundsOffensive'),
-    //     reboundsWeighted: sumStat('reboundsWeighted'),
+        reboundsTotal: sumStat('reboundsTotal'),
+        reboundsDefensive: sumStat('reboundsDefensive'),
+        reboundsOffensive: sumStat('reboundsOffensive'),
+        reboundsWeighted: sumStat('reboundsWeighted'),
 
-    //     threePointersMade: sumStat('threePointersMade'),
-    //     threePointersAttempted: sumStat('threePointersAttempted'),
+        threePointersMade: sumStat('threePointersMade'),
+        threePointersAttempted: sumStat('threePointersAttempted'),
 
-    //     blocks: sumStat('blocks'),
-    //     blocksReceived: sumStat('blocksReceived'),
-    //     steals: sumStat('steals'),
-    //     turnovers: sumStat('turnovers'),
+        blocks: sumStat('blocks'),
+        blocksReceived: sumStat('blocksReceived'),
+        steals: sumStat('steals'),
+        turnovers: sumStat('turnovers'),
         
-    //     stealsBlocks: sumStat('stealsBlocks'),
-    //     stealsBlocksTurnoversBlocksRecieved: sumStat('stealsBlocksTurnoversBlocksRecieved'),
-    // }
+        stealsBlocks: sumStat('stealsBlocks'),
+        stealsBlocksTurnoversBlocksRecieved: sumStat('stealsBlocksTurnoversBlocksRecieved'),
+    }
 }
 
 function addFantasyPlayerStats(player: PlayerStats): PlayerStats {
