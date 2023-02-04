@@ -1,4 +1,4 @@
-import { FANTASY_STATS, FANTASY_STATS_2022 } from "@/utils/constants";
+import { FANTASY_TEAM_STATS } from "@/utils/constants";
 import { AllStarDraftData, TeamStats, STAT_ID } from "@/utils/types";
 import AllStarPlayerStats from "./AllStarPlayerStats"
 
@@ -44,7 +44,7 @@ export default function AllStarScoreboard({data}: {data: AllStarDraftData}) {
                     <div> {fantasyTeamB?.teamCaptain} </div>
                 </div>
                 {
-                    FANTASY_STATS.map((stat) => (
+                    FANTASY_TEAM_STATS.map((stat) => (
                         <div className="px-6 py-1 flex justify-between items-center" key={stat.id}> 
                             <div className={isWinning('A', stat.id, stat?.invert)}> <> {fantasyTeamA?.teamStats[stat.id as keyof TeamStats]} </>  </div>
                             <div className="text-xs"> {stat.label} </div>
@@ -54,7 +54,7 @@ export default function AllStarScoreboard({data}: {data: AllStarDraftData}) {
                 }
             </div>
 
-            <div className="flex flex-col lg:flex-row lg:gap-24">
+            <div className="flex flex-col">
                 <AllStarPlayerStats team={fantasyTeamA} />
                 <AllStarPlayerStats team={fantasyTeamB} />
             </div>

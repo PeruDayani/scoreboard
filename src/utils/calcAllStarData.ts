@@ -1,18 +1,11 @@
 import { TEAM_A, TEAM_A_CAPTAIN, TEAM_B, TEAM_B_CAPTAIN } from "./constants";
 import { BoxScore, PlayerStats, STAT_ID, TeamStats } from "./types";
-import { keys } from 'ts-transformer-keys';
 
 function calcTeamStats(players: PlayerStats[]) : TeamStats {
 
     function sumStat(stat: STAT_ID) {
         return players.reduce((a, b) => a + (b[stat] || 0), 0);
     }
-
-    // const keysOfTeamStats = keys<TeamStats>();
-    // const teamsStats: any = {}
-    // keysOfTeamStats.map((key) => teamsStats[key] = sumStat(key))
-
-    // return teamsStats
 
     return {
         points: sumStat('points'),
@@ -21,7 +14,12 @@ function calcTeamStats(players: PlayerStats[]) : TeamStats {
         reboundsTotal: sumStat('reboundsTotal'),
         reboundsDefensive: sumStat('reboundsDefensive'),
         reboundsOffensive: sumStat('reboundsOffensive'),
-        reboundsWeighted: sumStat('reboundsWeighted'),
+
+        freeThrowsMade: sumStat('freeThrowsMade'),
+        freeThrowsAttempted: sumStat('freeThrowsAttempted'),
+
+        twoPointersMade: sumStat('twoPointersMade'),
+        twoPointersAttempted: sumStat('twoPointersAttempted'),
 
         threePointersMade: sumStat('threePointersMade'),
         threePointersAttempted: sumStat('threePointersAttempted'),
@@ -30,9 +28,11 @@ function calcTeamStats(players: PlayerStats[]) : TeamStats {
         blocksReceived: sumStat('blocksReceived'),
         steals: sumStat('steals'),
         turnovers: sumStat('turnovers'),
-        
-        stealsBlocks: sumStat('stealsBlocks'),
-        stealsBlocksTurnoversBlocksRecieved: sumStat('stealsBlocksTurnoversBlocksRecieved'),
+        foulsTechnical: sumStat('foulsTechnical'),
+
+        reboundsWeighted: sumStat('reboundsWeighted'),
+        twoPointersFreeThrows: sumStat('twoPointersFreeThrows'),
+        stealsBlocksTurnovers: sumStat('stealsBlocksTurnovers'),
     }
 }
 
@@ -40,8 +40,8 @@ function addFantasyPlayerStats(player: PlayerStats): PlayerStats {
     return {
         ...player,
         reboundsWeighted: player.reboundsDefensive + 2*player.reboundsOffensive,
-        stealsBlocks: player.steals + player.blocks,
-        stealsBlocksTurnoversBlocksRecieved: player.steals + player.blocks - player.turnovers - player.blocksReceived
+        twoPointersFreeThrows: player.freeThrowsMade + 2*player.twoPointersMade,
+        stealsBlocksTurnovers: player.steals + player.blocks - player.turnovers,
     }
 }
 
@@ -65,7 +65,9 @@ function calcAllStarData(data: BoxScore) : any {
         })
 
         const fantasyTeamA = teamA.map(addFantasyPlayerStats)
+        fantasyTeamA.sort((playerA: PlayerStats, playerB: PlayerStats) => playerB.points - playerA.points)
         const fantasyTeamB = teamB.map(addFantasyPlayerStats)
+        fantasyTeamB.sort((playerA: PlayerStats, playerB: PlayerStats) => playerB.points - playerA.points)
 
         return {
             date: data.date,
@@ -87,17 +89,4 @@ function calcAllStarData(data: BoxScore) : any {
     return null
 }
 
-function fetchPlayers(data: BoxScore) : string[] {
-
-    if (data) {
-        const homePlayers: PlayerStats[] = data.game.homeTeam.players
-        const awayPlayers: PlayerStats[] = data.game.awayTeam.players
-        const allPlayers: PlayerStats[] = homePlayers.concat(awayPlayers)
-
-        return allPlayers.map((player) => player.name)
-    }
-
-    return [`Well shit, you sure that's a valid game ID?`]
-}
-
-export { calcAllStarData, fetchPlayers }
+export { calcAllStarData }

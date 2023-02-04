@@ -25,7 +25,12 @@ type PlayerStats = {
     reboundsTotal: number,
     reboundsDefensive: number,
     reboundsOffensive: number,
-    reboundsWeighted?: number,
+
+    freeThrowsMade: number,
+    freeThrowsAttempted: number
+
+    twoPointersMade: number,
+    twoPointersAttempted: number,
 
     threePointersMade: number,
     threePointersAttempted: number,
@@ -34,9 +39,11 @@ type PlayerStats = {
     blocksReceived: number,
     steals: number,
     turnovers: number,
+    foulsTechnical: number,
 
-    stealsBlocks?: number,
-    stealsBlocksTurnoversBlocksRecieved?: number,
+    reboundsWeighted?: number,
+    twoPointersFreeThrows?: number,
+    stealsBlocksTurnovers?: number,
 }
 
 type Scoreboard = ScoreboardData | null
@@ -60,7 +67,12 @@ type TeamStats = {
     reboundsTotal: number,
     reboundsDefensive: number,
     reboundsOffensive: number,
-    reboundsWeighted?: number,
+
+    freeThrowsMade: number,
+    freeThrowsAttempted: number
+
+    twoPointersMade: number,
+    twoPointersAttempted: number,
 
     threePointersMade: number,
     threePointersAttempted: number,
@@ -69,9 +81,11 @@ type TeamStats = {
     blocksReceived: number,
     steals: number,
     turnovers: number,
+    foulsTechnical: number,
 
-    stealsBlocks?: number,
-    stealsBlocksTurnoversBlocksRecieved?: number,
+    reboundsWeighted?: number,
+    twoPointersFreeThrows?: number,
+    stealsBlocksTurnovers?: number,
 }
 
 // Use this to access any teamStats obj using variable keys

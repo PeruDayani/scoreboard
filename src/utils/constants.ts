@@ -40,80 +40,89 @@ const TEAM_B: string[] = [
     "Jock Landale",
 ]
 
-const FANTASY_STATS_2022: {id: string, label: string, invert?: boolean}[] = [
+const FANTASY_PLAYER_STATS: {id: STAT_ID, label: string, invert?: boolean, classes?: string}[] = [
     {
         id: 'points',
-        label: 'Points'
+        label: 'Pts'
     },
     {
         id: 'assists',
-        label: 'Assists'
+        label: 'Ast',
+        classes: 'font-bold'
     },
     {
         id: 'reboundsTotal',
-        label: 'Rebounds'
+        label: 'Reb',
+        classes: 'font-bold'
+    },
+    {
+        id: 'freeThrowsMade',
+        label: `FT`
+    },
+    {
+        id: 'twoPointersMade',
+        label: `2PM`
+    },
+    {
+        id: 'twoPointersFreeThrows',
+        label: `Inside`,
+        classes: 'font-bold'
     },
     {
         id: 'threePointersMade',
-        label: `Trey's`
-    },
-    {
-        id: 'stealsBlocks',
-        label: `Hustle`
-    },
-]
-
-const FANTASY_STATS: {id: STAT_ID, label: string, invert?: boolean}[] = [
-    {
-        id: 'points',
-        label: 'Points'
-    },
-    {
-        id: 'assists',
-        label: 'Assists'
-    },
-    {
-        id: 'reboundsTotal',
-        label: 'Rebounds'
-    },
-    {
-        id: 'threePointersMade',
-        label: `Trey's`
-    },
-    {
-        id: 'stealsBlocks',
-        label: `Hustle (STL+BLK)`
-    },
-    {
-        id: 'reboundsWeighted',
-        label: 'Rebounds Weighted'
-    },
-    {
-        id: 'threePointersAttempted',
-        label: `Trey's Attempted`
-    },
-    {
-        id: 'blocks',
-        label: `Blocks`
-    },
-    {
-        id: 'blocksReceived',
-        label: `Blocks Recieved`,
-        invert: true
+        label: `Trey's`,
+        classes: 'font-bold'
     },
     {
         id: 'steals',
-        label: `Steals`
+        label: `Stls`
+    },
+    {
+        id: 'blocks',
+        label: `Blks`
     },
     {
         id: 'turnovers',
-        label: `Turnovers`,
+        label: `Tovs`,
         invert: true
     },
     {
-        id: 'stealsBlocksTurnoversBlocksRecieved',
-        label: `Hustle (STL+BK-BKR-TO)`
+        id: 'stealsBlocksTurnovers',
+        label: `Hustle`,
+        classes: 'font-bold'
+    },
+    {
+        id: 'foulsTechnical',
+        label: `Tech's`,
+        classes: 'font-bold'
     },
 ]
 
-export {TEAM_A, TEAM_A_CAPTAIN, TEAM_B, TEAM_B_CAPTAIN, ALL_STAR_GAME_ID, FANTASY_STATS, FANTASY_STATS_2022, REFRESH_INTERVAL}
+const FANTASY_TEAM_STATS: {id: STAT_ID, label: string, invert?: boolean}[] = [
+    {
+        id: 'twoPointersFreeThrows',
+        label: `Inside the Arc`
+    },
+    {
+        id: 'threePointersMade',
+        label: `Trey's`
+    },
+    {
+        id: 'assists',
+        label: 'Assists'
+    },
+    {
+        id: 'reboundsTotal',
+        label: 'Rebounds'
+    },
+    {
+        id: 'stealsBlocksTurnovers',
+        label: `Hustle`
+    },
+    {
+        id: 'foulsTechnical',
+        label: `Technical's`
+    },
+]
+
+export {TEAM_A, TEAM_A_CAPTAIN, TEAM_B, TEAM_B_CAPTAIN, ALL_STAR_GAME_ID, FANTASY_PLAYER_STATS, FANTASY_TEAM_STATS, REFRESH_INTERVAL}

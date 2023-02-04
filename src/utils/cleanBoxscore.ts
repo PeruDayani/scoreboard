@@ -11,7 +11,13 @@ function extractPlayerData(data: any) : PlayerStats {
         reboundsTotal: data.statistics.reboundsTotal,
         reboundsDefensive: data.statistics.reboundsDefensive,
         reboundsOffensive: data.statistics.reboundsOffensive,
-    
+
+        freeThrowsMade: data.statistics.freeThrowsMade,
+        freeThrowsAttempted: data.statistics.freeThrowsAttempted,
+        
+        twoPointersMade: data.statistics.twoPointersMade,
+        twoPointersAttempted: data.statistics.twoPointersAttempted,
+
         threePointersMade: data.statistics.threePointersMade,
         threePointersAttempted: data.statistics.threePointersAttempted,
     
@@ -19,6 +25,7 @@ function extractPlayerData(data: any) : PlayerStats {
         blocksReceived: data.statistics.blocksReceived,
         steals: data.statistics.steals,
         turnovers: data.statistics.turnovers,
+        foulsTechnical: data.statistics.foulsTechnical,
     }
 }
 

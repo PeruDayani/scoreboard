@@ -1,4 +1,4 @@
-import { fetchPlayers } from '@/utils/calcAllStarData'
+import { fetchPlayers } from '@/utils/cleanPlayersData'
 import { cleanBoxscore } from '@/utils/cleanBoxscore'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
