@@ -5,7 +5,8 @@ import { Game } from '@/utils/types';
 
 export default function GameRow({game}: {game: Game}) {
     
-    let gameDifference = Math.ceil((Math.abs(game.homeTeam.score - game.awayTeam.score))/5)*5
+    const gameDifference = Math.ceil((Math.abs(game.homeTeam.score - game.awayTeam.score))/5)*5
+
     const highlighsLink = `https://www.youtube.com/results?search_query=${game.awayTeam.teamCity}+${game.awayTeam.teamName}+at+${game.homeTeam.teamCity}+${game.homeTeam.teamName}`
     const awayTeamImageSrc = `https://cdn.nba.com/logos/nba/${game.awayTeam.teamId}/primary/L/logo.svg`
     const homeTeamImageSrc = `https://cdn.nba.com/logos/nba/${game.homeTeam.teamId}/primary/L/logo.svg`
@@ -16,10 +17,26 @@ export default function GameRow({game}: {game: Game}) {
 
     function gameScoreText() {
         if (gameDifference > 0) {
-            return `Less than ${gameDifference}`
+            return (
+                <div> 
+                    <div className=" text-center italic text-sm">
+                        Decided by
+                    </div>
+                    <div>
+                        {`Less than ${gameDifference}` }
+                    </div>
+                </div>
+            )
+
         } else {
-            return `Tie Game!`
+            return (
+                    <div>
+                       Tie Game 
+                    </div>
+            )
+
         }
+        
     }
 
     function teamRecords() {
@@ -48,7 +65,10 @@ export default function GameRow({game}: {game: Game}) {
                 <Image src={homeTeamImageSrc} width="80" height="80" alt="homeTeam"/>
             </div>
 
+            
+
             <div className="m-auto font-medium">
+            
                 {gameScheduled() ? teamRecords() : gameScoreText()}
             </div>
 

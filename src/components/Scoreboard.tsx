@@ -12,6 +12,7 @@ export default function Scoreboard({date, games}: {date: any, games: any}) {
         const secondGameDiff = Math.abs(secondGame.homeTeam.score - secondGame.awayTeam.score)
         return firstGameDiff - secondGameDiff
     })
+
     
     return (
         <div className='flex flex-col font-mono antialiased'>
