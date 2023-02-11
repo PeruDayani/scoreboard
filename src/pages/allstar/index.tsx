@@ -19,7 +19,7 @@ function useAllStarData () {
 
 export default function AllStar() {
     const { data, isLoading, isError } = useAllStarData()
-    console.log("Recieved data: ", data)
+    console.log("Recieved data: ", data, isLoading)
   
     return (
       <>
@@ -35,4 +35,4 @@ export default function AllStar() {
         </div>
       </>
     )
-  }
+}

@@ -6,7 +6,7 @@ function extractTeamData(data: any) : Team {
         teamName: data.teamName || data['TEAM_NAME'],
         teamCity: data.teamCity || data['TEAM_CITY_NAME'],
         record: data.wins ? `${data.wins}-${data.losses}` : data['TEAM_WINS_LOSSES'],
-        score: data.score || data['PTS'],
+        score: data.score || data['PTS'] || 0,
         players: []
     }
 }

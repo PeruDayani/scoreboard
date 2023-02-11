@@ -47,7 +47,7 @@ function addFantasyPlayerStats(player: PlayerStats): PlayerStats {
 
 function calcAllStarData(data: BoxScore) : any {
 
-    if (data) {
+    if (data?.game) {
 
         const homePlayers: PlayerStats[] = data.game.homeTeam.players
         const awayPlayers: PlayerStats[] = data.game.awayTeam.players
@@ -86,7 +86,7 @@ function calcAllStarData(data: BoxScore) : any {
 
     }
 
-    return null
+    return data
 }
 
 export { calcAllStarData }

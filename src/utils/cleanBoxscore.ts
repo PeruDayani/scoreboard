@@ -75,7 +75,7 @@ function cleanBoxscore (data: any) : BoxScore {
         }
     }
 
-    return null
+    return data
 }
 
 export { cleanBoxscore }

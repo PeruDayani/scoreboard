@@ -101,7 +101,11 @@ type AllStarDraft = {
     date: string,
     game: Game,
     fantasyTeamA: FantasyTeam,
-    fantasyTeamB: FantasyTeam
+    fantasyTeamB: FantasyTeam,
+    error?: {
+        message: string,
+        type: string
+    }
 }
 
 type AllStarDraftData = AllStarDraft

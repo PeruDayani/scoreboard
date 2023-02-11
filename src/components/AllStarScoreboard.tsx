@@ -4,8 +4,8 @@ import AllStarPlayerStats from "./AllStarPlayerStats"
 
 export default function AllStarScoreboard({data}: {data: AllStarDraftData}) {
     
-    if (data == null ) {
-        return (<div> Nope </div>)
+    if (data.error || data == null ) {
+        return (<div> Game Data not published yet. </div>)
     }
     
     const fantasyTeamA = data.fantasyTeamA

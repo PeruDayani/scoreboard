@@ -17,7 +17,6 @@ function useScoreboard () {
   }
 }
 
-
 export default function Home() {
   const { data, isLoading, isError } = useScoreboard()
   console.log("Recieved data: ", data)

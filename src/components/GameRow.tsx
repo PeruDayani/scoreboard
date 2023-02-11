@@ -2,11 +2,13 @@ import Image from 'next/image'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpRightFromSquare, faAt } from '@fortawesome/free-solid-svg-icons';
 import { Game } from '@/utils/types';
+import { useState } from 'react';
 
 export default function GameRow({game}: {game: Game}) {
+
+    const [displayScore, setDisplayScore] = useState(false)
     
     const gameDifference = Math.ceil((Math.abs(game.homeTeam.score - game.awayTeam.score))/5)*5
-
     const highlighsLink = `https://www.youtube.com/results?search_query=${game.awayTeam.teamCity}+${game.awayTeam.teamName}+at+${game.homeTeam.teamCity}+${game.homeTeam.teamName}`
     const awayTeamImageSrc = `https://cdn.nba.com/logos/nba/${game.awayTeam.teamId}/primary/L/logo.svg`
     const homeTeamImageSrc = `https://cdn.nba.com/logos/nba/${game.homeTeam.teamId}/primary/L/logo.svg`
@@ -16,27 +18,33 @@ export default function GameRow({game}: {game: Game}) {
     }
 
     function gameScoreText() {
-        if (gameDifference > 0) {
+        if (displayScore) {
             return (
-                <div> 
-                    <div className=" text-center italic text-sm">
-                        Decided by
-                    </div>
-                    <div>
-                        {`Less than ${gameDifference}` }
-                    </div>
+                <div className="flex gap-20" onClick={() => setDisplayScore(false)}>
+                    <div> {game.awayTeam.score} </div>
+                    <div> {game.homeTeam.score} </div>
                 </div>
             )
-
         } else {
-            return (
-                    <div>
-                       Tie Game 
+            if (gameDifference > 0) {
+                return (
+                    <div onClick={() => setDisplayScore(true)}> 
+                        <div className="text-center italic text-sm">
+                            {game.gameStatus == 'Live' ? `Score Difference` : `Decided By`}
+                        </div>
+                        <div>
+                            {`Less than ${gameDifference}` }
+                        </div>
                     </div>
-            )
-
-        }
-        
+                )
+            } else {
+                return (
+                    <div onClick={() => setDisplayScore(true)}>
+                        Tie Game 
+                    </div>
+                )
+            }
+        }        
     }
 
     function teamRecords() {
@@ -65,13 +73,9 @@ export default function GameRow({game}: {game: Game}) {
                 <Image src={homeTeamImageSrc} width="80" height="80" alt="homeTeam"/>
             </div>
 
-            
-
             <div className="m-auto font-medium">
-            
                 {gameScheduled() ? teamRecords() : gameScoreText()}
             </div>
-
         </div>
     )
 }
