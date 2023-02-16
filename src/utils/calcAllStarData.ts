@@ -1,5 +1,6 @@
-import { TEAM_A, TEAM_A_CAPTAIN, TEAM_B, TEAM_B_CAPTAIN } from "./constants";
-import { BoxScore, PlayerStats, STAT_ID, TeamStats } from "./types";
+import { all } from "axios";
+import { TEAM_A, TEAM_A_CAPTAIN, TEAM_B, TEAM_B_CAPTAIN, FANTASY_TEAM_STATS } from "./constants";
+import { BoxScore, PlayerStats, STAT_ID, Team, TeamStats } from "./types";
 
 function calcTeamStats(players: PlayerStats[]) : TeamStats {
 
@@ -43,6 +44,56 @@ function addFantasyPlayerStats(player: PlayerStats): PlayerStats {
         twoPointersFreeThrows: player.freeThrowsMade + 2*player.twoPointersMade,
         stealsBlocksTurnovers: player.steals + player.blocks - player.turnovers,
     }
+}
+
+function calcAvgPlayerStats(players: PlayerStats[]) : any {
+
+    function avgStat(stat: STAT_ID) : string {
+        return (players.reduce((a, b) => a + (b[stat] || 0), 0) / players.length).toFixed(2);
+    }
+
+    return {
+        points: avgStat('points'),
+        assists: avgStat('assists'),
+        
+        reboundsTotal: avgStat('reboundsTotal'),
+        reboundsDefensive: avgStat('reboundsDefensive'),
+        reboundsOffensive: avgStat('reboundsOffensive'),
+
+        freeThrowsMade: avgStat('freeThrowsMade'),
+        freeThrowsAttempted: avgStat('freeThrowsAttempted'),
+
+        twoPointersMade: avgStat('twoPointersMade'),
+        twoPointersAttempted: avgStat('twoPointersAttempted'),
+
+        threePointersMade: avgStat('threePointersMade'),
+        threePointersAttempted: avgStat('threePointersAttempted'),
+
+        blocks: avgStat('blocks'),
+        blocksReceived: avgStat('blocksReceived'),
+        steals: avgStat('steals'),
+        turnovers: avgStat('turnovers'),
+        foulsTechnical: avgStat('foulsTechnical'),
+
+        reboundsWeighted: avgStat('reboundsWeighted'),
+        twoPointersFreeThrows: avgStat('twoPointersFreeThrows'),
+        stealsBlocksTurnovers: avgStat('stealsBlocksTurnovers'),
+    }
+}
+
+function calcBestPlayer(allPlayers: PlayerStats[], stat: STAT_ID) : any {
+    return allPlayers.sort(
+        function(playerA: any, playerB: any) {
+            return playerB[stat] - playerA[stat]
+        }
+    )
+    .map((player) => {
+        return {
+            name: player.name,
+            score: player[stat]
+        }
+    })
+    .slice(0,3)
 }
 
 function calcAllStarData(data: BoxScore) : any {
@@ -89,4 +140,37 @@ function calcAllStarData(data: BoxScore) : any {
     return data
 }
 
-export { calcAllStarData }
+function analyzeAllStarData(data:BoxScore) : any {
+    if (data?.game) {
+
+        const homePlayers: PlayerStats[] = data.game.homeTeam.players.map(addFantasyPlayerStats)
+        const awayPlayers: PlayerStats[] = data.game.awayTeam.players.map(addFantasyPlayerStats)
+        const allPlayers: PlayerStats[] = homePlayers.concat(awayPlayers)
+
+        const avgPlayer: TeamStats = calcAvgPlayerStats(allPlayers)
+        
+        const bestPlayers: any[] = []
+
+        FANTASY_TEAM_STATS.forEach((stat) => 
+            bestPlayers.push(
+                {
+                    stat: stat,
+                    average: avgPlayer[stat.id],
+                    bestPlayers: calcBestPlayer(allPlayers, stat.id)
+                }
+            )
+        )
+
+        return {
+            date: data.date,
+            bestPlayers: bestPlayers,
+            // avgPlayer: avgPlayer,
+            // allPlayers: allPlayers
+        }
+
+    }
+
+    return data
+}
+
+export { calcAllStarData, analyzeAllStarData }

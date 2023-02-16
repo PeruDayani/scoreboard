@@ -6,7 +6,7 @@ const REFRESH_INTERVAL: number = 60*1000
 // All Star Data:
 // 2022 All Star GameID : 0032100001
 // 2023 All Star GameID : 0032200001
-const ALL_STAR_GAME_ID: string = '0022200788'
+const ALL_STAR_GAME_ID: string = '0032100001'
 
 const TEAM_A_CAPTAIN: string = 'Peru Dayani'
 const TEAM_A: string[] = [
