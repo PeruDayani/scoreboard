@@ -43,6 +43,30 @@ export default function Fantasy() {
       )
     }
 
+    if (!data || data.error) {
+      return (
+        <>
+          <Head>
+            <title>All Star Fantasy Draft 3.0</title>
+            <meta name="description" content="Watch the highlights of close sports games" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <link rel="icon" href="/favicon.ico" />
+          </Head>
+    
+          <div className='p-10 flex justify-center'>
+            <div className="mx-auto text-lg py-2 italic text-center"> 
+                <p> 
+                    The NBA has not started publishing the game data yet.
+                </p>
+                <p> 
+                    They usually start 45 minutes before tipoff.
+                </p>
+            </div>
+          </div>
+        </>
+      )
+    }
+
     return (
       <>
         <Head>

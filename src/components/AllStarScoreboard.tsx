@@ -3,35 +3,40 @@ import AllStarPlayerStats from "./AllStarPlayerStats"
 import Image from 'next/image'
 import leftWinnerImg from '../../public/left_winner.png'
 import rightWinnerImg from '../../public/right_winner.png'
+import Confetti from 'react-dom-confetti';
+import { useCallback, useEffect, useState } from "react";
+
+const CONFETTI_CONFIG = {
+    angle: 90,
+    spread: 45,
+    startVelocity: 30,
+    elementCount: 90,
+    dragFriction: 0.12,
+    duration: 6000,
+    stagger: 3,
+    width: "20px",
+    height: "20px",
+    perspective: "500px",
+    colors: ["#a864fd", "#29cdff", "#78ff44", "#ff718d", "#fdff6a"]
+};
 
 export default function AllStarScoreboard({data}: {data: AllStarDraftData}) {
-    
-    if (data.error) {
-        return (
-            <div className="mx-auto text-lg py-2 italic text-center"> 
-                <p> 
-                    The NBA has not started publishing the game data yet.
-                </p>
-                <p> 
-                    They usually start 45 minutes before tipoff.
-                </p>
-            </div>
-        )
-    }
+
+    const [confettiTeamA, setConfettiTeamA] = useState(false);    
+    const [confettiTeamB, setConfettiTeamB] = useState(false);
     
     const fantasyTeamA = data.fantasyTeamA
     const fantasyTeamB = data.fantasyTeamB
 
-    function isRightWinning () : boolean {
-
+    const isTeamAWinning = useCallback(() => {
         const results = data.stats?.map((stat: any) => {
             let teamAScore = fantasyTeamA?.teamStats[stat.id as keyof TeamStats] || 0
             let teamBScore = fantasyTeamB?.teamStats[stat.id as keyof TeamStats] || 0
 
             if (teamAScore > teamBScore) {
-                return -1
-            } else if (teamAScore < teamBScore) {
                 return 1
+            } else if (teamAScore < teamBScore) {
+                return -1
             } else {
                 return 0
             }
@@ -44,9 +49,20 @@ export default function AllStarScoreboard({data}: {data: AllStarDraftData}) {
         }
 
         return primaryResult > 0 ?  true : false     
-    }
+    }, [data, fantasyTeamA, fantasyTeamB])
 
-    function isWinningStat (team: string, statId: STAT_ID, invert: boolean = false) : string {
+    const triggerConfetti = useCallback(() => {
+        if (isTeamAWinning()) {
+            setConfettiTeamA(true)
+            setTimeout(() => setConfettiTeamA(false), 1000)    
+        } else {
+            setConfettiTeamB(true)
+            setTimeout(() => setConfettiTeamB(false), 1000)
+        }
+    }, [isTeamAWinning])
+
+    const isWinningStat = useCallback((team: string, statId: STAT_ID, invert: boolean = false) => {
+
         let teamAScore = fantasyTeamA?.teamStats[statId as keyof TeamStats] || 0
         let teamBScore = fantasyTeamB?.teamStats[statId as keyof TeamStats] || 0
 
@@ -64,10 +80,14 @@ export default function AllStarScoreboard({data}: {data: AllStarDraftData}) {
         } 
 
         return ''
-    }
 
-    // Trigger confettit on click and when status === final
-    // Use this icon to signify who's winning 
+    }, [fantasyTeamA, fantasyTeamB])
+
+    useEffect(() => {
+        if (data.game.gameStatus == 'Done') {
+            triggerConfetti()
+        }
+    }, [data, triggerConfetti])
 
     return (
         <div className='flex flex-col font-mono antialiased'>
@@ -76,20 +96,26 @@ export default function AllStarScoreboard({data}: {data: AllStarDraftData}) {
                 All Star {data?.date.split(' ')[3]}
             </div>
 
-            <div className="w-80 lg:w-96 m-auto p-4 bg-purple-100 rounded-lg flex flex-col">
+            <div className="w-80 lg:w-96 m-auto p-4 bg-purple-100 rounded-lg flex flex-col" onClick={triggerConfetti}>
 
                 <div className="text-center text-sm underline decoration-purple-900 underline-offset-2">
                     {data.game.gameStatusText}
                 </div>
 
                 <div className="flex justify-between items-center italic text-center">
-                    <div className="w-1/4"> {fantasyTeamA?.teamCaptain} </div>
+                    <div className="w-1/4"> 
+                        <div> {fantasyTeamA?.teamCaptain}  </div>
+                        <Confetti active={confettiTeamA} config={CONFETTI_CONFIG} />
+                    </div>
                     <div className="w-20">
                         {
-                            isRightWinning() ? <Image src={rightWinnerImg} alt="teamA winner"/> : <Image src={leftWinnerImg} alt="teamA winner"/>
+                            isTeamAWinning() ? <Image src={leftWinnerImg} alt="teamA winner"/> : <Image src={rightWinnerImg} alt="teamA winner"/>
                         }
                     </div>
-                    <div className="w-1/4"> {fantasyTeamB?.teamCaptain} </div>
+                    <div className="w-1/4"> 
+                        <div> {fantasyTeamB?.teamCaptain} </div>
+                        <Confetti active={confettiTeamB} config={CONFETTI_CONFIG} />
+                     </div>
                 </div>
 
                 {

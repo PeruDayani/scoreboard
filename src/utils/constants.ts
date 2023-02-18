@@ -46,7 +46,7 @@ const FANTASY_PLAYER_STATS: {id: STAT_ID, label: string, invert?: boolean, class
     },
     {
         id: 'stealsBlocks',
-        label: `HustleV1`,
+        label: `HslV1`,
         classes: 'font-bold'
     },
     {
@@ -56,7 +56,7 @@ const FANTASY_PLAYER_STATS: {id: STAT_ID, label: string, invert?: boolean, class
     },
     {
         id: 'stealsBlocksTurnovers',
-        label: `HustleV2`,
+        label: `HslV2`,
         classes: 'font-bold'
     },
     {

@@ -13,6 +13,11 @@ export default async function handler(
     try {
         if (id && typeof id === "string") {
             const fantasyData = ID_TO_DATA_MAP.find((data) => data.id == id)
+
+            if (!fantasyData) {
+                throw Error('Invalid game ID provided')
+            }
+
             const  url = `https://cdn.nba.com/static/json/liveData/boxscore/boxscore_${fantasyData?.gameId}.json`
             const data  = await fetch(url)
                 .then((res) => res.json())
@@ -26,6 +31,5 @@ export default async function handler(
         console.log("Error: ", error)
         res.status(404).json({error})
     }
-
 
 }
