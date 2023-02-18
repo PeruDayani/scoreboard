@@ -43,6 +43,7 @@ type PlayerStats = {
 
     reboundsWeighted?: number,
     twoPointersFreeThrows?: number,
+    stealsBlocks?: number,
     stealsBlocksTurnovers?: number,
 }
 
@@ -85,6 +86,7 @@ type TeamStats = {
 
     reboundsWeighted?: number,
     twoPointersFreeThrows?: number,
+    stealsBlocks?: number,
     stealsBlocksTurnovers?: number,
 }
 
@@ -102,6 +104,7 @@ type AllStarDraft = {
     game: Game,
     fantasyTeamA: FantasyTeam,
     fantasyTeamB: FantasyTeam,
+    stats?: any,
     error?: {
         message: string,
         type: string

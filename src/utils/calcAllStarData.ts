@@ -1,4 +1,4 @@
-import { TEAM_A, TEAM_A_CAPTAIN, TEAM_B, TEAM_B_CAPTAIN } from "./constants";
+import { ID_TO_DATA_MAP } from "./constants";
 import { BoxScore, PlayerStats, STAT_ID, TeamStats } from "./types";
 
 function calcTeamStats(players: PlayerStats[]) : TeamStats {
@@ -32,6 +32,7 @@ function calcTeamStats(players: PlayerStats[]) : TeamStats {
 
         reboundsWeighted: sumStat('reboundsWeighted'),
         twoPointersFreeThrows: sumStat('twoPointersFreeThrows'),
+        stealsBlocks: sumStat('stealsBlocks'),
         stealsBlocksTurnovers: sumStat('stealsBlocksTurnovers'),
     }
 }
@@ -41,13 +42,18 @@ function addFantasyPlayerStats(player: PlayerStats): PlayerStats {
         ...player,
         reboundsWeighted: player.reboundsDefensive + 2*player.reboundsOffensive,
         twoPointersFreeThrows: player.freeThrowsMade + 2*player.twoPointersMade,
+        stealsBlocks: player.steals + player.blocks,
         stealsBlocksTurnovers: player.steals + player.blocks - player.turnovers,
     }
 }
 
-function calcAllStarData(data: BoxScore) : any {
+function calcAllStarData(data: BoxScore, id: string) : any {
 
-    if (data?.game) {
+    const fantasyData = ID_TO_DATA_MAP.find((data) => data.id == id)
+
+    if (data?.game && fantasyData) {
+
+        const { captainTeamA, captainTeamB, playersTeamA, playersTeamB } = fantasyData
 
         const homePlayers: PlayerStats[] = data.game.homeTeam.players
         const awayPlayers: PlayerStats[] = data.game.awayTeam.players
@@ -57,9 +63,9 @@ function calcAllStarData(data: BoxScore) : any {
         const teamB: PlayerStats[] = []
 
         allPlayers.forEach((player) => {
-            if (TEAM_A.includes(player.name)) {
+            if (playersTeamA.includes(player.name)) {
                 teamA.push(player)
-            } else if (TEAM_B.includes(player.name)) {
+            } else if (playersTeamB.includes(player.name)) {
                 teamB.push(player)
             }
         })
@@ -73,15 +79,16 @@ function calcAllStarData(data: BoxScore) : any {
             date: data.date,
             game: data.game,
             fantasyTeamA: {
-                teamCaptain: TEAM_A_CAPTAIN,
+                teamCaptain: captainTeamA,
                 teamStats: calcTeamStats(fantasyTeamA),
                 players: fantasyTeamA
             },
             fantasyTeamB: {
-                teamCaptain: TEAM_B_CAPTAIN,
+                teamCaptain: captainTeamB,
                 teamStats: calcTeamStats(fantasyTeamB),
                 players: fantasyTeamB
-            }
+            },
+            stats: fantasyData.stats
         }
 
     }

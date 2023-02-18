@@ -16,13 +16,11 @@ export default function AllStarPlayerStats({team} : {team: FantasyTeam | undefin
                 {team?.teamCaptain}
             </div>
 
-            {/* hover:bg-purple-800 hover:text-white */}
-
             <div className="text-xs bg-purple-100 rounded-lg md:text-base">
                 {/* Table */}
                 <div className="flex flex-row">
                     {/* Player Column */}
-                    <div className="w-28 md:w-44 p-3 bg-purple-200 rounded-tl-lg rounded-bl-lg">
+                    <div className="w-28 md:w-44 lg:w-fit p-3 bg-purple-200 rounded-tl-lg rounded-bl-lg">
                         <div className="underline italic pb-1 decoration-purple-900 underline-offset-2 "> Player </div>
                         {
                             team?.players.map((player) => (
