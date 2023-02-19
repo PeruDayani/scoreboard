@@ -15,10 +15,27 @@ export default function Fantasy() {
 
     const { data, error, isLoading } = useSWR(id ? `/api/fantasy/${id}` : null, fetcher, { refreshInterval: REFRESH_INTERVAL })
 
-    console.log("Internal game id : ", id)
-    console.log("fetching data : ", isLoading)
-    console.log("recieved data : ", data)
+    // console.log("Internal game id : ", id)
+    // console.log("fetching data : ", isLoading)
+    // console.log("recieved data : ", data)
   
+    if (isLoading || !data) {
+      return (
+        <>
+          <Head>
+            <title>All Star Fantasy Draft 3.0</title>
+            <meta name="description" content="Watch the highlights of close sports games" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <link rel="icon" href="/favicon.ico" />
+          </Head>
+    
+          <div className='p-10 flex justify-center'>
+              <FontAwesomeIcon icon={faBasketball} bounce size="3x" />
+          </div>
+        </>
+      )  
+    }
+
     if (error) {
       return (
         <>
@@ -43,7 +60,10 @@ export default function Fantasy() {
       )
     }
 
-    if (!data || data.error) {
+    if (data.error) {
+
+      console.log("Why? ", data,error)
+
       return (
         <>
           <Head>
@@ -77,7 +97,7 @@ export default function Fantasy() {
         </Head>
   
         <div className='p-10 flex justify-center'>
-            { isLoading || !data ? <FontAwesomeIcon icon={faBasketball} bounce size="3x" /> : <AllStarScoreboard data={data} />}
+          <AllStarScoreboard data={data} />
         </div>
       </>
     )
