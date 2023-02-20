@@ -130,7 +130,7 @@ export default function AllStarScoreboard({data}: {data: AllStarDraftData}) {
             </div>
 
             <div className="flex flex-col">
-                <AllStarPlayerStats teamCaptain={fantasyTeamA.teamCaptain} players={fantasyTeamB.players} />
+                <AllStarPlayerStats teamCaptain={fantasyTeamA.teamCaptain} players={fantasyTeamA.players} />
                 <AllStarPlayerStats teamCaptain={fantasyTeamB.teamCaptain} players={fantasyTeamB.players} />
             </div>
 
