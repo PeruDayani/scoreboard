@@ -62,8 +62,6 @@ export default function Fantasy() {
 
     if (data.error) {
 
-      console.log("Why? ", data,error)
-
       return (
         <>
           <Head>

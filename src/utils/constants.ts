@@ -5,6 +5,10 @@ const REFRESH_INTERVAL: number = 60*1000
 
 const FANTASY_PLAYER_STATS: {id: STAT_ID, label: string, invert?: boolean, classes?: string}[] = [
     {
+        id: 'minutes',
+        label: 'Mins'
+    },
+    {
         id: 'points',
         label: 'Pts'
     },

@@ -18,6 +18,7 @@ type Game = {
 type PlayerStats = {
     name: string,
     personId: string,
+    minutes?: number,
 
     points: number,
     assists: number,
@@ -64,6 +65,7 @@ type BoxScoreData = {
 type TeamStats = {
     points: number,
     assists: number,
+    minutes?: number,
 
     reboundsTotal: number,
     reboundsDefensive: number,

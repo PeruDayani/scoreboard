@@ -1,9 +1,19 @@
 import { BoxScore, Game, PlayerStats, Team } from './types'
 
+function cleanMinsPlayer(data: string) : number {
+    const regex = /(?<=PT)(.*)(?=M)/g;
+    const found = data.match(regex);
+    if (found?.length == 1) {
+        return Number(found[0])
+    }
+    return 0
+}
+
 function extractPlayerData(data: any) : PlayerStats {
     return {
         name: data.name,
         personId: data.personId,
+        minutes: cleanMinsPlayer(data.statistics.minutesCalculated),
     
         points: data.statistics.points,
         assists: data.statistics.assists,

@@ -1,8 +1,8 @@
 import { FANTASY_PLAYER_STATS } from "@/utils/constants";
-import { FantasyTeam } from "@/utils/types";
+import { PlayerStats } from "@/utils/types";
 import React, { useState } from 'react';
 
-export default function AllStarPlayerStats({team} : {team: FantasyTeam | undefined}) { 
+export default function AllStarPlayerStats({teamCaptain, players} : {teamCaptain: string, players: PlayerStats[]}) { 
 
     const [playerSelected, setPlayerSelected] = useState('');
 
@@ -13,7 +13,7 @@ export default function AllStarPlayerStats({team} : {team: FantasyTeam | undefin
     return (
         <div className="flex flex-col justify-start my-4">
             <div className="mx-auto py-2 italic underline">
-                {team?.teamCaptain}
+                {teamCaptain}
             </div>
 
             <div className="text-xs bg-purple-100 rounded-lg md:text-base">
@@ -23,7 +23,7 @@ export default function AllStarPlayerStats({team} : {team: FantasyTeam | undefin
                     <div className="w-28 md:w-44 lg:w-fit p-3 bg-purple-200 rounded-tl-lg rounded-bl-lg">
                         <div className="underline italic pb-1 decoration-purple-900 underline-offset-2 "> Player </div>
                         {
-                            team?.players.map((player) => (
+                            players.map((player) => (
                                 <div className={isPlayerSelected(player.personId) ? "rounded-lg bg-purple-800 text-white" : ""} key={"wrapper_" + player.personId} >
                                     <div className="truncate p-1 md:p-1" onMouseEnter={() => setPlayerSelected(player.personId)} onMouseLeave={() => setPlayerSelected('')}> {player.name} </div>
                                 </div>
@@ -39,7 +39,7 @@ export default function AllStarPlayerStats({team} : {team: FantasyTeam | undefin
                                     <div className={"px-2 pb-1 underline italic decoration-purple-900 underline-offset-2 " + stat.classes}> {stat.label} </div>
                                     {/* Display all the player stats */}
                                     {
-                                        team?.players.map((player) => (
+                                        players.map((player) => (
                                             <div className={isPlayerSelected(player.personId) ? "bg-purple-800 text-white" : ""} key={stat.id + "_" + player.personId}>
                                                 <div className="px-2 p-1" onMouseEnter={() => setPlayerSelected(player.personId)} onMouseLeave={() => setPlayerSelected('')}> {player[stat.id]} </div>
                                             </div>

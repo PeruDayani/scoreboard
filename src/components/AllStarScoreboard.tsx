@@ -130,10 +130,14 @@ export default function AllStarScoreboard({data}: {data: AllStarDraftData}) {
             </div>
 
             <div className="flex flex-col">
-                <AllStarPlayerStats team={fantasyTeamA} />
-                <AllStarPlayerStats team={fantasyTeamB} />
+                <AllStarPlayerStats teamCaptain={fantasyTeamA.teamCaptain} players={fantasyTeamB.players} />
+                <AllStarPlayerStats teamCaptain={fantasyTeamB.teamCaptain} players={fantasyTeamB.players} />
             </div>
-            
+
+            <div className="flex flex-col">
+                <AllStarPlayerStats teamCaptain="All Players Ranked" players={data.allPlayers || []}/>
+            </div>
+
         </div>
     )
 }
