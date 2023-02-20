@@ -52,7 +52,7 @@ export default function Fantasy() {
                   Welp, it was going to break someday. 
                 </p>
                 <p> 
-                  Let me know @ <span className='underline text-purple-600'> perudayani.berkeley.edu </span>
+                  Let me know @ <span className='underline text-purple-600'> perudayani@berkeley.edu </span>
                 </p>
               </div>
           </div>
