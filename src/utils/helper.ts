@@ -231,40 +231,6 @@ const ID_TO_DATA_MAP = [
         ]
     },
     {
-        id: '2023-peru-hayden-allstar-v2',
-        title: 'Peru V Hayden AllStar 2023',
-        gameId: '0032200001',
-        stats: FANTASY_TEAM_STATS_2023,
-        captainTeamA: 'Peru Dayani',
-        playersTeamA: [
-            'Joel Embiid',
-            'Nikola Jokic',
-            'Kyrie Irving',
-            'Donovan Mitchell',
-            'Damian Lillard',
-            'Jaylen Brown',
-            'Paul George',
-            'DeMar DeRozan',
-            'Jrue Holiday',
-            'Bam Adebayo',
-            `De'Aaron Fox`
-        ],
-        captainTeamB: 'Hayden Davila',
-        playersTeamB: [
-            'LeBron James',
-            'Luka Doncic',
-            'Jayson Tatum',
-            'Ja Morant',
-            'Shai Gilgeous-Alexander',
-            'Anthony Edwards',
-            'Domantas Sabonis',
-            'Tyrese Haliburton',
-            'Jaren Jackson Jr.',
-            'Julius Randle',
-            'Pascal Siakam'
-        ]
-    },
-    {
         id: '2023-seerat-kyle-allstar',
         title: 'Seerat V Kyle AllStar 2023',
         gameId: '0032200001',
