@@ -201,9 +201,33 @@ const ID_TO_DATA_MAP = [
         stats: FANTASY_TEAM_STATS_2023,
         captainTeamA: 'Peru Dayani',
         playersTeamA: [
+            'Joel Embiid',
+            'Giannis Antetokounmpo',
+            'Nikola Jokic',
+            'Kyrie Irving',
+            'Donovan Mitchell',
+            'Damian Lillard',
+            'Jaylen Brown',
+            'Paul George',
+            'DeMar DeRozan',
+            'Jrue Holiday',
+            'Bam Adebayo',
+            `De'Aaron Fox`
         ],
         captainTeamB: 'Hayden Davila',
         playersTeamB: [
+            'LeBron James',
+            'Luka Doncic',
+            'Jayson Tatum',
+            'Ja Morant',
+            'Lauri Markkanen',
+            'Shai Gilgeous-Alexander',
+            'Anthony Edwards',
+            'Domantas Sabonis',
+            'Tyrese Haliburton',
+            'Jaren Jackson Jr.',
+            'Julius Randle',
+            'Pascal Siakam'
         ]
     },
     {
