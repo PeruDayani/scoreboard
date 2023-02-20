@@ -232,7 +232,7 @@ const ID_TO_DATA_MAP = [
     },
     {
         id: '2023-peru-hayden-allstar-v2',
-        title: 'Peru V Hayden AllStar 2023',
+        title: 'Peru V Hayden AllStar 2023 v2',
         gameId: '0032200001',
         stats: FANTASY_TEAM_STATS_2023,
         captainTeamA: 'Peru Dayani',
