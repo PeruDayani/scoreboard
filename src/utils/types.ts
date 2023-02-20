@@ -104,6 +104,7 @@ type AllStarDraft = {
     game: Game,
     fantasyTeamA: FantasyTeam,
     fantasyTeamB: FantasyTeam,
+    allPlayers?: PlayerStats[],
     stats?: any,
     error?: {
         message: string,

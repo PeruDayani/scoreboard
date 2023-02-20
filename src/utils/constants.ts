@@ -47,7 +47,6 @@ const FANTASY_PLAYER_STATS: {id: STAT_ID, label: string, invert?: boolean, class
     {
         id: 'stealsBlocks',
         label: `HslV1`,
-        classes: 'font-bold'
     },
     {
         id: 'turnovers',

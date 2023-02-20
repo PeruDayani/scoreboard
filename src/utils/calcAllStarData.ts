@@ -1,3 +1,4 @@
+import { faL } from "@fortawesome/free-solid-svg-icons";
 import { ID_TO_DATA_MAP } from "./constants";
 import { BoxScore, PlayerStats, STAT_ID, TeamStats } from "./types";
 
@@ -47,6 +48,23 @@ function addFantasyPlayerStats(player: PlayerStats): PlayerStats {
     }
 }
 
+function comparePlayers(playerA: PlayerStats, playerB: PlayerStats, stats: any): number {
+    const results = stats?.map((stat: any) => {
+        let playerAScore = playerA[stat.id as keyof TeamStats] || 0
+        let playerBScore = playerB[stat.id as keyof TeamStats] || 0
+
+        if (playerAScore < playerBScore) {
+            return 1
+        } else if (playerAScore > playerBScore) {
+            return -1
+        } else {
+            return 0
+        }
+    })
+
+    return results.slice(0,5).reduce((sum: number, a: number) => sum + a, 0)
+}
+
 function calcAllStarData(data: BoxScore, id: string) : any {
 
     const fantasyData = ID_TO_DATA_MAP.find((data) => data.id == id)
@@ -55,13 +73,15 @@ function calcAllStarData(data: BoxScore, id: string) : any {
 
         const { captainTeamA, captainTeamB, playersTeamA, playersTeamB } = fantasyData
 
-        const homePlayers: PlayerStats[] = data.game.homeTeam.players
-        const awayPlayers: PlayerStats[] = data.game.awayTeam.players
+        const homePlayers: PlayerStats[] = data.game.homeTeam.players.map(addFantasyPlayerStats)
+        const awayPlayers: PlayerStats[] = data.game.awayTeam.players.map(addFantasyPlayerStats)
         const allPlayers: PlayerStats[] = homePlayers.concat(awayPlayers)
 
-        const teamA: PlayerStats[] = []
-        const teamB: PlayerStats[] = []
+        const teamA: any[] = []
+        const teamB: any[] = []
 
+        allPlayers.sort((playerA, playerB) => comparePlayers(playerA, playerB, fantasyData.stats))
+        
         allPlayers.forEach((player) => {
             if (playersTeamA.includes(player.name)) {
                 teamA.push(player)
@@ -70,25 +90,21 @@ function calcAllStarData(data: BoxScore, id: string) : any {
             }
         })
 
-        const fantasyTeamA = teamA.map(addFantasyPlayerStats)
-        fantasyTeamA.sort((playerA: PlayerStats, playerB: PlayerStats) => playerB.points - playerA.points)
-        const fantasyTeamB = teamB.map(addFantasyPlayerStats)
-        fantasyTeamB.sort((playerA: PlayerStats, playerB: PlayerStats) => playerB.points - playerA.points)
-
         return {
             date: data.date,
             game: data.game,
             fantasyTeamA: {
                 teamCaptain: captainTeamA,
-                teamStats: calcTeamStats(fantasyTeamA),
-                players: fantasyTeamA
+                teamStats: calcTeamStats(teamA),
+                players: teamA
             },
             fantasyTeamB: {
                 teamCaptain: captainTeamB,
-                teamStats: calcTeamStats(fantasyTeamB),
-                players: fantasyTeamB
+                teamStats: calcTeamStats(teamB),
+                players: teamB
             },
-            stats: fantasyData.stats
+            stats: fantasyData.stats,
+            allPlayers: allPlayers
         }
 
     }

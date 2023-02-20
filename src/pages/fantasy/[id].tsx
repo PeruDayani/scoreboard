@@ -79,7 +79,7 @@ export default function Fantasy() {
                     The NBA has not started publishing the game data yet.
                 </p>
                 <p> 
-                    They usually start 45 minutes before tipoff.
+                    They usually start 10 minutes before tipoff.
                 </p>
             </div>
           </div>

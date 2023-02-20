@@ -133,7 +133,7 @@ export default function AllStarScoreboard({data}: {data: AllStarDraftData}) {
                 <AllStarPlayerStats team={fantasyTeamA} />
                 <AllStarPlayerStats team={fantasyTeamB} />
             </div>
-
+            
         </div>
     )
 }
