@@ -11,6 +11,7 @@ function calcTeamStats(players: PlayerStats[]) : TeamStats {
     return {
         points: sumStat('points'),
         assists: sumStat('assists'),
+        minutes: sumStat('minutes'),
         
         reboundsTotal: sumStat('reboundsTotal'),
         reboundsDefensive: sumStat('reboundsDefensive'),

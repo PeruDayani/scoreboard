@@ -119,7 +119,21 @@ export default function AllStarScoreboard({data}: {data: AllStarDraftData}) {
                 </div>
 
                 {
-                    data.stats.map((stat: any) => (
+                    data.stats.filter((stat: any) => !stat.ignore ).map((stat: any) => (
+                        <div className="px-6 py-1 flex justify-between items-center" key={stat.id}> 
+                            <div className={isWinningStat('A', stat.id, stat?.invert)}> <> {fantasyTeamA?.teamStats[stat.id as keyof TeamStats]} </>  </div>
+                            <div className="text-xs"> {stat.label} </div>
+                            <div className={isWinningStat('B', stat.id, stat?.invert)} > <> {fantasyTeamB?.teamStats[stat.id as keyof TeamStats]} </>  </div>
+                        </div>
+                    ))
+                }
+
+                <div className="px-6 py-2 flex justify-center items-center"> 
+                    <div className="text-xs italic"> Other stats </div>
+                </div>
+
+                {   
+                    data.stats.filter((stat: any) => stat.ignore ).map((stat: any) => (
                         <div className="px-6 py-1 flex justify-between items-center" key={stat.id}> 
                             <div className={isWinningStat('A', stat.id, stat?.invert)}> <> {fantasyTeamA?.teamStats[stat.id as keyof TeamStats]} </>  </div>
                             <div className="text-xs"> {stat.label} </div>

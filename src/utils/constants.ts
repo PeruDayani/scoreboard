@@ -69,7 +69,7 @@ const FANTASY_PLAYER_STATS: {id: STAT_ID, label: string, invert?: boolean, class
     },
 ]
 
-const FANTASY_TEAM_STATS_2022: {id: STAT_ID, label: string, invert?: boolean}[] = [
+const FANTASY_TEAM_STATS_2022: {id: STAT_ID, label: string, invert?: boolean, ignore?: boolean}[] = [
     {
         id: 'points',
         label: `Points`
@@ -92,11 +92,22 @@ const FANTASY_TEAM_STATS_2022: {id: STAT_ID, label: string, invert?: boolean}[] 
     },
     {
         id: 'foulsTechnical',
-        label: `Technical's`
+        label: `Technical's`,
+        ignore: true
+    },
+    {
+        id: 'minutes',
+        label: `Minutes`,
+        ignore: true
+    },
+    {
+        id: 'twoPointersFreeThrows',
+        label: `Inside the Arc`,
+        ignore: true
     },
 ]
 
-const FANTASY_TEAM_STATS_2023: {id: STAT_ID, label: string, invert?: boolean}[] = [
+const FANTASY_TEAM_STATS_2023: {id: STAT_ID, label: string, invert?: boolean, ignore?: boolean}[] = [
     {
         id: 'twoPointersFreeThrows',
         label: `Inside the Arc`
@@ -119,7 +130,18 @@ const FANTASY_TEAM_STATS_2023: {id: STAT_ID, label: string, invert?: boolean}[] 
     },
     {
         id: 'foulsTechnical',
-        label: `Technical's`
+        label: `Technical's`,
+        ignore: true
+    },
+    {
+        id: 'minutes',
+        label: `Minutes`,
+        ignore: true
+    },
+    {
+        id: 'points',
+        label: `Points`,
+        ignore: true
     },
 ]
 
