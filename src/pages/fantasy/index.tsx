@@ -16,7 +16,7 @@ export default function Home() {
                 <div className='flex flex-col flex-wrap justify-center max-w-5xl m-auto'>
                     {FANTASY_DRAFTS.map((draft) => {
                         return (
-                            <FantasyGameCard fantasyDraft={draft}/>
+                            <FantasyGameCard key={draft.urlId} fantasyDraft={draft}/>
                         )
                     })}
                 </div>
