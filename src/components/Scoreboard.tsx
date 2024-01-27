@@ -1,4 +1,4 @@
-import GameRow from '@/components/GameRow'
+import GameCard from '@/components/GameCard'
 import { Game } from '@/utils/types'
 
 export default function Scoreboard({date, games}: {date: any, games: any}) {    
@@ -20,11 +20,11 @@ export default function Scoreboard({date, games}: {date: any, games: any}) {
             </div>
 
             <div className='flex flex-wrap justify-center max-w-5xl m-auto'>
-                {sortedDoneGames.map((game: Game) => <GameRow game={game} key={game.gameId}/>)}
+                {sortedDoneGames.map((game: Game) => <GameCard game={game} key={game.gameId}/>)}
 
-                {liveGames.map((game: Game) => <GameRow game={game} key={game.gameId}/>)}
+                {liveGames.map((game: Game) => <GameCard game={game} key={game.gameId}/>)}
 
-                {scheduledGames.map((game: Game) => <GameRow game={game} key={game.gameId}/>)}
+                {scheduledGames.map((game: Game) => <GameCard game={game} key={game.gameId}/>)}
             </div>
 
         </div>

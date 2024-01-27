@@ -1,7 +1,7 @@
-import { calcAllStarData } from '@/utils/calcAllStarData'
+import { calcFantasyDraftData } from '@/utils/calcFantasyDraftData'
 import { cleanBoxscore } from '@/utils/cleanBoxscore'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { ID_TO_DATA_MAP } from '@/utils/constants'
+import { FANTASY_DRAFTS } from '@/utils/constants'
 
 export default async function handler(
   req: NextApiRequest,
@@ -12,7 +12,7 @@ export default async function handler(
 
     try {
         if (id && typeof id === "string") {
-            const fantasyData = ID_TO_DATA_MAP.find((data) => data.id == id)
+            const fantasyData = FANTASY_DRAFTS.find((data) => data.urlId == id)
 
             if (!fantasyData) {
                 throw Error('Invalid game ID provided')
@@ -22,7 +22,7 @@ export default async function handler(
             const data  = await fetch(url)
                 .then((res) => res.json())
                 .then((data) => cleanBoxscore(data))
-                .then((data) => calcAllStarData(data, id))
+                .then((data) => calcFantasyDraftData(data, id))
 
             res.status(200).json(data)
         }

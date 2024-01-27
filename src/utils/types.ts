@@ -101,7 +101,7 @@ type FantasyTeam = {
     players: PlayerStats[]
 }
 
-type AllStarDraft = {
+type FantasyDraft = {
     date: string,
     game: Game,
     fantasyTeamA: FantasyTeam,
@@ -114,11 +114,24 @@ type AllStarDraft = {
     }
 }
 
-type AllStarDraftData = AllStarDraft
+type FantasyDraftData = FantasyDraft
 
 type CustomError = {
     status: string,
     reason: string
 }
 
-export type { Team, Game, PlayerStats, FantasyTeam, STAT_ID, AllStarDraftData, CustomError, TeamStats, Scoreboard, BoxScore }
+type FantasyTeamStatsConfig = {id: STAT_ID, label: string, invert?: boolean, ignore?: boolean}[]
+
+type FantasyDraftConfig = {
+    urlId: string,
+    gameId: string,
+    title: string,
+    stats: FantasyTeamStatsConfig,
+    captainTeamA: string,
+    captainTeamB: string,
+    playersTeamA: string[],
+    playersTeamB: string[]
+}
+
+export type { Team, Game, PlayerStats, FantasyTeam, STAT_ID, FantasyDraftData, CustomError, TeamStats, Scoreboard, BoxScore, FantasyDraftConfig, FantasyTeamStatsConfig }

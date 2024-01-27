@@ -4,7 +4,7 @@ import { faUpRightFromSquare, faAt } from '@fortawesome/free-solid-svg-icons';
 import { Game } from '@/utils/types';
 import { useState } from 'react';
 
-export default function GameRow({game}: {game: Game}) {
+export default function GameCard({game}: {game: Game}) {
 
     const [displayScore, setDisplayScore] = useState(false)
     
@@ -28,8 +28,8 @@ export default function GameRow({game}: {game: Game}) {
         } else {
             if (gameDifference > 0) {
                 return (
-                    <div onClick={() => setDisplayScore(true)}> 
-                        <div className="text-center italic text-sm">
+                    <div onClick={() => setDisplayScore(true)} className="text-center"> 
+                        <div className="italic text-sm">
                             {game.gameStatus == 'Live' ? `Score Difference` : `Decided By`}
                         </div>
                         <div>

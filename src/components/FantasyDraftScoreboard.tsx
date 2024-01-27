@@ -1,5 +1,5 @@
-import { AllStarDraftData, TeamStats, STAT_ID } from "@/utils/types";
-import AllStarPlayerStats from "./AllStarPlayerStats"
+import { FantasyDraftData, TeamStats, STAT_ID } from "@/utils/types";
+import FantasyDraftPlayerStats from "./FantasyDraftPlayerStats"
 import Image from 'next/image'
 import leftWinnerImg from '../../public/left_winner.png'
 import rightWinnerImg from '../../public/right_winner.png'
@@ -20,7 +20,7 @@ const CONFETTI_CONFIG = {
     colors: ["#a864fd", "#29cdff", "#78ff44", "#ff718d", "#fdff6a"]
 };
 
-export default function AllStarScoreboard({data}: {data: AllStarDraftData}) {
+export default function FantasyDraftScoreboard({data}: {data: FantasyDraftData}) {
 
     const [confettiTeamA, setConfettiTeamA] = useState(false);    
     const [confettiTeamB, setConfettiTeamB] = useState(false);
@@ -144,12 +144,12 @@ export default function AllStarScoreboard({data}: {data: AllStarDraftData}) {
             </div>
 
             <div className="flex flex-col">
-                <AllStarPlayerStats teamCaptain={fantasyTeamA.teamCaptain} players={fantasyTeamA.players} />
-                <AllStarPlayerStats teamCaptain={fantasyTeamB.teamCaptain} players={fantasyTeamB.players} />
+                <FantasyDraftPlayerStats teamCaptain={fantasyTeamA.teamCaptain} players={fantasyTeamA.players} />
+                <FantasyDraftPlayerStats teamCaptain={fantasyTeamB.teamCaptain} players={fantasyTeamB.players} />
             </div>
 
             <div className="flex flex-col">
-                <AllStarPlayerStats teamCaptain="All Players Ranked" players={data.allPlayers || []}/>
+                <FantasyDraftPlayerStats teamCaptain="All Players Ranked" players={data.allPlayers || []}/>
             </div>
 
         </div>

@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import AllStarScoreboard from '@/components/AllStarScoreboard'
+import FantasyDraftScoreboard from '@/components/FantasyDraftScoreboard'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBasketball } from '@fortawesome/free-solid-svg-icons'
 import useSWR from 'swr'
@@ -14,16 +14,12 @@ export default function Fantasy() {
     const { id } = router.query
 
     const { data, error, isLoading } = useSWR(id ? `/api/fantasy/${id}` : null, fetcher, { refreshInterval: REFRESH_INTERVAL })
-
-    // console.log("Internal game id : ", id)
-    // console.log("fetching data : ", isLoading)
-    // console.log("recieved data : ", data)
   
     if (isLoading || !data) {
       return (
         <>
           <Head>
-            <title>All Star Fantasy Draft 3.0</title>
+            <title>Fantasy Draft 3.0</title>
             <meta name="description" content="Watch the highlights of close sports games" />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <link rel="icon" href="/favicon.ico" />
@@ -40,7 +36,7 @@ export default function Fantasy() {
       return (
         <>
           <Head>
-            <title>All Star Fantasy Draft 3.0</title>
+            <title>Fantasy Draft 3.0</title>
             <meta name="description" content="Watch the highlights of close sports games" />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <link rel="icon" href="/favicon.ico" />
@@ -65,7 +61,7 @@ export default function Fantasy() {
       return (
         <>
           <Head>
-            <title>All Star Fantasy Draft 3.0</title>
+            <title>Fantasy Draft 3.0</title>
             <meta name="description" content="Watch the highlights of close sports games" />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <link rel="icon" href="/favicon.ico" />
@@ -88,14 +84,14 @@ export default function Fantasy() {
     return (
       <>
         <Head>
-          <title>All Star Fantasy Draft 3.0</title>
+          <title>Fantasy Draft 3.0</title>
           <meta name="description" content="Watch the highlights of close sports games" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
   
         <div className='p-10 flex justify-center'>
-          <AllStarScoreboard data={data} />
+          <FantasyDraftScoreboard data={data} />
         </div>
       </>
     )

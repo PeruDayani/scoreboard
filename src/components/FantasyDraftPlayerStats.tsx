@@ -2,7 +2,7 @@ import { FANTASY_PLAYER_STATS } from "@/utils/constants";
 import { PlayerStats } from "@/utils/types";
 import React, { useState } from 'react';
 
-export default function AllStarPlayerStats({teamCaptain, players} : {teamCaptain: string, players: PlayerStats[]}) { 
+export default function FantasyDraftPlayerStats({teamCaptain, players} : {teamCaptain: string, players: PlayerStats[]}) { 
 
     const [playerSelected, setPlayerSelected] = useState('');
 

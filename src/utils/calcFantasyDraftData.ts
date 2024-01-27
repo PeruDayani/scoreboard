@@ -1,5 +1,4 @@
-import { faL } from "@fortawesome/free-solid-svg-icons";
-import { ID_TO_DATA_MAP } from "./constants";
+import { FANTASY_DRAFTS } from "./constants";
 import { BoxScore, PlayerStats, STAT_ID, TeamStats } from "./types";
 
 function calcTeamStats(players: PlayerStats[]) : TeamStats {
@@ -66,9 +65,9 @@ function comparePlayers(playerA: PlayerStats, playerB: PlayerStats, stats: any):
     return results.slice(0,5).reduce((sum: number, a: number) => sum + a, 0)
 }
 
-function calcAllStarData(data: BoxScore, id: string) : any {
+function calcFantasyDraftData(data: BoxScore, id: string) : any {
 
-    const fantasyData = ID_TO_DATA_MAP.find((data) => data.id == id)
+    const fantasyData = FANTASY_DRAFTS.find((data) => data.urlId == id)
 
     if (data?.game && fantasyData) {
 
@@ -113,4 +112,4 @@ function calcAllStarData(data: BoxScore, id: string) : any {
     return data
 }
 
-export { calcAllStarData }
+export { calcFantasyDraftData }

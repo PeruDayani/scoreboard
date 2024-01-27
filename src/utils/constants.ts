@@ -1,6 +1,5 @@
-import { STAT_ID } from "./types"
+import { STAT_ID, FantasyDraftConfig, FantasyTeamStatsConfig } from "./types"
 
-// In milliseconds
 const REFRESH_INTERVAL: number = 60*1000
 
 const FANTASY_PLAYER_STATS: {id: STAT_ID, label: string, invert?: boolean, classes?: string}[] = [
@@ -69,7 +68,7 @@ const FANTASY_PLAYER_STATS: {id: STAT_ID, label: string, invert?: boolean, class
     },
 ]
 
-const FANTASY_TEAM_STATS_2022: {id: STAT_ID, label: string, invert?: boolean, ignore?: boolean}[] = [
+const FANTASY_TEAM_STATS_2022: FantasyTeamStatsConfig = [
     {
         id: 'points',
         label: `Points`
@@ -107,7 +106,7 @@ const FANTASY_TEAM_STATS_2022: {id: STAT_ID, label: string, invert?: boolean, ig
     },
 ]
 
-const FANTASY_TEAM_STATS_2023: {id: STAT_ID, label: string, invert?: boolean, ignore?: boolean}[] = [
+const FANTASY_TEAM_STATS_2023: FantasyTeamStatsConfig = [
     {
         id: 'twoPointersFreeThrows',
         label: `Inside the Arc`
@@ -145,13 +144,51 @@ const FANTASY_TEAM_STATS_2023: {id: STAT_ID, label: string, invert?: boolean, ig
     },
 ]
 
-const ID_TO_DATA_MAP = [
+const FANTASY_TEAM_STATS_2024: FantasyTeamStatsConfig = [
     {
-        id: '2022-peru-hayden-allstar',
-        title: 'Peru V Hayden AllStar 2022',
-        gameId: '0032100001',
-        stats: FANTASY_TEAM_STATS_2022,
-        captainTeamA: 'Peru Dayani',
+        id: 'twoPointersFreeThrows',
+        label: `Inside the Arc`
+    },
+    {
+        id: 'threePointersMade',
+        label: `Trey's`
+    },
+    {
+        id: 'assists',
+        label: 'Assists'
+    },
+    {
+        id: 'reboundsTotal',
+        label: 'Rebounds'
+    },
+    {
+        id: 'stealsBlocksTurnovers',
+        label: `Hustle`
+    },
+    {
+        id: 'foulsTechnical',
+        label: `Technical's`,
+        ignore: true
+    },
+    {
+        id: 'minutes',
+        label: `Minutes`,
+        ignore: true
+    },
+    {
+        id: 'points',
+        label: `Points`,
+        ignore: true
+    },
+]
+
+const FANTASY_DRAFTS: FantasyDraftConfig[] = [
+    {
+        urlId: '2024-peru-hayden-allstar',
+        gameId: '0032300001',
+        title: 'All Star 2024',
+        stats: FANTASY_TEAM_STATS_2024,
+        captainTeamA: 'P. Dayani',
         playersTeamA: [
             'Giannis Antetokounmpo',
             'LeBron James',
@@ -166,7 +203,7 @@ const ID_TO_DATA_MAP = [
             'Donovan Mitchell',
             'Dejounte Murray'
         ],
-        captainTeamB: 'Hayden Davila',
+        captainTeamB: 'H. Davila',
         playersTeamB: [
             'Stephen Curry',
             'Trae Young',
@@ -183,48 +220,11 @@ const ID_TO_DATA_MAP = [
         ]
     },
     {
-        id: '2023-peru-hayden-random',
-        title: 'Peru V Hayden Test',
-        gameId: '0022200788',
-        stats: FANTASY_TEAM_STATS_2023,
-        captainTeamA: 'Peru Dayani',
-        playersTeamA: [
-            "Jaylen Brown",
-            "Chris Paul",
-            "Deandre Ayton",
-            "Derrick White",
-            "Bismack Biyombo",
-            "Luke Kornet",
-            "Robert Williams III",
-            "Torrey Craig",
-            "Josh Okogie",
-            "Blake Griffin",
-            "Sam Hauser",
-            "Mfiondu Kabengele",
-            "Saben Lee",
-        ],
-        captainTeamB: 'Hayden Davila',
-        playersTeamB: [
-            "Jayson Tatum",
-            "Malcolm Brogdon",
-            "Al Horford",
-            "Mikal Bridges",
-            "Grant Williams",
-            "Payton Pritchard",
-            "Damion Lee",
-            "Dario Saric",
-            "Ish Wainright",
-            "Justin Jackson",
-            "JD Davison",
-            "Jock Landale",
-        ]
-    },
-    {
-        id: '2023-peru-hayden-allstar',
-        title: 'Peru V Hayden AllStar 2023',
+        urlId: '2023-peru-hayden-allstar',
+        title: 'All Star 2023',
         gameId: '0032200001',
         stats: FANTASY_TEAM_STATS_2023,
-        captainTeamA: 'Peru Dayani',
+        captainTeamA: 'P. Dayani',
         playersTeamA: [
             'Joel Embiid',
             'Giannis Antetokounmpo',
@@ -239,7 +239,7 @@ const ID_TO_DATA_MAP = [
             'Bam Adebayo',
             `De'Aaron Fox`
         ],
-        captainTeamB: 'Hayden Davila',
+        captainTeamB: 'H. Davila',
         playersTeamB: [
             'LeBron James',
             'Luka Doncic',
@@ -256,11 +256,11 @@ const ID_TO_DATA_MAP = [
         ]
     },
     {
-        id: '2023-peru-hayden-allstar-v2',
-        title: 'Peru V Hayden AllStar 2023 v2',
+        urlId: '2023-peru-hayden-allstar-v2',
+        title: 'All Star 2023 (2)',
         gameId: '0032200001',
         stats: FANTASY_TEAM_STATS_2023,
-        captainTeamA: 'Peru Dayani',
+        captainTeamA: 'P. Dayani',
         playersTeamA: [
             'Joel Embiid',
             'Nikola Jokic',
@@ -274,7 +274,7 @@ const ID_TO_DATA_MAP = [
             'Bam Adebayo',
             `De'Aaron Fox`
         ],
-        captainTeamB: 'Hayden Davila',
+        captainTeamB: 'H. Davila',
         playersTeamB: [
             'LeBron James',
             'Luka Doncic',
@@ -290,11 +290,11 @@ const ID_TO_DATA_MAP = [
         ]
     },
     {
-        id: '2023-seerat-kyle-allstar',
-        title: 'Seerat V Kyle AllStar 2023',
+        urlId: '2023-seerat-kyle-allstar',
+        title: 'All Star 2023',
         gameId: '0032200001',
         stats: FANTASY_TEAM_STATS_2023,
-        captainTeamA: 'Seerat Sohi',
+        captainTeamA: 'S. Sohi',
         playersTeamA: [
             'Giannis Antetokounmpo',
             'LeBron James',
@@ -309,7 +309,7 @@ const ID_TO_DATA_MAP = [
             'DeMar DeRozan',
             `De'Aaron Fox`,
         ],
-        captainTeamB: 'J. Kyle Mann',
+        captainTeamB: 'J. Mann',
         playersTeamB: [
             'Joel Embiid',
             'Nikola Jokic',
@@ -325,10 +325,46 @@ const ID_TO_DATA_MAP = [
             'Julius Randle',
         ]
     },
+    {
+        urlId: '2022-peru-hayden-allstar',
+        title: 'All Star 2022',
+        gameId: '0032100001',
+        stats: FANTASY_TEAM_STATS_2022,
+        captainTeamA: 'P. Dayani',
+        playersTeamA: [
+            'Giannis Antetokounmpo',
+            'LeBron James',
+            'Ja Morant',
+            'Nikola Jokic',
+            'Andrew Wiggins',
+            'Devin Booker',
+            'Karl-Anthony Towns',
+            'Khris Middleton',
+            'Darius Garland',
+            'Chris Paul',
+            'Donovan Mitchell',
+            'Dejounte Murray'
+        ],
+        captainTeamB: 'H. Davila',
+        playersTeamB: [
+            'Stephen Curry',
+            'Trae Young',
+            'Joel Embiid',
+            'Jayson Tatum',
+            'DeMar DeRozan',
+            'Luka Doncic',
+            'Zach LaVine',
+            'Jarrett Allen',
+            'Rudy Gobert',
+            'LaMelo Ball',
+            'Fred VanVleet',
+            'Jimmy Butler'
+        ]
+    }
 ]
 
 export { 
-    ID_TO_DATA_MAP,
+    FANTASY_DRAFTS,
     FANTASY_PLAYER_STATS,
     REFRESH_INTERVAL
 }
