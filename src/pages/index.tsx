@@ -28,7 +28,7 @@ export default function Home() {
         <title>Hidden Sports Scoreboards</title>
         <meta name="description" content="Watch the highlights of close sports games" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/basketball.ico" />
       </Head>
 
       <div className='p-10 flex justify-center'>
@@ -40,10 +40,10 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Hidden Sports Scoreboards</title>
-        <meta name="description" content="Watch the highlights of close sports games" />
+        <title>Hidden NBA Scoreboard</title>
+        <meta name="description" content="Enjoy highlights of close NBA games" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/basketball.ico" />
       </Head>
 
       <div className='p-10 flex justify-center'>
