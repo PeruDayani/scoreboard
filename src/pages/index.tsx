@@ -19,23 +19,23 @@ function useScoreboard () {
 
 export default function Home() {
   const { data, isLoading, isError } = useScoreboard()
-  console.log("Recieved data: ", data)
 
   if (!data) {  
     return (
       <>
-      <Head>
-        <title>Hidden Sports Scoreboards</title>
-        <meta name="description" content="Watch the highlights of close sports games" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/basketball.ico" />
-      </Head>
+        <Head>
+          <title>Hidden Sports Scoreboards</title>
+          <meta name="description" content="Watch the highlights of close sports games" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <link rel="icon" href="/basketball.ico" />
+        </Head>
 
-      <div className='p-10 flex justify-center'>
-        { isLoading ? <FontAwesomeIcon icon={faBasketball} bounce size="3x"/> : <div className='mx-auto text-lg py-2 italic underline'> No Games Today! </div>}
-      </div>
-    </>
-  )}
+        <div className='p-10 flex justify-center'>
+          { isLoading ? <FontAwesomeIcon icon={faBasketball} bounce size="3x"/> : <div className='mx-auto text-lg py-2 italic underline'> No Games Today! </div>}
+        </div>
+      </>
+    )
+  }
 
   return (
     <>

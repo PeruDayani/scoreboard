@@ -1,8 +1,8 @@
 import GameCard from '@/components/GameCard'
 import { Game } from '@/utils/types'
 
-export default function Scoreboard({date, games}: {date: any, games: any}) {    
-
+export default function Scoreboard({date, games}: {date: any, games: any}) { 
+    
     const liveGames = games.filter((game: Game) => game.gameStatus == 'Live')
     const scheduledGames = games.filter((game: Game) => game.gameStatus == 'Scheduled')
     const doneGames = games.filter((game: Game) => game.gameStatus == 'Done')
