@@ -32,6 +32,8 @@ export default async function handler(
 
         res.status(200).json(data)
     } catch (error: any) {
+        console.log("Error: ", error)
+        
         res.status(404).json({status: '404', reason: error})
     }
 }

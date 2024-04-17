@@ -31,26 +31,6 @@ export default function Home() {
         return `${dayNames[dayOfWeek]}, ${monthNames[month]}, ${day}, ${year}`
     }, [activeDate])
 
-    const backADay = useCallback(() => {
-        const yesterday = new Date(activeDate)
-        yesterday.setDate(activeDate.getDate() - 1)
-        setActiveDate(yesterday)
-
-        fetchData(yesterday)
-
-        setIsLoading(true)
-    }, [activeDate])
-
-    const forwardADay = useCallback(() => {
-        const tomorrow = new Date(activeDate)
-        tomorrow.setDate(activeDate.getDate() + 1)
-        setActiveDate(tomorrow)
-
-        fetchData(tomorrow)
-
-        setIsLoading(true)
-    }, [activeDate])
-
     const fetchData = useCallback(async (date: Date) => {
         const day = date.getDate()
         const month = date.getMonth() + 1
@@ -63,9 +43,29 @@ export default function Home() {
         setIsLoading(false)
     }, [])
 
+    const backADay = useCallback(() => {
+        const yesterday = new Date(activeDate)
+        yesterday.setDate(activeDate.getDate() - 1)
+        setActiveDate(yesterday)
+
+        fetchData(yesterday)
+
+        setIsLoading(true)
+    }, [activeDate, fetchData])
+
+    const forwardADay = useCallback(() => {
+        const tomorrow = new Date(activeDate)
+        tomorrow.setDate(activeDate.getDate() + 1)
+        setActiveDate(tomorrow)
+
+        fetchData(tomorrow)
+
+        setIsLoading(true)
+    }, [activeDate, fetchData])
+
     useEffect(() => {
         fetchData(activeDate)
-    }, [])
+    }, [activeDate, fetchData])
 
     return (
         <>
