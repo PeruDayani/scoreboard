@@ -1,7 +1,7 @@
 import GameCard from '@/components/GameCard'
 import { Game } from '@/utils/types'
 
-export default function Scoreboard({date, games}: {date: any, games: any}) { 
+export default function Scoreboard({date, games}: {date?: any, games: any}) { 
     
     const liveGames = games.filter((game: Game) => game.gameStatus == 'Live')
     const scheduledGames = games.filter((game: Game) => game.gameStatus == 'Scheduled')
@@ -15,9 +15,9 @@ export default function Scoreboard({date, games}: {date: any, games: any}) {
     
     return (
         <div className='flex flex-col font-mono antialiased'>
-            <div className='mx-auto py-2 italic underline'>
+            {date && <div className='mx-auto py-2 italic underline'>
                 {date}
-            </div>
+            </div>}
 
             <div className='flex flex-wrap justify-center max-w-5xl m-auto'>
                 {sortedDoneGames.map((game: Game) => <GameCard game={game} key={game.gameId}/>)}

@@ -24,9 +24,9 @@ export default async function handler(
         const { date } = query;
 
         const url = `https://stats.nba.com/stats/scoreboardv3?GameDate=${date}&LeagueID=00`
-        console.log("API call for:  ", url)
+        console.log("API call for:  ", url, STATS_HEADERS)
 
-        const data  = await fetch(url, { headers: STATS_HEADERS})
+        const data  = await fetch(url, { headers: new Headers(STATS_HEADERS)})
             .then((res) => res.json())
             .then((data) => cleanScoreboard(data))
 
