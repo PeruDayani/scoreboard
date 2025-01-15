@@ -121,17 +121,26 @@ type CustomError = {
     reason: string
 }
 
-type FantasyTeamStatsConfig = {id: STAT_ID, label: string, invert?: boolean, ignore?: boolean}[]
+type FantasyTeamStatsConfig = {
+    id: STAT_ID,
+    label: string,
+    invert?: boolean,
+    ignore?: boolean
+}[]
+
+type FantasyDraftGameConfig = {
+    gameId: string,
+    playersTeamA: string[],
+    playersTeamB: string[]
+}
 
 type FantasyDraftConfig = {
     urlId: string,
-    gameId: string,
     title: string,
     stats: FantasyTeamStatsConfig,
     captainTeamA: string,
     captainTeamB: string,
-    playersTeamA: string[],
-    playersTeamB: string[]
+    games: FantasyDraftGameConfig[]
 }
 
 export type { Team, Game, PlayerStats, FantasyTeam, STAT_ID, FantasyDraftData, CustomError, TeamStats, Scoreboard, BoxScore, FantasyDraftConfig, FantasyTeamStatsConfig }

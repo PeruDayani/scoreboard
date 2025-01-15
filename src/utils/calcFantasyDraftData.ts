@@ -1,4 +1,3 @@
-import { FANTASY_DRAFTS } from "./constants";
 import { BoxScore, PlayerStats, STAT_ID, TeamStats } from "./types";
 
 function calcTeamStats(players: PlayerStats[]) : TeamStats {
@@ -65,13 +64,9 @@ function comparePlayers(playerA: PlayerStats, playerB: PlayerStats, stats: any):
     return results.slice(0,5).reduce((sum: number, a: number) => sum + a, 0)
 }
 
-function calcFantasyDraftData(data: BoxScore, id: string) : any {
+function calcFantasyDraftData(data: BoxScore, captainTeamA: string, captainTeamB: string, playersTeamA: string[], playersTeamB: string[], stats: any) : any {
 
-    const fantasyData = FANTASY_DRAFTS.find((data) => data.urlId == id)
-
-    if (data?.game && fantasyData) {
-
-        const { captainTeamA, captainTeamB, playersTeamA, playersTeamB } = fantasyData
+    if (data?.game) {
 
         const homePlayers: PlayerStats[] = data.game.homeTeam.players.map(addFantasyPlayerStats)
         const awayPlayers: PlayerStats[] = data.game.awayTeam.players.map(addFantasyPlayerStats)
@@ -80,7 +75,7 @@ function calcFantasyDraftData(data: BoxScore, id: string) : any {
         const teamA: any[] = []
         const teamB: any[] = []
 
-        allPlayers.sort((playerA, playerB) => comparePlayers(playerA, playerB, fantasyData.stats))
+        allPlayers.sort((playerA, playerB) => comparePlayers(playerA, playerB, stats))
         
         allPlayers.forEach((player) => {
             if (playersTeamA.includes(player.name)) {
@@ -103,7 +98,7 @@ function calcFantasyDraftData(data: BoxScore, id: string) : any {
                 teamStats: calcTeamStats(teamB),
                 players: teamB
             },
-            stats: fantasyData.stats,
+            stats: stats,
             allPlayers: allPlayers
         }
 

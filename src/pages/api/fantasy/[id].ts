@@ -12,19 +12,27 @@ export default async function handler(
 
     try {
         if (id && typeof id === "string") {
-            const fantasyData = FANTASY_DRAFTS.find((data) => data.urlId == id)
+            const fantasyDraftConfig = FANTASY_DRAFTS.find((data) => data.urlId == id)
 
-            if (!fantasyData) {
+            if (!fantasyDraftConfig) {
                 throw Error('Invalid game ID provided')
             }
 
-            const  url = `https://cdn.nba.com/static/json/liveData/boxscore/boxscore_${fantasyData?.gameId}.json`
-            const data  = await fetch(url)
-                .then((res) => res.json())
-                .then((data) => cleanBoxscore(data))
-                .then((data) => calcFantasyDraftData(data, id))
+            const gamesDataRequests = fantasyDraftConfig.games.map((game) => {
+                return fetch(`https://cdn.nba.com/static/json/liveData/boxscore/boxscore_${game.gameId}.json`)
+            })
 
-            res.status(200).json(data)
+            const gamesDataResponses = await Promise.all(gamesDataRequests)
+            const gamesDataObjects = await Promise.all(gamesDataResponses.map(res => res.json()));
+            const gamesDataCleaned = gamesDataObjects.map(cleanBoxscore)
+
+            const { captainTeamA, captainTeamB, stats, games } = fantasyDraftConfig
+            const fantasyGamesData = gamesDataCleaned.map((g, i) => {
+                const { playersTeamA, playersTeamB } = games[i]
+                return calcFantasyDraftData(g, captainTeamA, captainTeamB, playersTeamA, playersTeamB, stats)
+            })
+
+            res.status(200).json(fantasyGamesData)
         }
     }
     catch (error: any) {

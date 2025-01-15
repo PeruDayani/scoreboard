@@ -57,7 +57,6 @@ export default function Fantasy() {
     }
 
     if (data.error) {
-
       return (
         <>
           <Head>
@@ -90,9 +89,15 @@ export default function Fantasy() {
           <link rel="icon" href="/basketball.ico" />
         </Head>
   
-        <div className='p-10 flex justify-center'>
-          <FantasyDraftScoreboard data={data} />
-        </div>
+        {
+          data.map((d: any) => {
+            return (
+              <div className='p-10 flex justify-center'>
+                <FantasyDraftScoreboard data={d} />
+              </div>
+            )
+          })
+        }
       </>
     )
 }
