@@ -2,11 +2,12 @@ import Head from 'next/head'
 import FantasyDraftScoreboard from '@/components/FantasyDraftScoreboard'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBasketball } from '@fortawesome/free-solid-svg-icons'
-import useSWR from 'swr'
+import useSWR, { Fetcher } from 'swr'
 import { REFRESH_INTERVAL } from '@/utils/constants';
 import { useRouter } from 'next/router'
+import { FantasyDraftData } from '@/utils/types';
 
-const fetcher = (url: RequestInfo | URL) => fetch(url).then(r => r.json())
+const fetcher: Fetcher<FantasyDraftData[]> = (url: RequestInfo | URL) => fetch(url).then(r => r.json())
 
 export default function Fantasy() {
 
@@ -56,29 +57,29 @@ export default function Fantasy() {
       )
     }
 
-    if (data.error) {
-      return (
-        <>
-          <Head>
-            <title>Fantasy Drafts</title>
-            <meta name="description" content="Fantasy Drafts for an NBA Game" />
-            <meta name="viewport" content="width=device-width, initial-scale=1" />
-            <link rel="icon" href="/basketball.ico" />
-          </Head>
+    // if (data.error) {
+    //   return (
+    //     <>
+    //       <Head>
+    //         <title>Fantasy Drafts</title>
+    //         <meta name="description" content="Fantasy Drafts for an NBA Game" />
+    //         <meta name="viewport" content="width=device-width, initial-scale=1" />
+    //         <link rel="icon" href="/basketball.ico" />
+    //       </Head>
     
-          <div className='p-10 flex justify-center'>
-            <div className="mx-auto text-lg py-2 italic text-center"> 
-                <p> 
-                    The NBA has not started publishing the game data yet.
-                </p>
-                <p> 
-                    They usually start 10 minutes before tipoff.
-                </p>
-            </div>
-          </div>
-        </>
-      )
-    }
+    //       <div className='p-10 flex justify-center'>
+    //         <div className="mx-auto text-lg py-2 italic text-center"> 
+    //             <p> 
+    //                 The NBA has not started publishing the game data yet.
+    //             </p>
+    //             <p> 
+    //                 They usually start 10 minutes before tipoff.
+    //             </p>
+    //         </div>
+    //       </div>
+    //     </>
+    //   )
+    // }
 
     return (
       <>
@@ -90,9 +91,9 @@ export default function Fantasy() {
         </Head>
   
         {
-          data.map((d: any) => {
+          data.map((d) => {
             return (
-              <div className='p-10 flex justify-center'>
+              <div key={d.game.gameId} className='p-10 flex justify-center'>
                 <FantasyDraftScoreboard data={d} />
               </div>
             )
