@@ -253,34 +253,34 @@ const FANTASY_DRAFTS: FantasyDraftConfig[] = [
                 ]
             },
             {
-                gameId: '0032200001',
+                gameId: '0032100001',
                 playersTeamA: [
-                    'Joel Embiid',
                     'Giannis Antetokounmpo',
+                    'LeBron James',
+                    'Ja Morant',
                     'Nikola Jokic',
-                    'Kyrie Irving',
+                    'Andrew Wiggins',
+                    'Devin Booker',
+                    'Karl-Anthony Towns',
+                    'Khris Middleton',
+                    'Darius Garland',
+                    'Chris Paul',
                     'Donovan Mitchell',
-                    'Damian Lillard',
-                    'Jaylen Brown',
-                    'Paul George',
-                    'DeMar DeRozan',
-                    'Jrue Holiday',
-                    'Bam Adebayo',
-                    `De'Aaron Fox`
+                    'Dejounte Murray'
                 ],
                 playersTeamB: [
-                    'LeBron James',
-                    'Luka Doncic',
+                    'Stephen Curry',
+                    'Trae Young',
+                    'Joel Embiid',
                     'Jayson Tatum',
-                    'Ja Morant',
-                    'Lauri Markkanen',
-                    'Shai Gilgeous-Alexander',
-                    'Anthony Edwards',
-                    'Domantas Sabonis',
-                    'Tyrese Haliburton',
-                    'Jaren Jackson Jr.',
-                    'Julius Randle',
-                    'Pascal Siakam'
+                    'DeMar DeRozan',
+                    'Luka Doncic',
+                    'Zach LaVine',
+                    'Jarrett Allen',
+                    'Rudy Gobert',
+                    'LaMelo Ball',
+                    'Fred VanVleet',
+                    'Jimmy Butler'
                 ]
             }
         ] 

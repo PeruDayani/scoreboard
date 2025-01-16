@@ -1,9 +1,11 @@
 import Image from 'next/image'
 import leftWinnerImg from '../../public/left_winner.png'
 import rightWinnerImg from '../../public/right_winner.png'
+import linkImg from '../../public/link.png'
 import Confetti from 'react-dom-confetti';
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { FantasyDraftConfig, FantasyDraftData, STAT_ID, Statistic, TeamStats } from '@/utils/types';
+import Link from 'next/link';
 
 const CONFETTI_CONFIG = {
     angle: 90,
@@ -210,7 +212,6 @@ export default function FancierFantasyDraftScoreboard({ config, games }: FancyPa
             </div>
 
             <div className="m-auto p-2 bg-purple-100 rounded-lg flex flex-col gap-2" onClick={triggerConfetti}>
-
                 <div className="text-center text-sm underline decoration-purple-900 underline-offset-2">
                     { gameStatus }
                 </div>
@@ -232,6 +233,28 @@ export default function FancierFantasyDraftScoreboard({ config, games }: FancyPa
                 </div>
                 
                 { activeStats.map((st) => <FancyStatDisplay key={st.id} data={finalResult[st.id]}/>)}
+            </div>
+
+            <div className='mx-auto italic underline'>
+                Games
+            </div>
+
+            <div className="p-4 bg-purple-100 rounded-lg flex flex-col gap-4" onClick={triggerConfetti}>
+                {
+                    games.map((g, i) => (
+                        <div key={g.game.gameId} className='flex flex-col gap-2 text-center'>
+                            <div> Game {i+1} </div>
+                            <div className='text-sm flex gap-4 justify-center items-center'>
+                                <div>
+                                    {g.date}
+                                </div>
+                                <Link href={`https://www.nba.com/game/${g.game.gameId}/box-score`} target='_blank'>
+                                    <Image className='w-3' src={linkImg} alt="open link" />
+                                </Link>
+                            </div>
+                        </div>
+                    ))
+                }
             </div>
 
         </div>

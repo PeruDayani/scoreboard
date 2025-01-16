@@ -145,14 +145,14 @@ export default function FantasyDraftScoreboard({data}: {data: FantasyDraftData})
                 }
             </div>
 
-            {/* <div className="flex flex-col">
+            <div className="flex flex-col">
                 <FantasyDraftPlayerStats teamCaptain={fantasyTeamA.teamCaptain} players={fantasyTeamA.players} />
                 <FantasyDraftPlayerStats teamCaptain={fantasyTeamB.teamCaptain} players={fantasyTeamB.players} />
             </div>
 
             <div className="flex flex-col">
                 <FantasyDraftPlayerStats teamCaptain="All Players Ranked" players={data.allPlayers || []}/>
-            </div> */}
+            </div>
 
         </div>
     )
