@@ -62,7 +62,7 @@ function gameStatus(data: any) : string {
 
 function cleanBoxscore (data: any) : BoxScore {
 
-    if (data.game && data.game.gameId) {
+    if (data && data.game && data.game.gameId) {
 
         const dateUTC = new Date(data.game.gameTimeUTC)
         const options: Intl.DateTimeFormatOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };

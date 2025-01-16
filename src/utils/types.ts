@@ -95,6 +95,13 @@ type TeamStats = {
 // Use this to access any teamStats obj using variable keys
 type STAT_ID = keyof TeamStats
 
+type Statistic = {
+    id: STAT_ID,
+    label: string,
+    invert?: boolean,
+    ignore?: boolean
+}
+
 type FantasyTeam = {
     teamCaptain: string,
     teamStats: TeamStats,
@@ -107,7 +114,7 @@ type FantasyDraft = {
     fantasyTeamA: FantasyTeam,
     fantasyTeamB: FantasyTeam,
     allPlayers?: PlayerStats[],
-    stats?: any,
+    stats: Statistic[],
     error?: {
         message: string,
         type: string
@@ -121,12 +128,7 @@ type CustomError = {
     reason: string
 }
 
-type FantasyTeamStatsConfig = {
-    id: STAT_ID,
-    label: string,
-    invert?: boolean,
-    ignore?: boolean
-}[]
+type FantasyTeamStatsConfig = Statistic[]
 
 type FantasyDraftGameConfig = {
     gameId: string,
@@ -143,4 +145,4 @@ type FantasyDraftConfig = {
     games: FantasyDraftGameConfig[]
 }
 
-export type { Team, Game, PlayerStats, FantasyTeam, STAT_ID, FantasyDraftData, CustomError, TeamStats, Scoreboard, BoxScore, FantasyDraftConfig, FantasyTeamStatsConfig }
+export type { Team, Game, PlayerStats, FantasyTeam, STAT_ID, Statistic, FantasyDraftData, CustomError, TeamStats, Scoreboard, BoxScore, FantasyDraftConfig, FantasyTeamStatsConfig }

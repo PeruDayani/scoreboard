@@ -1,4 +1,4 @@
-import { FantasyDraftData, TeamStats, STAT_ID } from "@/utils/types";
+import { FantasyDraftData, TeamStats, STAT_ID, Statistic } from "@/utils/types";
 import FantasyDraftPlayerStats from "./FantasyDraftPlayerStats"
 import Image from 'next/image'
 import leftWinnerImg from '../../public/left_winner.png'
@@ -22,6 +22,8 @@ const CONFETTI_CONFIG = {
 
 export default function FantasyDraftScoreboard({data}: {data: FantasyDraftData}) {
 
+    console.log("Data: ", data)
+
     const [confettiTeamA, setConfettiTeamA] = useState(false);    
     const [confettiTeamB, setConfettiTeamB] = useState(false);
     
@@ -29,9 +31,9 @@ export default function FantasyDraftScoreboard({data}: {data: FantasyDraftData})
     const fantasyTeamB = data.fantasyTeamB
 
     const isTeamAWinning = useCallback(() => {
-        const results = data.stats?.map((stat: any) => {
-            let teamAScore = fantasyTeamA?.teamStats[stat.id as keyof TeamStats] || 0
-            let teamBScore = fantasyTeamB?.teamStats[stat.id as keyof TeamStats] || 0
+        const results = data.stats.map((stat: Statistic) => {
+            let teamAScore = fantasyTeamA.teamStats[stat.id as keyof TeamStats] || 0
+            let teamBScore = fantasyTeamB.teamStats[stat.id as keyof TeamStats] || 0
 
             if (teamAScore > teamBScore) {
                 return 1
@@ -143,14 +145,14 @@ export default function FantasyDraftScoreboard({data}: {data: FantasyDraftData})
                 }
             </div>
 
-            <div className="flex flex-col">
+            {/* <div className="flex flex-col">
                 <FantasyDraftPlayerStats teamCaptain={fantasyTeamA.teamCaptain} players={fantasyTeamA.players} />
                 <FantasyDraftPlayerStats teamCaptain={fantasyTeamB.teamCaptain} players={fantasyTeamB.players} />
             </div>
 
             <div className="flex flex-col">
                 <FantasyDraftPlayerStats teamCaptain="All Players Ranked" players={data.allPlayers || []}/>
-            </div>
+            </div> */}
 
         </div>
     )

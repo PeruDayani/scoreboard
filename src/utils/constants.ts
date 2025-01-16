@@ -36,7 +36,7 @@ const FANTASY_PLAYER_STATS: {id: STAT_ID, label: string, invert?: boolean, class
     },
     {
         id: 'threePointersMade',
-        label: `Trey's`,
+        label: `Treys`,
         classes: 'font-bold'
     },
     {
@@ -75,7 +75,7 @@ const FANTASY_TEAM_STATS_2022: FantasyTeamStatsConfig = [
     },
     {
         id: 'threePointersMade',
-        label: `Trey's`
+        label: `Treys`
     },
     {
         id: 'assists',
@@ -91,7 +91,7 @@ const FANTASY_TEAM_STATS_2022: FantasyTeamStatsConfig = [
     },
     {
         id: 'foulsTechnical',
-        label: `Technical's`,
+        label: `Technicals`,
         ignore: true
     },
     {
@@ -113,7 +113,7 @@ const FANTASY_TEAM_STATS_2023: FantasyTeamStatsConfig = [
     },
     {
         id: 'threePointersMade',
-        label: `Trey's`
+        label: `Treys`
     },
     {
         id: 'assists',
@@ -129,7 +129,7 @@ const FANTASY_TEAM_STATS_2023: FantasyTeamStatsConfig = [
     },
     {
         id: 'foulsTechnical',
-        label: `Technical's`,
+        label: `Technicals`,
         ignore: true
     },
     {
@@ -147,11 +147,11 @@ const FANTASY_TEAM_STATS_2023: FantasyTeamStatsConfig = [
 const FANTASY_TEAM_STATS_2024: FantasyTeamStatsConfig = [
     {
         id: 'twoPointersFreeThrows',
-        label: `Inside the Arc`
+        label: `Inside`
     },
     {
         id: 'threePointersMade',
-        label: `Trey's`
+        label: `Treys`
     },
     {
         id: 'assists',
@@ -167,7 +167,7 @@ const FANTASY_TEAM_STATS_2024: FantasyTeamStatsConfig = [
     },
     {
         id: 'foulsTechnical',
-        label: `Technical's`,
+        label: `Technicals`,
         ignore: true
     },
     {
@@ -219,6 +219,37 @@ const FANTASY_DRAFTS: FantasyDraftConfig[] = [
                     'Anthony Edwards',
                     'Paolo Banchero',
                     'Scottie Barnes',
+                ]
+            },
+            {
+                gameId: '0032200001',
+                playersTeamA: [
+                    'Joel Embiid',
+                    'Giannis Antetokounmpo',
+                    'Nikola Jokic',
+                    'Kyrie Irving',
+                    'Donovan Mitchell',
+                    'Damian Lillard',
+                    'Jaylen Brown',
+                    'Paul George',
+                    'DeMar DeRozan',
+                    'Jrue Holiday',
+                    'Bam Adebayo',
+                    `De'Aaron Fox`
+                ],
+                playersTeamB: [
+                    'LeBron James',
+                    'Luka Doncic',
+                    'Jayson Tatum',
+                    'Ja Morant',
+                    'Lauri Markkanen',
+                    'Shai Gilgeous-Alexander',
+                    'Anthony Edwards',
+                    'Domantas Sabonis',
+                    'Tyrese Haliburton',
+                    'Jaren Jackson Jr.',
+                    'Julius Randle',
+                    'Pascal Siakam'
                 ]
             },
             {

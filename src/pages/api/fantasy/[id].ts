@@ -23,7 +23,13 @@ export default async function handler(
             })
 
             const gamesDataResponses = await Promise.all(gamesDataRequests)
-            const gamesDataObjects = await Promise.all(gamesDataResponses.map(res => res.json()));
+            const gamesDataObjects = await Promise.all(gamesDataResponses.map(res => {
+                if (res.status === 200) {
+                    return res.json()
+                } else {
+                    return null
+                }
+            }));
             const gamesDataCleaned = gamesDataObjects.map(cleanBoxscore)
 
             const { captainTeamA, captainTeamB, stats, games } = fantasyDraftConfig
@@ -36,8 +42,8 @@ export default async function handler(
         }
     }
     catch (error: any) {
-        console.log("Error: ", error)
-        res.status(404).json({error})
+        console.log("Error while fetching Fantasy Games Data: ", error)
+        res.status(404).json([])
     }
 
 }
