@@ -94,8 +94,10 @@ export function calculateFantasyDraftResult(boxScore: BoxScore, config: FantasyD
 
     allPlayers.forEach((player) => {
         if (gameConfig.playersTeamA.includes(player.name)) {
+            player.draftedAt = gameConfig.playersTeamA.indexOf(player.name) + 1
             playersTeamA.push(player)
         } else if (gameConfig.playersTeamB.includes(player.name)) {
+            player.draftedAt = gameConfig.playersTeamB.indexOf(player.name) + 1
             playersTeamB.push(player)
         }
     })

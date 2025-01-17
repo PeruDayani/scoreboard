@@ -26,6 +26,7 @@ export type AllStatistics = {
     twoPointersFreeThrows?: number,
     stealsBlocks?: number,
     stealsBlocksTurnovers?: number,
+    draftedAt?: number,
 }
 
 export type StatisticID = keyof AllStatistics
