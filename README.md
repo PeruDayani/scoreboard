@@ -15,3 +15,6 @@ For Every Draft:
 3. Create a new Fantasy Draft in src/utils/constants
 4. Deploy to Vercel: https://vercel.com/perudayanis-projects/scoreboard/deployments
 5. Enjoy!
+
+Thoughts:
+1. Persist options selected to cookies

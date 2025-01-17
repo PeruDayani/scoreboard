@@ -13,7 +13,7 @@ export default function PlayersList({
 }: PlayersListParams) {
 
     return (
-        <div className="w-1/3 flex flex-col h-full gap-8">
+        <div className="w-1/3 flex flex-col justify-evenly h-full gap-8">
             {
                 players.map((p) => (
                     <div

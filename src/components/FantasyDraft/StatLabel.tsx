@@ -15,7 +15,7 @@ function StatComparisonDisplay({
     return (
         <div>
             <span className={cssA}>{valueA}</span>
-            <span> - </span>
+            <span> • </span>
             <span className={cssB}>{valueB}</span>
         </div>
     )

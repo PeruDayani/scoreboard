@@ -7,6 +7,8 @@ import FancyStatDisplay from "./FantasyDraft/FancyStatDisplay";
 import StatLabel from "./FantasyDraft/StatLabel";
 import PlayersList from "./FantasyDraft/PlayersList";
 import Navi from "./Navi";
+import Link from "next/link";
+import GameLabel from "./FantasyDraft/GameLabel";
 
 type FancyParams = {
     config: FantasyDraftConfig,
@@ -24,8 +26,6 @@ export default function FantasyDraftResults({ config, draftResult }: FancyParams
 
     const activeGameChange = useCallback((i: number) => {
         const newActiveGame = draftResult.draftResults[i]
-        console.log("Active Game: ", newActiveGame)
-
         setActiveGame(i)
         setActiveGameData(newActiveGame)
         setSelectedPlayerA(draftResult.draftResults[i].playersTeamA[0])
@@ -48,6 +48,7 @@ export default function FantasyDraftResults({ config, draftResult }: FancyParams
                     captainTeamA={config.captainTeamA}
                     captainTeamB={config.captainTeamB}
                     winner={draftResult.winner}
+                    confettiOnLoad={draftResult.status == 'Final'}
                 />
                 
                 { 
@@ -77,6 +78,7 @@ export default function FantasyDraftResults({ config, draftResult }: FancyParams
                         captainTeamB={config.captainTeamB}
                         winner={activeGameData.winner}
                         imageCSS={'w-12'}
+                        confettiOnLoad={draftResult.status == 'Final'}
                     />
                 }
 
@@ -121,6 +123,12 @@ export default function FantasyDraftResults({ config, draftResult }: FancyParams
                     />
                 </div>
 
+                <Title>
+                    Game
+                </Title>
+
+                <GameLabel draftResult={activeGameData} />
+                
             </div>
 
         </div>
