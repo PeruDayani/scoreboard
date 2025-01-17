@@ -91,7 +91,7 @@ export default function MultiFantasyDraftResultDisplay({ config, draftResult }: 
     }, [draftResult.status, triggerConfetti])
 
     return (
-        <div className='flex flex-col gap-4 font-mono antialiased'>
+        <div className='flex flex-col gap-4 font-mono antialiased mb-60'>
 
             <div className='mx-auto italic underline underline-offset-2'>
                 { config.title }
