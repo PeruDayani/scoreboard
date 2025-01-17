@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { FantasyDraftConfig, FantasyDraftResult, MultiFantasyDraftResult, Player, StatResult } from '@/utils/types';
 import Header from './FantasyDraft/Header';
 import Title from "./FantasyDraft/Title";
@@ -26,11 +26,29 @@ export default function FantasyDraftResults({ config, draftResult }: FancyParams
 
     const activeGameChange = useCallback((i: number) => {
         const newActiveGame = draftResult.draftResults[i]
+        const newPlayerA = draftResult.draftResults[i].playersTeamA[0]
+        const newPlayerB = draftResult.draftResults[i].playersTeamB[0]
+
         setActiveGame(i)
         setActiveGameData(newActiveGame)
-        setSelectedPlayerA(draftResult.draftResults[i].playersTeamA[0])
-        setSelectedPlayerB(draftResult.draftResults[i].playersTeamB[0])    
+        setSelectedPlayerA(newPlayerA)
+        setSelectedPlayerB(newPlayerB)
+        
+        localStorage.setItem('fantasyDraftSelection', JSON.stringify(newActiveGame))
     }, [draftResult, setActiveGame, setActiveGameData])
+
+    useEffect(() => {
+        try {
+            const storedActiveGame = JSON.parse(localStorage.getItem('fantasyDraftSelection') || '')
+            const foundGame = draftResult.draftResults.findIndex((d) => d.game?.gameId === storedActiveGame?.game?.gameId )
+
+            if (foundGame != -1) {
+                activeGameChange(foundGame)
+            }
+        } catch (e) {
+            console.log("Welp: ", e)
+        }
+    }, [])
 
     return (
         <div className='flex flex-col gap-4 font-mono antialiased mb-60'>
