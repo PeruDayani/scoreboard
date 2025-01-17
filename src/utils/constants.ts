@@ -1,8 +1,19 @@
 import { StatisticID, FantasyDraftConfig, Statistic } from "./types"
 
-const REFRESH_INTERVAL: number = 60*1000
+export const REFRESH_INTERVAL: number = 60*1000
 
-const CONFETTI_CONFIG = {
+export const NAVI_CONFIG = [
+    {
+        label: 'Home',
+        url: '/',
+    },
+    {
+        label: 'Fantasy',
+        url: '/fantasy',
+    }
+]
+
+export const CONFETTI_CONFIG = {
     angle: 90,
     spread: 45,
     startVelocity: 30,
@@ -16,7 +27,7 @@ const CONFETTI_CONFIG = {
     colors: ["#a864fd", "#29cdff", "#78ff44", "#ff718d", "#fdff6a"]
 };
 
-const FANTASY_PLAYER_STATS: {id: StatisticID, label: string, invert?: boolean, classes?: string}[] = [
+export const FANTASY_PLAYER_STATS: {id: StatisticID, label: string, invert?: boolean, classes?: string}[] = [
     {
         id: 'minutes',
         label: 'Mins'
@@ -224,7 +235,7 @@ const FANTASY_TEAM_STATS_2025: Statistic[] = [
     },
 ]
 
-const FANTASY_DRAFTS: FantasyDraftConfig[] = [
+export const FANTASY_DRAFTS: FantasyDraftConfig[] = [
     {
         urlId: '2025-peru-hayden-allstar',
         title: 'All Star 2025',
@@ -526,10 +537,3 @@ const FANTASY_DRAFTS: FantasyDraftConfig[] = [
         ]
     }
 ]
-
-export { 
-    FANTASY_DRAFTS,
-    FANTASY_PLAYER_STATS,
-    REFRESH_INTERVAL,
-    CONFETTI_CONFIG
-}

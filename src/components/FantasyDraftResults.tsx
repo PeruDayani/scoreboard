@@ -6,6 +6,7 @@ import DraftsNavi from "./FantasyDraft/DraftsNavi";
 import FancyStatDisplay from "./FantasyDraft/FancyStatDisplay";
 import StatLabel from "./FantasyDraft/StatLabel";
 import PlayersList from "./FantasyDraft/PlayersList";
+import Navi from "./Navi";
 
 type FancyParams = {
     config: FantasyDraftConfig,
@@ -31,9 +32,9 @@ export default function FantasyDraftResults({ config, draftResult }: FancyParams
     return (
         <div className='flex flex-col gap-4 font-mono antialiased mb-60'>
 
-            <div className='mx-auto underline underline-offset-4'>
-                { config.title }
-            </div>
+            <Navi
+                label={config.title}
+            />
 
             <div className="m-auto p-4 bg-purple-100 rounded-lg flex flex-col gap-4">
                 <Title>
@@ -72,7 +73,7 @@ export default function FantasyDraftResults({ config, draftResult }: FancyParams
                         captainTeamA={config.captainTeamA}
                         captainTeamB={config.captainTeamB}
                         winner={activeGameData.winner}
-                        imageSize={12}
+                        imageCSS={'w-12'}
                     />
                 }
 

@@ -10,12 +10,8 @@ Client Endpoints:
 
 For Every Draft:
 
-1. Fetch the Game ID from the NBA.com boxscore URL. Eg: https://www.nba.com/game/mia-vs-nyk-0022300643/box-score
-2. Fetch the Players list from http://localhost:3000/api/players/{GAME_ID}
-3. Create a new FANTASY_DRAFTS in src/utils/constants following convention
-4. View it on on http://localhost:3000/fantasy
-5. Merge to main to kick off a Vercel deploy
-
-TODO:
-1. Add Page for easily fetching Players list
-2. Cleanup the Player Stats display code
+1. Find the GameID from NBA.com (eg: 0022300643 for https://www.nba.com/game/mia-vs-nyk-0022300643/box-score)
+2. Find the players list at http://localhost:3000/api/players/{GameID}
+3. Create a new Fantasy Draft in src/utils/constants
+4. Deploy to Vercel: https://vercel.com/perudayanis-projects/scoreboard/deployments
+5. Enjoy!

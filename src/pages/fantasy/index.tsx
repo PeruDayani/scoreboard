@@ -1,6 +1,7 @@
 import { FANTASY_DRAFTS } from '@/utils/constants'
 import FantasyGameCard from '@/components/FantasyGameCard'
 import Head from 'next/head'
+import Navi from '@/components/Navi'
 
 export default function Home() {
     return (
@@ -12,7 +13,7 @@ export default function Home() {
                 <link rel="icon" href="/basketball.ico" />
             </Head>
             <div className='p-10 flex flex-col justify-center font-mono antialiased'>
-                <div className='mx-auto py-2 italic underline'> Fantasy Drafts </div>
+                <Navi label='Fantasy Drafts' />
                 <div className='flex flex-col flex-wrap justify-center max-w-5xl m-auto'>
                     {FANTASY_DRAFTS.map((draft) => {
                         return (
