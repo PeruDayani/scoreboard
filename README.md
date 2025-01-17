@@ -17,6 +17,5 @@ For Every Draft:
 5. Merge to main to kick off a Vercel deploy
 
 TODO:
-1. Add Player Stats Display for multi-draft display
-2. Add Page for easily fetching Players list
-3. Add Player draft position
+1. Add Page for easily fetching Players list
+2. Cleanup the Player Stats display code
