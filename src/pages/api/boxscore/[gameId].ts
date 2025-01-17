@@ -14,7 +14,7 @@ export default async function handler(
       const data  = await fetch(url)
           .then((res) => res.json())
       
-      res.status(200).json(cleanBoxscore(data))    
+      res.status(200).json(cleanBoxscore(data) as BoxScore)    
     } catch (error: any) {
       console.log("Error: ", error)
       res.status(404).json(error)

@@ -1,8 +1,8 @@
-import { STAT_ID, FantasyDraftConfig, FantasyTeamStatsConfig } from "./types"
+import { StatisticID, FantasyDraftConfig, Statistic } from "./types"
 
 const REFRESH_INTERVAL: number = 60*1000
 
-const FANTASY_PLAYER_STATS: {id: STAT_ID, label: string, invert?: boolean, classes?: string}[] = [
+const FANTASY_PLAYER_STATS: {id: StatisticID, label: string, invert?: boolean, classes?: string}[] = [
     {
         id: 'minutes',
         label: 'Mins'
@@ -68,7 +68,7 @@ const FANTASY_PLAYER_STATS: {id: STAT_ID, label: string, invert?: boolean, class
     },
 ]
 
-const FANTASY_TEAM_STATS_2022: FantasyTeamStatsConfig = [
+const FANTASY_TEAM_STATS_2022: Statistic[] = [
     {
         id: 'points',
         label: `Points`
@@ -106,7 +106,7 @@ const FANTASY_TEAM_STATS_2022: FantasyTeamStatsConfig = [
     },
 ]
 
-const FANTASY_TEAM_STATS_2023: FantasyTeamStatsConfig = [
+const FANTASY_TEAM_STATS_2023: Statistic[] = [
     {
         id: 'twoPointersFreeThrows',
         label: `Inside the Arc`
@@ -144,7 +144,7 @@ const FANTASY_TEAM_STATS_2023: FantasyTeamStatsConfig = [
     },
 ]
 
-const FANTASY_TEAM_STATS_2024: FantasyTeamStatsConfig = [
+const FANTASY_TEAM_STATS_2024: Statistic[] = [
     {
         id: 'twoPointersFreeThrows',
         label: `Inside`

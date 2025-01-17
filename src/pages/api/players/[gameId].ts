@@ -1,6 +1,7 @@
 import { fetchPlayers } from '@/utils/cleanPlayersData'
 import { cleanBoxscore } from '@/utils/cleanBoxscore'
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { BoxScore } from '@/utils/types';
 
 export default async function handler(
   req: NextApiRequest,
@@ -15,7 +16,7 @@ export default async function handler(
     const data  = await fetch(url)
         .then((res) => res.json())
         .then((data) => cleanBoxscore(data))
-        .then((data) => fetchPlayers(data))
+        .then((data) => fetchPlayers(data as BoxScore))
 
     res.status(200).json(data)
   } catch (error: any) {

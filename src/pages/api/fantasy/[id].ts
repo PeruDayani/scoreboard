@@ -1,7 +1,8 @@
-import { calcFantasyDraftData } from '@/utils/calcFantasyDraftData'
+import { calculateFantasyDraftResult, calculateMultiFantasyDraftResult } from '@/utils/calcFantasyDraftData'
 import { cleanBoxscore } from '@/utils/cleanBoxscore'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { FANTASY_DRAFTS } from '@/utils/constants'
+import { FantasyDraftResult } from '@/utils/types';
 
 export default async function handler(
   req: NextApiRequest,
@@ -12,17 +13,18 @@ export default async function handler(
 
     try {
         if (id && typeof id === "string") {
-            const fantasyDraftConfig = FANTASY_DRAFTS.find((data) => data.urlId == id)
+            const config = FANTASY_DRAFTS.find((data) => data.urlId == id)
 
-            if (!fantasyDraftConfig) {
+            if (!config) {
                 throw Error('Invalid game ID provided')
             }
 
-            const gamesDataRequests = fantasyDraftConfig.games.map((game) => {
+            const gamesDataRequests = config.games.map((game) => {
                 return fetch(`https://cdn.nba.com/static/json/liveData/boxscore/boxscore_${game.gameId}.json`)
             })
 
             const gamesDataResponses = await Promise.all(gamesDataRequests)
+
             const gamesDataObjects = await Promise.all(gamesDataResponses.map(res => {
                 if (res.status === 200) {
                     return res.json()
@@ -30,15 +32,16 @@ export default async function handler(
                     return null
                 }
             }));
+
             const gamesDataCleaned = gamesDataObjects.map(cleanBoxscore)
 
-            const { captainTeamA, captainTeamB, stats, games } = fantasyDraftConfig
-            const fantasyGamesData = gamesDataCleaned.map((g, i) => {
-                const { playersTeamA, playersTeamB } = games[i]
-                return calcFantasyDraftData(g, captainTeamA, captainTeamB, playersTeamA, playersTeamB, stats)
-            })
+            const draftResults = gamesDataCleaned.map((g, i) => {
+                return g && calculateFantasyDraftResult(g, config, i)
+            }).filter((d) => d !== null) as FantasyDraftResult[]
 
-            res.status(200).json(fantasyGamesData)
+            const multiDraftResults = calculateMultiFantasyDraftResult(draftResults, config)
+
+            res.status(200).json(multiDraftResults)
         }
     }
     catch (error: any) {

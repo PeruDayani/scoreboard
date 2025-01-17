@@ -1,14 +1,13 @@
 import Head from 'next/head'
-import FantasyDraftScoreboard from '@/components/FantasyDraftScoreboard'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBasketball } from '@fortawesome/free-solid-svg-icons'
 import useSWR, { Fetcher } from 'swr'
 import { FANTASY_DRAFTS, REFRESH_INTERVAL } from '@/utils/constants';
 import { useRouter } from 'next/router'
-import { FantasyDraftData } from '@/utils/types';
-import FancierFantasyDraftScoreboard from '@/components/FancierFantasyDraftScoreboard';
+import { MultiFantasyDraftResult } from '@/utils/types';
+import MultiFantasyDraftResultDisplay from '@/components/MultiFantasyDraftResultDisplay';
 
-const fetcher: Fetcher<FantasyDraftData[]> = (url: RequestInfo | URL) => fetch(url).then(r => r.json())
+const fetcher: Fetcher<MultiFantasyDraftResult> = (url: RequestInfo | URL) => fetch(url).then(r => r.json())
 
 export default function Fantasy() {
 
@@ -16,9 +15,9 @@ export default function Fantasy() {
     const { id } = router.query
 
     const { data, error, isLoading } = useSWR(id ? `/api/fantasy/${id}` : null, fetcher, { refreshInterval: REFRESH_INTERVAL })
-    const FANTASY_DRAFT_CONFIG = FANTASY_DRAFTS.find((draft) => draft.urlId == id)
+    const config = FANTASY_DRAFTS.find((draft) => draft.urlId == id)
 
-    if (isLoading || !data) {
+    if (!data || isLoading) {
       return (
         <>
           <Head>
@@ -35,7 +34,7 @@ export default function Fantasy() {
       )  
     }
 
-    if (!FANTASY_DRAFT_CONFIG || error) {
+    if (!config || error) {
       return (
         <>
           <Head>
@@ -59,7 +58,7 @@ export default function Fantasy() {
       )
     }
 
-    if (data.length < 1) {
+    if (data.draftResults.length < 1) {
       return (
         <>
           <Head>
@@ -93,21 +92,9 @@ export default function Fantasy() {
         </Head>
 
         {
-          FANTASY_DRAFT_CONFIG.games.length > 1 ?
-            (  
-              <div className='py-10 px-4 flex justify-center'>
-                <FancierFantasyDraftScoreboard config={FANTASY_DRAFT_CONFIG} games={data} />
-              </div>
-            ) : 
-            (
-              data.map((d) => {
-                return d && (
-                  <div key={d.game.gameId} className='p-10 flex justify-center'>
-                    <FantasyDraftScoreboard data={d} />
-                  </div>
-                )
-              })
-            )
+          <div className='py-10 px-4 flex justify-center'>
+            <MultiFantasyDraftResultDisplay config={config} draftResult={data} />
+          </div>
         }
       </>
     )

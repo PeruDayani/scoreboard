@@ -1,41 +1,41 @@
 import Head from 'next/head'
-import Scoreboard from '@/components/Scoreboard'
+import ScoreboardDisplay from '@/components/ScoreboardDisplay'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBasketball } from '@fortawesome/free-solid-svg-icons'
 import useSWR from 'swr'
-import { REFRESH_INTERVAL } from '@/utils/constants';
+import { useMemo } from 'react';
+import { Scoreboard } from '@/utils/types';
 
 const fetcher = (url: RequestInfo | URL) => fetch(url).then(r => r.json())
 
-function useScoreboard () {
+type useScoreboardPayload = {
+  data: Scoreboard,
+  isLoading: boolean,
+  isError: any
+}
+
+function useScoreboard(): useScoreboardPayload {
   const { data, error, isLoading } = useSWR(`/api/scoreboard/`, fetcher)
 
   return {
-    data: data,
+    data,
     isLoading,
     isError: error
   }
 }
 
 export default function Home() {
-  const { data, isLoading, isError } = useScoreboard()
+  const { data, isLoading } = useScoreboard()
 
-  if (!data) {  
-    return (
-      <>
-        <Head>
-          <title>Hidden Sports Scoreboards</title>
-          <meta name="description" content="Watch the highlights of close sports games" />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <link rel="icon" href="/basketball.ico" />
-        </Head>
-
-        <div className='p-10 flex justify-center'>
-          { isLoading ? <FontAwesomeIcon icon={faBasketball} bounce size="3x"/> : <div className='mx-auto text-lg py-2 italic underline'> No Games Today! </div>}
-        </div>
-      </>
-    )
-  }
+  const content = useMemo(() => {
+    if (isLoading) {
+      return <FontAwesomeIcon icon={faBasketball} bounce size="3x"/>
+    } else if (data) {
+      return <ScoreboardDisplay title={data.date} games={data.games} />
+    } else {
+      return <div className='mx-auto text-lg py-2 italic underline'> No Games Today! </div>
+    }
+  }, [data, isLoading])
 
   return (
     <>
@@ -47,7 +47,7 @@ export default function Home() {
       </Head>
 
       <div className='p-10 flex justify-center'>
-        { isLoading ? <FontAwesomeIcon icon={faBasketball} bounce size="3x"/> : <Scoreboard date={data.date} games={data.games} />}
+        { content }
       </div>
     </>
   )

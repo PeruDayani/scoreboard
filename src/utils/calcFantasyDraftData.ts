@@ -1,8 +1,8 @@
-import { BoxScore, PlayerStats, STAT_ID, TeamStats } from "./types";
+import { BoxScore, Player, StatisticID, AllStatistics, FantasyDraftConfig, Statistic, FantasyDraftResult, WinnerType, StatResult, MultiFantasyDraftResult } from "./types";
 
-function calcTeamStats(players: PlayerStats[]) : TeamStats {
+function calcTeamStats(players: Player[]) : AllStatistics {
 
-    function sumStat(stat: STAT_ID) {
+    function sumStat(stat: StatisticID) {
         return players.reduce((a, b) => a + (b[stat] || 0), 0);
     }
 
@@ -37,7 +37,7 @@ function calcTeamStats(players: PlayerStats[]) : TeamStats {
     }
 }
 
-function addFantasyPlayerStats(player: PlayerStats): PlayerStats {
+function addFantasyPlayerStats(player: Player): Player {
     return {
         ...player,
         reboundsWeighted: player.reboundsDefensive + 2*player.reboundsOffensive,
@@ -47,10 +47,10 @@ function addFantasyPlayerStats(player: PlayerStats): PlayerStats {
     }
 }
 
-function comparePlayers(playerA: PlayerStats, playerB: PlayerStats, stats: any): number {
-    const results = stats?.map((stat: any) => {
-        let playerAScore = playerA[stat.id as keyof TeamStats] || 0
-        let playerBScore = playerB[stat.id as keyof TeamStats] || 0
+function comparePlayers(playerA: Player, playerB: Player, stats: Statistic[]): number {
+    const results = stats.filter((s) => !s.ignore).map((stat: any) => {
+        let playerAScore = playerA[stat.id as StatisticID] || 0
+        let playerBScore = playerB[stat.id as StatisticID] || 0
 
         if (playerAScore < playerBScore) {
             return 1
@@ -61,50 +61,168 @@ function comparePlayers(playerA: PlayerStats, playerB: PlayerStats, stats: any):
         }
     })
 
-    return results.slice(0,5).reduce((sum: number, a: number) => sum + a, 0)
+    return results.reduce((sum: number, a: number) => sum + a, 0)
 }
 
-function calcFantasyDraftData(data: BoxScore, captainTeamA: string, captainTeamB: string, playersTeamA: string[], playersTeamB: string[], stats: any) : any {
+function comparePlayersWrapper(stats: Statistic[]) {
+    return (a: Player, b: Player) => comparePlayers(a, b, stats)
+}
 
-    if (data?.game) {
+function calcWinner(a: number, b: number): WinnerType {
+    if (a > b) {
+        return 'A'
+    } else if (a < b) {
+        return 'B'
+    } else {
+        return null
+    }
+}
 
-        const homePlayers: PlayerStats[] = data.game.homeTeam.players.map(addFantasyPlayerStats)
-        const awayPlayers: PlayerStats[] = data.game.awayTeam.players.map(addFantasyPlayerStats)
-        const allPlayers: PlayerStats[] = homePlayers.concat(awayPlayers)
+export function calculateFantasyDraftResult(boxScore: BoxScore, config: FantasyDraftConfig, gameConfigIdx: number): FantasyDraftResult {
+    const gameData = boxScore.game
+    const gameConfig = config.games[gameConfigIdx]
 
-        const teamA: any[] = []
-        const teamB: any[] = []
+    // Sort Players into Fantasy Teams
 
-        allPlayers.sort((playerA, playerB) => comparePlayers(playerA, playerB, stats))
-        
-        allPlayers.forEach((player) => {
-            if (playersTeamA.includes(player.name)) {
-                teamA.push(player)
-            } else if (playersTeamB.includes(player.name)) {
-                teamB.push(player)
-            }
-        })
+    const allPlayers: Player[] = [
+        ...gameData.homeTeam.players,
+        ...gameData.awayTeam.players
+    ].map(addFantasyPlayerStats).sort(comparePlayersWrapper(config.stats))
 
-        return {
-            date: data.date,
-            game: data.game,
-            fantasyTeamA: {
-                teamCaptain: captainTeamA,
-                teamStats: calcTeamStats(teamA),
-                players: teamA
-            },
-            fantasyTeamB: {
-                teamCaptain: captainTeamB,
-                teamStats: calcTeamStats(teamB),
-                players: teamB
-            },
-            stats: stats,
-            allPlayers: allPlayers
+    const playersTeamA: Player[] = []
+    const playersTeamB: Player[] = []
+
+    allPlayers.forEach((player) => {
+        if (gameConfig.playersTeamA.includes(player.name)) {
+            playersTeamA.push(player)
+        } else if (gameConfig.playersTeamB.includes(player.name)) {
+            playersTeamB.push(player)
+        }
+    })
+
+    // Calculate Fantasy Team results
+
+    const statsTeamA: AllStatistics = calcTeamStats(playersTeamA)
+    const statsTeamB: AllStatistics = calcTeamStats(playersTeamB)
+
+    // Calculate Fantasy Draft results
+
+    const results: StatResult[] = []
+    let winsA = 0
+    let winsB = 0
+
+    config.stats.forEach((stat) => {
+        const statTeamA = statsTeamA[stat.id as StatisticID] || 0
+        const statTeamB = statsTeamB[stat.id as StatisticID] || 0
+        const winner = calcWinner(statTeamA, statTeamB)
+
+        if (winner == 'A') { 
+            winsA += 1
+        }
+        if (winner == 'B') { 
+            winsB += 1
         }
 
-    }
+        results.push({
+            stat,
+            winner,
+            teamA: {
+                total: statTeamA,
+                breakdown: []
+            },
+            teamB: {
+                total: statTeamB,
+                breakdown: []
+            },
+        })
+    })
 
-    return data
+    return {
+        date: boxScore.date,
+        game: gameData,
+        playersTeamA,
+        playersTeamB,
+        winner: calcWinner(winsA, winsB),
+        results
+    }
 }
 
-export { calcFantasyDraftData }
+export function calculateMultiFantasyDraftResult(draftResults: FantasyDraftResult[],  config: FantasyDraftConfig): MultiFantasyDraftResult {
+
+    const results: StatResult[] = []
+    let winsA = 0
+    let winsB = 0
+
+    config.stats.forEach((stat) => {
+
+        let totalStatA = 0
+        let breakdownStatA: { value: number; winner: boolean; }[] = []
+        let totalStatB = 0
+        let breakdownStatB: { value: number; winner: boolean; }[] = []
+
+        draftResults.forEach((draftResult) => {
+            const statResult = draftResult.results.find((s) => (s.stat.id == stat.id))
+
+            if (statResult) {
+                totalStatA += statResult.teamA.total
+                breakdownStatA.push({
+                    value: statResult.teamA.total,
+                    winner: statResult.winner == 'A'
+                })
+
+                totalStatB += statResult.teamB.total
+                breakdownStatB.push({
+                    value: statResult.teamB.total,
+                    winner: statResult.winner == 'B'
+                })
+            }
+
+        })
+
+        const winner = calcWinner(totalStatA, totalStatB)
+        if (!stat.ignore) {
+            if (winner == 'A') { 
+                winsA += 1
+            }
+            if (winner == 'B') { 
+                winsB += 1
+            }   
+        }
+
+        results.push({
+            stat,
+            winner,
+            teamA: {
+                total: totalStatA,
+                breakdown: breakdownStatA
+            },
+            teamB: {
+                total: totalStatB,
+                breakdown: breakdownStatB
+            },
+        })
+    })
+
+    let status = 'Final'
+    let gamesCompleted = 0
+
+    draftResults.forEach((g) => {
+        if (g && g.game.gameStatus) {
+            if (g.game.gameStatus == 'Done') {
+                gamesCompleted += 1
+            } else {
+                status = g.game.gameStatusText
+            }
+        }
+    })
+    if (gamesCompleted !== config.games.length) {
+        status = `(${gamesCompleted + 1}/${config.games.length}) ${status}`
+    }
+
+    return {
+        status,
+        winner: calcWinner(winsA, winsB),
+        results,
+        draftResults
+    }
+}

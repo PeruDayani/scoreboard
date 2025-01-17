@@ -1,3 +1,5 @@
+// Note: This only works locally for now, not sure how to set Header for production
+
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { cleanScoreboard } from '@/utils/cleanScoreboard'
 import fetch from 'node-fetch';
