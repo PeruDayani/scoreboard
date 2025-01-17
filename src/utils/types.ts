@@ -85,22 +85,21 @@ export type FantasyDraftConfig = {
 
 export type WinnerType = 'A' | 'B' | null
 
+export type StatResultBreakdown = {
+    value: number,
+    winner: boolean
+}
+
 export type StatResult = {
     stat: Statistic,
     winner: WinnerType,
     teamA: {
         total: number,
-        breakdown: {
-            value: number,
-            winner: boolean
-        }[]
+        breakdown: StatResultBreakdown[]
     }
     teamB: {
         total: number,
-        breakdown: {
-            value: number,
-            winner: boolean
-        }[]
+        breakdown: StatResultBreakdown[]
     }
 }
 

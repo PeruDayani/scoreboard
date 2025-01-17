@@ -37,6 +37,16 @@ function calcTeamStats(players: Player[]) : AllStatistics {
     }
 }
 
+function calcWinner(a: number, b: number): WinnerType {
+    if (a > b) {
+        return 'A'
+    } else if (a < b) {
+        return 'B'
+    } else {
+        return null
+    }
+}
+
 function addFantasyPlayerStats(player: Player): Player {
     return {
         ...player,
@@ -68,17 +78,7 @@ function comparePlayersWrapper(stats: Statistic[]) {
     return (a: Player, b: Player) => comparePlayers(a, b, stats)
 }
 
-function calcWinner(a: number, b: number): WinnerType {
-    if (a > b) {
-        return 'A'
-    } else if (a < b) {
-        return 'B'
-    } else {
-        return null
-    }
-}
-
-export function calculateFantasyDraftResult(boxScore: BoxScore, config: FantasyDraftConfig, gameConfigIdx: number): FantasyDraftResult {
+export function computeFantasyDraftResult(boxScore: BoxScore, config: FantasyDraftConfig, gameConfigIdx: number): FantasyDraftResult {
     const gameData = boxScore.game
     const gameConfig = config.games[gameConfigIdx]
 
@@ -149,7 +149,7 @@ export function calculateFantasyDraftResult(boxScore: BoxScore, config: FantasyD
     }
 }
 
-export function calculateMultiFantasyDraftResult(draftResults: FantasyDraftResult[],  config: FantasyDraftConfig): MultiFantasyDraftResult {
+export function computeeMultiFantasyDraftResult(draftResults: FantasyDraftResult[],  config: FantasyDraftConfig): MultiFantasyDraftResult {
 
     const results: StatResult[] = []
     let winsA = 0

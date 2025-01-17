@@ -1,4 +1,4 @@
-import GameCard from '@/components/GameCard'
+import ScoreboardGameCard from '@/components/ScoreboardGameCard'
 import { Game } from '@/utils/types'
 import { useMemo } from 'react'
 
@@ -42,7 +42,7 @@ export default function ScoreboardDisplay({title, games}: ScoreboardDisplayProps
             </div>
 
             <div className='flex flex-wrap justify-center max-w-5xl m-auto'>
-                {displayGames.map((game: Game) => <GameCard game={game} key={game.gameId}/>)}
+                {displayGames.map((game: Game) => <ScoreboardGameCard game={game} key={game.gameId}/>)}
             </div>
 
         </div>

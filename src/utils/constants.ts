@@ -2,6 +2,20 @@ import { StatisticID, FantasyDraftConfig, Statistic } from "./types"
 
 const REFRESH_INTERVAL: number = 60*1000
 
+const CONFETTI_CONFIG = {
+    angle: 90,
+    spread: 45,
+    startVelocity: 30,
+    elementCount: 90,
+    dragFriction: 0.12,
+    duration: 6000,
+    stagger: 3,
+    width: "20px",
+    height: "20px",
+    perspective: "500px",
+    colors: ["#a864fd", "#29cdff", "#78ff44", "#ff718d", "#fdff6a"]
+};
+
 const FANTASY_PLAYER_STATS: {id: StatisticID, label: string, invert?: boolean, classes?: string}[] = [
     {
         id: 'minutes',
@@ -283,20 +297,6 @@ const FANTASY_DRAFTS: FantasyDraftConfig[] = [
             {
                 gameId: '0032100001',
                 playersTeamA: [
-                    'Giannis Antetokounmpo',
-                    'LeBron James',
-                    'Ja Morant',
-                    'Nikola Jokic',
-                    'Andrew Wiggins',
-                    'Devin Booker',
-                    'Karl-Anthony Towns',
-                    'Khris Middleton',
-                    'Darius Garland',
-                    'Chris Paul',
-                    'Donovan Mitchell',
-                    'Dejounte Murray'
-                ],
-                playersTeamB: [
                     'Stephen Curry',
                     'Trae Young',
                     'Joel Embiid',
@@ -309,6 +309,20 @@ const FANTASY_DRAFTS: FantasyDraftConfig[] = [
                     'LaMelo Ball',
                     'Fred VanVleet',
                     'Jimmy Butler'
+                ],
+                playersTeamB: [
+                    'Giannis Antetokounmpo',
+                    'LeBron James',
+                    'Ja Morant',
+                    'Nikola Jokic',
+                    'Andrew Wiggins',
+                    'Devin Booker',
+                    'Karl-Anthony Towns',
+                    'Khris Middleton',
+                    'Darius Garland',
+                    'Chris Paul',
+                    'Donovan Mitchell',
+                    'Dejounte Murray'
                 ]
             }
         ] 
@@ -516,5 +530,6 @@ const FANTASY_DRAFTS: FantasyDraftConfig[] = [
 export { 
     FANTASY_DRAFTS,
     FANTASY_PLAYER_STATS,
-    REFRESH_INTERVAL
+    REFRESH_INTERVAL,
+    CONFETTI_CONFIG
 }

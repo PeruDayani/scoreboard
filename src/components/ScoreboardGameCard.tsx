@@ -4,7 +4,7 @@ import { faUpRightFromSquare, faAt } from '@fortawesome/free-solid-svg-icons';
 import { Game } from '@/utils/types';
 import { useMemo, useState } from 'react';
 
-export default function GameCard({game}: {game: Game}) {
+export default function ScoreboardGameCard({game}: {game: Game}) {
 
     const [displayScore, setDisplayScore] = useState(false)    
     const highlighsLink = `https://www.youtube.com/results?search_query=${game.awayTeam.teamCity}+${game.awayTeam.teamName}+at+${game.homeTeam.teamCity}+${game.homeTeam.teamName}`

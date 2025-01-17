@@ -5,7 +5,7 @@ import useSWR, { Fetcher } from 'swr'
 import { FANTASY_DRAFTS, REFRESH_INTERVAL } from '@/utils/constants';
 import { useRouter } from 'next/router'
 import { MultiFantasyDraftResult } from '@/utils/types';
-import MultiFantasyDraftResultDisplay from '@/components/MultiFantasyDraftResultDisplay';
+import FantasyDraftResults from '@/components/FantasyDraftResults';
 
 const fetcher: Fetcher<MultiFantasyDraftResult> = (url: RequestInfo | URL) => fetch(url).then(r => r.json())
 
@@ -93,7 +93,7 @@ export default function Fantasy() {
 
         {
           <div className='py-10 px-4 flex justify-center'>
-            <MultiFantasyDraftResultDisplay config={config} draftResult={data} />
+            <FantasyDraftResults config={config} draftResult={data} />
           </div>
         }
       </>
