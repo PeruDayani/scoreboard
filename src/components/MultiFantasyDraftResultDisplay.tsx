@@ -123,7 +123,7 @@ export default function MultiFantasyDraftResultDisplay({ config, draftResult }: 
 
             <div className="p-4 bg-purple-100 rounded-lg flex flex-col gap-4">
 
-                { multipleDrafts && <div className='flex justify-between italic'>
+                { multipleDrafts && <div className='flex py-2 justify-between italic sticky top-0 bg-purple-100'>
                     {
                         draftResult.draftResults.map((g, i) => (
                             <div key={i} className={`${activeGame == i? 'underline underline-offset-2' : ''}`} onClick={() => activeGameChange(i)}> Game {i+1} </div>
@@ -138,7 +138,7 @@ export default function MultiFantasyDraftResultDisplay({ config, draftResult }: 
                     </div>
                     <div className="w-1/3">
                         {
-                            activeGameData.winner == 'A' ? <Image className='w-16 m-auto' src={leftWinnerImg} alt="teamA winner"/> : <Image className='w-16 m-auto' src={rightWinnerImg} alt="teamA winner"/>
+                            activeGameData.winner == 'A' ? <Image className='w-12 m-auto' src={leftWinnerImg} alt="teamA winner"/> : <Image className='w-12 m-auto' src={rightWinnerImg} alt="teamA winner"/>
                         }
                     </div>
                     <div className="w-1/3"> 
