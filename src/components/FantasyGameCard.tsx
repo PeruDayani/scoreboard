@@ -1,7 +1,6 @@
 import { FantasyDraftConfig } from '@/utils/types';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAt } from '@fortawesome/free-solid-svg-icons';
-
 import Link from 'next/link';
 
 export default function FantasyGameCard({fantasyDraft}: {fantasyDraft: FantasyDraftConfig}) {

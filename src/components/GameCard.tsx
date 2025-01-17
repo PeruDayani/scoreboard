@@ -2,22 +2,25 @@ import Image from 'next/image'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpRightFromSquare, faAt } from '@fortawesome/free-solid-svg-icons';
 import { Game } from '@/utils/types';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 export default function GameCard({game}: {game: Game}) {
 
-    const [displayScore, setDisplayScore] = useState(false)
-    
-    const gameDifference = Math.ceil((Math.abs(game.homeTeam.score - game.awayTeam.score))/5)*5
+    const [displayScore, setDisplayScore] = useState(false)    
     const highlighsLink = `https://www.youtube.com/results?search_query=${game.awayTeam.teamCity}+${game.awayTeam.teamName}+at+${game.homeTeam.teamCity}+${game.homeTeam.teamName}`
     const awayTeamImageSrc = `https://cdn.nba.com/logos/nba/${game.awayTeam.teamId}/primary/L/logo.svg`
     const homeTeamImageSrc = `https://cdn.nba.com/logos/nba/${game.homeTeam.teamId}/primary/L/logo.svg`
 
-    function gameScheduled() {
-        return game.gameStatus == 'Scheduled'
-    }
+    const displayContent = useMemo(() => {
+        if (game.gameStatus == 'Scheduled') {
+            return (
+                <div className="flex gap-12">
+                    <div> {game.awayTeam.record} </div>
+                    <div> {game.homeTeam.record} </div>
+                </div>
+            )
+        }
 
-    function gameScoreText() {
         if (displayScore) {
             return (
                 <div className="flex gap-20" onClick={() => setDisplayScore(false)}>
@@ -25,36 +28,29 @@ export default function GameCard({game}: {game: Game}) {
                     <div> {game.homeTeam.score} </div>
                 </div>
             )
-        } else {
-            if (gameDifference > 0) {
-                return (
-                    <div onClick={() => setDisplayScore(true)} className="text-center"> 
-                        <div className="italic text-sm">
-                            {game.gameStatus == 'Live' ? `Score Difference` : `Decided By`}
-                        </div>
-                        <div>
-                            {`Less than ${gameDifference}` }
-                        </div>
-                    </div>
-                )
-            } else {
-                return (
-                    <div onClick={() => setDisplayScore(true)}>
-                        Tie Game 
-                    </div>
-                )
-            }
-        }        
-    }
+        }
 
-    function teamRecords() {
+        const gameDifference = Math.ceil((Math.abs(game.homeTeam.score - game.awayTeam.score))/5) * 5
+        if (gameDifference == 0) {
+            return (
+                <div onClick={() => setDisplayScore(true)} className="text-center"> 
+                    <div> Tie Game! </div>
+                </div>
+            )
+        }
+        
         return (
-            <div className="flex gap-12">
-                <div> {game.awayTeam.record} </div>
-                <div> {game.homeTeam.record} </div>
+            <div onClick={() => setDisplayScore(true)} className="text-center"> 
+                <div className="italic text-sm">
+                    {game.gameStatus == 'Live' ? `Score Difference` : `Decided By`}
+                </div>
+                <div>
+                    {`Less than ${gameDifference}`}
+                </div>
             </div>
         )
-    }
+
+    }, [game, displayScore, setDisplayScore])
 
     return (
         <div className="min-w-3/4 m-2 p-4 bg-purple-100	rounded-lg flex flex-col">
@@ -62,9 +58,9 @@ export default function GameCard({game}: {game: Game}) {
                 <div>
                     {game.gameStatusText}
                 </div>
-                <div>
-                    <a href={highlighsLink} target="_blank" rel="noreferrer"> <FontAwesomeIcon icon={faUpRightFromSquare} size="sm"/> </a>
-                </div>
+                <a href={highlighsLink} target="_blank" rel="noreferrer">
+                    <FontAwesomeIcon icon={faUpRightFromSquare} size="sm"/>
+                </a>
             </div>
 
             <div className="p-4 flex justify-between items-center">
@@ -74,7 +70,7 @@ export default function GameCard({game}: {game: Game}) {
             </div>
 
             <div className="m-auto font-medium">
-                {gameScheduled() ? teamRecords() : gameScoreText()}
+                { displayContent }
             </div>
         </div>
     )

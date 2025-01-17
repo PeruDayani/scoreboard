@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBasketball } from '@fortawesome/free-solid-svg-icons';
-import Scoreboard from '@/components/Scoreboard';
+import ScoreboardDisplay from '@/components/ScoreboardDisplay';
 import Head from 'next/head'
 
 const monthNames = [
@@ -86,7 +86,7 @@ export default function Home() {
                     {
                         isLoading ? <FontAwesomeIcon icon={faBasketball} bounce size="3x"/> : 
                         (
-                            data ? <Scoreboard games={data.games} /> : <div className='font-mono antialiased mx-auto text-lg py-2 italic'> No Games Today! </div>
+                            data ? <ScoreboardDisplay title='' games={data.games} /> : <div className='font-mono antialiased mx-auto text-lg py-2 italic'> No Games Today! </div>
                         )
                     }
                 </div>

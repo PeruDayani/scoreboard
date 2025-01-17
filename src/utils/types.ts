@@ -1,13 +1,57 @@
-type Team = {
+export type AllStatistics = {
+    points: number,
+    assists: number,
+    minutes?: number,
+
+    reboundsTotal: number,
+    reboundsDefensive: number,
+    reboundsOffensive: number,
+
+    freeThrowsMade: number,
+    freeThrowsAttempted: number
+
+    twoPointersMade: number,
+    twoPointersAttempted: number,
+
+    threePointersMade: number,
+    threePointersAttempted: number,
+
+    blocks: number,
+    blocksReceived: number,
+    steals: number,
+    turnovers: number,
+    foulsTechnical: number,
+
+    reboundsWeighted?: number,
+    twoPointersFreeThrows?: number,
+    stealsBlocks?: number,
+    stealsBlocksTurnovers?: number,
+}
+
+export type StatisticID = keyof AllStatistics
+
+export type Statistic = {
+    id: StatisticID,
+    label: string,
+    invert?: boolean,
+    ignore?: boolean
+}
+
+export type Player = {
+    name: string,
+    personId: string,
+} & AllStatistics
+
+export type Team = {
     teamId: string,
     teamName: string,
     teamCity: string,
     record: string,
     score: number,
-    players: PlayerStats[] | []
+    players: Player[]
 }
 
-type Game = {
+export type Game = {
     gameId: string,
     gameStatus: string,
     gameStatusText: string,
@@ -15,134 +59,62 @@ type Game = {
     awayTeam: Team
 }
 
-type PlayerStats = {
-    name: string,
-    personId: string,
-    minutes?: number,
-
-    points: number,
-    assists: number,
-
-    reboundsTotal: number,
-    reboundsDefensive: number,
-    reboundsOffensive: number,
-
-    freeThrowsMade: number,
-    freeThrowsAttempted: number
-
-    twoPointersMade: number,
-    twoPointersAttempted: number,
-
-    threePointersMade: number,
-    threePointersAttempted: number,
-
-    blocks: number,
-    blocksReceived: number,
-    steals: number,
-    turnovers: number,
-    foulsTechnical: number,
-
-    reboundsWeighted?: number,
-    twoPointersFreeThrows?: number,
-    stealsBlocks?: number,
-    stealsBlocksTurnovers?: number,
+export type BoxScore =  {
+    date: string,
+    game: Game,
 }
 
-type Scoreboard = ScoreboardData | null
-
-type ScoreboardData = {
+export type Scoreboard = {
     date: string,
     games: Game[]
 }
 
-type BoxScore = BoxScoreData | null
-
-type BoxScoreData = {
-    date: string,
-    game: Game,
-}
-
-type TeamStats = {
-    points: number,
-    assists: number,
-    minutes?: number,
-
-    reboundsTotal: number,
-    reboundsDefensive: number,
-    reboundsOffensive: number,
-
-    freeThrowsMade: number,
-    freeThrowsAttempted: number
-
-    twoPointersMade: number,
-    twoPointersAttempted: number,
-
-    threePointersMade: number,
-    threePointersAttempted: number,
-
-    blocks: number,
-    blocksReceived: number,
-    steals: number,
-    turnovers: number,
-    foulsTechnical: number,
-
-    reboundsWeighted?: number,
-    twoPointersFreeThrows?: number,
-    stealsBlocks?: number,
-    stealsBlocksTurnovers?: number,
-}
-
-// Use this to access any teamStats obj using variable keys
-type STAT_ID = keyof TeamStats
-
-type Statistic = {
-    id: STAT_ID,
-    label: string,
-    invert?: boolean,
-    ignore?: boolean
-}
-
-type FantasyTeam = {
-    teamCaptain: string,
-    teamStats: TeamStats,
-    players: PlayerStats[]
-}
-
-type FantasyDraft = {
-    date: string,
-    game: Game,
-    fantasyTeamA: FantasyTeam,
-    fantasyTeamB: FantasyTeam,
-    allPlayers?: PlayerStats[],
+export type FantasyDraftConfig = {
+    urlId: string,
+    title: string,
     stats: Statistic[],
-    error?: {
-        message: string,
-        type: string
+    captainTeamA: string,
+    captainTeamB: string,
+    games: {
+        gameId: string,
+        playersTeamA: string[],
+        playersTeamB: string[]
+    }[]
+}
+
+export type WinnerType = 'A' | 'B' | null
+
+export type StatResult = {
+    stat: Statistic,
+    winner: WinnerType,
+    teamA: {
+        total: number,
+        breakdown: {
+            value: number,
+            winner: boolean
+        }[]
+    }
+    teamB: {
+        total: number,
+        breakdown: {
+            value: number,
+            winner: boolean
+        }[]
     }
 }
 
-type FantasyDraftData = FantasyDraft
+export type FantasyDraftResult = {
+    date: string,
+    game: Game,
+    playersTeamA: Player[],
+    playersTeamB: Player[],
+    winner: WinnerType,
+    results: StatResult[]
+}
 
-type CustomError = {
+export type MultiFantasyDraftResult = {
     status: string,
-    reason: string
+    winner: WinnerType,
+    results: StatResult[],
+    draftResults: FantasyDraftResult[]
 }
-
-type FantasyTeamStatsConfig = Statistic[]
-
-type FantasyDraftGameConfig = {
-    gameId: string,
-    playersTeamA: string[],
-    playersTeamB: string[]
-}
-
-type FantasyDraftConfig = {
-    urlId: string,
-    title: string,
-    stats: FantasyTeamStatsConfig,
-    captainTeamA: string,
-    captainTeamB: string,
-    games: FantasyDraftGameConfig[]
-}
-
-export type { Team, Game, PlayerStats, FantasyTeam, STAT_ID, Statistic, FantasyDraftData, CustomError, TeamStats, Scoreboard, BoxScore, FantasyDraftConfig, FantasyTeamStatsConfig }

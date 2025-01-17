@@ -1,11 +1,11 @@
-import { BoxScore, PlayerStats } from "./types"
+import { BoxScore, Player } from "./types"
 
 function fetchPlayers(data: BoxScore) : string[] {
 
     if (data) {
-        const homePlayers: PlayerStats[] = data.game.homeTeam.players
-        const awayPlayers: PlayerStats[] = data.game.awayTeam.players
-        const allPlayers: PlayerStats[] = homePlayers.concat(awayPlayers)
+        const homePlayers: Player[] = data.game.homeTeam.players
+        const awayPlayers: Player[] = data.game.awayTeam.players
+        const allPlayers: Player[] = homePlayers.concat(awayPlayers)
 
         return allPlayers.map((player) => player.name)
     }

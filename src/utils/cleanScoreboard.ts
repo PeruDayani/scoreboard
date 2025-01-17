@@ -22,10 +22,10 @@ function gameStatus(data: any) : string {
     }
 }
 
-function cleanScoreboard(data: any) : Scoreboard {
+function cleanScoreboard(data: any): Scoreboard {
 
-    let date = ''
-    let games = new Array<Game>()
+    let date: string = 'No Data Found'
+    let games: Game[] = []
 
     if (data.scoreboard && data.scoreboard.games && data.scoreboard.games.length > 0) {
 
@@ -40,20 +40,18 @@ function cleanScoreboard(data: any) : Scoreboard {
             homeTeam: extractTeamData(game.homeTeam),
             awayTeam: extractTeamData(game.awayTeam)
         }))
-
-        return {
-            date,
-            games
-        } 
     }
 
-    return null
+    return {
+        date,
+        games
+    } 
 }
 
 function cleanScoreboardByDate(data: any) : Scoreboard {
 
-    let date = ''
-    let games = new Array<Game>()
+    let date: string = 'No Data Found'
+    let games: Game[] = []
 
     if (Object.keys(data['LineScore']).length > 0) {
 
@@ -76,14 +74,12 @@ function cleanScoreboardByDate(data: any) : Scoreboard {
                 awayTeam: extractTeamData(awayTeam)
             })
         }
-
-        return {
-            date,
-            games
-        }
     }
 
-    return null
+    return {
+        date,
+        games
+    }
 }
 
 export { cleanScoreboard, cleanScoreboardByDate }

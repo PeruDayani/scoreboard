@@ -1,4 +1,4 @@
-import { BoxScore, Game, PlayerStats, Team } from './types'
+import { BoxScore, Game, Player, Team } from './types'
 
 function cleanMinsPlayer(data: string) : number {
     const regex = /(?<=PT)(.*)(?=M)/g;
@@ -9,7 +9,7 @@ function cleanMinsPlayer(data: string) : number {
     return 0
 }
 
-function extractPlayerData(data: any) : PlayerStats {
+function extractPlayerData(data: any) : Player {
     return {
         name: data.name,
         personId: data.personId,
@@ -60,7 +60,7 @@ function gameStatus(data: any) : string {
     }
 }
 
-function cleanBoxscore (data: any) : BoxScore {
+function cleanBoxscore (data: any) : BoxScore | null {
 
     if (data && data.game && data.game.gameId) {
 
@@ -69,7 +69,6 @@ function cleanBoxscore (data: any) : BoxScore {
         const date = new Intl.DateTimeFormat('en-US', options).format(dateUTC)
 
         const gameData = data.game
-
 
         const game : Game = {
             gameId: gameData.gameId,
@@ -85,7 +84,7 @@ function cleanBoxscore (data: any) : BoxScore {
         }
     }
 
-    return data
+    return null
 }
 
 export { cleanBoxscore }
