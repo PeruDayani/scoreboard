@@ -1,4 +1,4 @@
-import { computeFantasyDraftResult, computeeMultiFantasyDraftResult } from '@/utils/computeFantasyDrafts'
+import { computeFantasyDraftResult, computeMultiFantasyDraftResult } from '@/utils/computeFantasyDrafts'
 import { cleanBoxscore } from '@/utils/cleanBoxscore'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { FANTASY_DRAFTS } from '@/utils/constants'
@@ -36,10 +36,10 @@ export default async function handler(
             const gamesDataCleaned = gamesDataObjects.map(cleanBoxscore)
 
             const draftResults = gamesDataCleaned.map((g, i) => {
-                return g && computeFantasyDraftResult(g, config, i)
-            }).filter((d) => d !== null) as FantasyDraftResult[]
+                return computeFantasyDraftResult(g, config, i)
+            })
 
-            const multiDraftResults = computeeMultiFantasyDraftResult(draftResults, config)
+            const multiDraftResults = computeMultiFantasyDraftResult(draftResults, config)
 
             res.status(200).json(multiDraftResults)
         }

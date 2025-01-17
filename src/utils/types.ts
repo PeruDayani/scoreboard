@@ -104,8 +104,9 @@ export type StatResult = {
 }
 
 export type FantasyDraftResult = {
-    date: string,
-    game: Game,
+    date?: string,
+    game?: Game,
+    status: string,
     playersTeamA: Player[],
     playersTeamB: Player[],
     winner: WinnerType,

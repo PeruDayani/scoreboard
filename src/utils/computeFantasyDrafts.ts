@@ -47,6 +47,29 @@ function calcWinner(a: number, b: number): WinnerType {
     }
 }
 
+function createBasicPlayer(name: string): Player {
+    return {
+        name: name,
+        personId: name,
+        points: 0,
+        assists: 0,
+        reboundsTotal: 0,
+        reboundsDefensive: 0,
+        reboundsOffensive: 0,
+        freeThrowsMade: 0,
+        freeThrowsAttempted: 0,
+        twoPointersMade: 0,
+        twoPointersAttempted: 0,
+        threePointersMade: 0,
+        threePointersAttempted: 0,
+        blocks: 0,
+        blocksReceived: 0,
+        steals: 0,
+        turnovers: 0,
+        foulsTechnical: 0
+    }
+}
+
 function addFantasyPlayerStats(player: Player): Player {
     return {
         ...player,
@@ -78,9 +101,20 @@ function comparePlayersWrapper(stats: Statistic[]) {
     return (a: Player, b: Player) => comparePlayers(a, b, stats)
 }
 
-export function computeFantasyDraftResult(boxScore: BoxScore, config: FantasyDraftConfig, gameConfigIdx: number): FantasyDraftResult {
-    const gameData = boxScore.game
+export function computeFantasyDraftResult(boxScore: BoxScore | null, config: FantasyDraftConfig, gameConfigIdx: number): FantasyDraftResult {
     const gameConfig = config.games[gameConfigIdx]
+    
+    if (!boxScore) {
+        return {
+            status: 'Scheduled',
+            playersTeamA: gameConfig.playersTeamA.map(createBasicPlayer),
+            playersTeamB: gameConfig.playersTeamB.map(createBasicPlayer),
+            winner: null,
+            results: []
+        }
+    }
+    
+    const gameData = boxScore.game
 
     // Sort Players into Fantasy Teams
 
@@ -140,6 +174,7 @@ export function computeFantasyDraftResult(boxScore: BoxScore, config: FantasyDra
     })
 
     return {
+        status: boxScore.game.gameStatusText,
         date: boxScore.date,
         game: gameData,
         playersTeamA,
@@ -149,7 +184,7 @@ export function computeFantasyDraftResult(boxScore: BoxScore, config: FantasyDra
     }
 }
 
-export function computeeMultiFantasyDraftResult(draftResults: FantasyDraftResult[],  config: FantasyDraftConfig): MultiFantasyDraftResult {
+export function computeMultiFantasyDraftResult(draftResults: FantasyDraftResult[],  config: FantasyDraftConfig): MultiFantasyDraftResult {
 
     const results: StatResult[] = []
     let winsA = 0
@@ -205,20 +240,15 @@ export function computeeMultiFantasyDraftResult(draftResults: FantasyDraftResult
         })
     })
 
-    let status = 'Final'
-    let gamesCompleted = 0
+    const gameStates = draftResults.map((d) => d.status)
+    let status = ''
 
-    draftResults.forEach((g) => {
-        if (g && g.game.gameStatus) {
-            if (g.game.gameStatus == 'Done') {
-                gamesCompleted += 1
-            } else {
-                status = g.game.gameStatusText
-            }
-        }
-    })
-    if (gamesCompleted !== config.games.length) {
-        status = `(${gamesCompleted + 1}/${config.games.length}) ${status}`
+    if (gameStates.every((v) => v == 'Final')) {
+        status = 'Final'
+    } else if (gameStates.every((v) => v == 'Scheduled')) {
+        status = 'Scheduled'
+    } else {
+        status = 'Live'
     }
 
     return {

@@ -237,6 +237,54 @@ const FANTASY_TEAM_STATS_2025: Statistic[] = [
 
 export const FANTASY_DRAFTS: FantasyDraftConfig[] = [
     {
+        urlId: '2025-peru-hayden-test',
+        title: `Feb 8th, Happy B'day`,
+        stats: FANTASY_TEAM_STATS_2025,
+        captainTeamA: 'P. Dayani',
+        captainTeamB: 'H. Davila',
+        games: [
+            {
+                gameId: '0022400583',
+                playersTeamA: [
+                    'Giannis Antetokounmpo',
+                    'Shai Gilgeous-Alexander',
+                    'Damian Lillard',
+                ],
+                playersTeamB: [
+                    'Tyrese Haliburton',
+                    'Jayson Tatum',
+                    'Luka Doncic',
+                ]
+            },
+            {
+                gameId: '0022400583',
+                playersTeamA: [
+                    'Joel Embiid',
+                    'Giannis Antetokounmpo',
+                    'Nikola Jokic',
+                ],
+                playersTeamB: [
+                    'LeBron James',
+                    'Luka Doncic',
+                    'Jayson Tatum',
+                ]
+            },
+            {
+                gameId: '0022400583',
+                playersTeamA: [
+                    'Stephen Curry',
+                    'Trae Young',
+                    'Joel Embiid',
+                ],
+                playersTeamB: [
+                    'Giannis Antetokounmpo',
+                    'LeBron James',
+                    'Ja Morant',
+                ]
+            }
+        ] 
+    },
+    {
         urlId: '2025-peru-hayden-allstar',
         title: 'All Star 2025',
         stats: FANTASY_TEAM_STATS_2025,
@@ -308,20 +356,6 @@ export const FANTASY_DRAFTS: FantasyDraftConfig[] = [
             {
                 gameId: '0032100001',
                 playersTeamA: [
-                    'Stephen Curry',
-                    'Trae Young',
-                    'Joel Embiid',
-                    'Jayson Tatum',
-                    'DeMar DeRozan',
-                    'Luka Doncic',
-                    'Zach LaVine',
-                    'Jarrett Allen',
-                    'Rudy Gobert',
-                    'LaMelo Ball',
-                    'Fred VanVleet',
-                    'Jimmy Butler'
-                ],
-                playersTeamB: [
                     'Giannis Antetokounmpo',
                     'LeBron James',
                     'Ja Morant',
@@ -334,6 +368,20 @@ export const FANTASY_DRAFTS: FantasyDraftConfig[] = [
                     'Chris Paul',
                     'Donovan Mitchell',
                     'Dejounte Murray'
+                ],
+                playersTeamB: [
+                    'Stephen Curry',
+                    'Trae Young',
+                    'Joel Embiid',
+                    'Jayson Tatum',
+                    'DeMar DeRozan',
+                    'Luka Doncic',
+                    'Zach LaVine',
+                    'Jarrett Allen',
+                    'Rudy Gobert',
+                    'LaMelo Ball',
+                    'Fred VanVleet',
+                    'Jimmy Butler'
                 ]
             }
         ] 

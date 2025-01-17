@@ -6,6 +6,8 @@ import Image from 'next/image'
 import { CONFETTI_CONFIG } from "@/utils/constants";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
+// TODO: Add tie state
+
 type HeaderParams = {
     captainTeamA: string,
     captainTeamB: string,

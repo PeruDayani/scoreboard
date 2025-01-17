@@ -23,10 +23,13 @@ export default function FantasyDraftResults({ config, draftResult }: FancyParams
     const [selectedPlayerB, setSelectedPlayerB] = useState<Player>(activeGameData.playersTeamB[0])
 
     const activeGameChange = useCallback((i: number) => {
+        const newActiveGame = draftResult.draftResults[i]
+        console.log("Active Game: ", newActiveGame)
+
         setActiveGame(i)
-        setActiveGameData(draftResult.draftResults[i])
+        setActiveGameData(newActiveGame)
         setSelectedPlayerA(draftResult.draftResults[i].playersTeamA[0])
-        setSelectedPlayerB(draftResult.draftResults[i].playersTeamB[0])
+        setSelectedPlayerB(draftResult.draftResults[i].playersTeamB[0])    
     }, [draftResult, setActiveGame, setActiveGameData])
 
     return (
@@ -91,7 +94,7 @@ export default function FantasyDraftResults({ config, draftResult }: FancyParams
                     Roster
                 </Title>
 
-                <div className='w-80 flex justify-between items-center text-center text-xs'>
+                <div className='w-80 pt-2 flex justify-between items-center text-center text-xs'>
                     <PlayersList
                         players={activeGameData.playersTeamA}
                         activePlayerId={selectedPlayerA.personId}

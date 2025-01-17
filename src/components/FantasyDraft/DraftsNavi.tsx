@@ -7,16 +7,20 @@ type DraftsNaviParams = {
 }
 
 export default function DraftsNavi ({ games, activeGame, onClick }: DraftsNaviParams) {
+    
+    const flexCSS = games.length > 2 ? 'flex justify-between' : 'flex justify-evenly'
+    
     return (
-        <div className='flex p-2 justify-between sticky top-0 text-sm bg-purple-100'>
+        <div className={`${flexCSS} p-2 sticky top-0 bg-purple-100`}>
             {
                 games.map((g, i) => (
                     <div
                         key={i}
-                        className={`${activeGame == i? 'underline underline-offset-4' : ''}`}
+                        className='flex flex-col gap-1 text-center text-sm'
                         onClick={() => onClick(i)}
                     >
-                        Draft {i+1}
+                        <div className={`${activeGame == i? 'underline underline-offset-4' : ''} `}> Draft {i+1} </div>
+                        <div className="text-xs italic"> {g.status} </div>
                     </div>
                 ))
             }
