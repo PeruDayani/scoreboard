@@ -9,6 +9,10 @@ function cleanMinsPlayer(data: string) : number {
     return 0
 }
 
+function capitalizeFirstLetter(val: string) {
+    return String(val).charAt(0).toUpperCase() + String(val).slice(1);
+}
+
 function extractPlayerData(data: any) : Player {
     return {
         name: data.name,
@@ -50,10 +54,10 @@ function extractTeamData(data: any) : Team {
     }
 }
 
-function gameStatus(data: any) : string {    
+function gameStatus(data: any) : string {   
     if (data.includes('Final')) {
         return 'Done'
-    } else if (data.includes('ET') || data.includes('P')) {
+    } else if (data.includes('ET') || data.includes('P') || data.includes('pregame')) {
         return 'Scheduled'
     } else {
         return 'Live'
@@ -73,7 +77,7 @@ function cleanBoxscore (data: any) : BoxScore | null {
         const game : Game = {
             gameId: gameData.gameId,
             gameStatus: gameStatus(gameData.gameStatusText),
-            gameStatusText: gameData.gameStatusText,
+            gameStatusText: capitalizeFirstLetter(gameData.gameStatusText),
             homeTeam: extractTeamData(gameData.homeTeam),
             awayTeam: extractTeamData(gameData.awayTeam)
         }

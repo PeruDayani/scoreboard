@@ -2,7 +2,6 @@ import { computeFantasyDraftResult, computeMultiFantasyDraftResult } from '@/uti
 import { cleanBoxscore } from '@/utils/cleanBoxscore'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { FANTASY_DRAFTS } from '@/utils/constants'
-import { FantasyDraftResult } from '@/utils/types';
 
 export default async function handler(
   req: NextApiRequest,

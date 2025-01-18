@@ -37,16 +37,16 @@ export default function Header({
         }
 
         return tieGameImg
-    }, [isWinnerTeamA])
+    }, [winner, isWinnerTeamA])
 
     const triggerConfetti = useCallback(() => {
         setConfettiStatus(winner)
         setTimeout(() => setConfettiStatus(null), 1000)    
-    }, [])
+    }, [winner])
 
     useEffect(() => {
         confettiOnLoad && triggerConfetti()
-    }, [triggerConfetti])
+    }, [confettiOnLoad, triggerConfetti])
     
     return (
         <div onClick={triggerConfetti}>

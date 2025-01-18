@@ -1,16 +1,21 @@
-import { BoxScore, Player } from "./types"
+import { BoxScore } from "./types"
 
-function fetchPlayers(data: BoxScore) : string[] {
+function fetchPlayers(data: BoxScore) : { homePlayers: string[], awayPlayers: string[]} {
 
     if (data) {
-        const homePlayers: Player[] = data.game.homeTeam.players
-        const awayPlayers: Player[] = data.game.awayTeam.players
-        const allPlayers: Player[] = homePlayers.concat(awayPlayers)
+        const homePlayers = data.game.homeTeam.players.map((player) => player.name)
+        const awayPlayers = data.game.awayTeam.players.map((player) => player.name)
 
-        return allPlayers.map((player) => player.name)
+        return {
+            homePlayers,
+            awayPlayers
+        }
     }
 
-    return [`Well shit, you sure that's a valid game ID?`]
+    return {
+        homePlayers: [],
+        awayPlayers: []
+    }
 }
 
 export { fetchPlayers }

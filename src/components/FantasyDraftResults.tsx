@@ -48,7 +48,7 @@ export default function FantasyDraftResults({ config, draftResult }: FancyParams
         } catch (e) {
             console.log("Welp: ", e)
         }
-    }, [])
+    }, [draftResult.draftResults, activeGameChange])
 
     return (
         <div className='flex flex-col gap-4 font-mono antialiased mb-60'>
