@@ -1,6 +1,6 @@
 import { StatisticID, FantasyDraftConfig, Statistic } from "./types"
 
-export const REFRESH_INTERVAL: number = 5*1000
+export const REFRESH_INTERVAL: number = 60*1000
 
 export const NAVI_CONFIG = [
     {
