@@ -261,11 +261,11 @@ export const FANTASY_DRAFTS: FantasyDraftConfig[] = [
         ] 
     },
     {
-        urlId: '2025-peru-hayden-allstar',
-        title: 'All Star 2025 Test',
+        urlId: '2025-test',
+        title: '2025 Test Draft',
         stats: FANTASY_TEAM_STATS_2025,
-        captainTeamA: 'P. Dayani',
-        captainTeamB: 'H. Davila',
+        captainTeamA: 'Team A',
+        captainTeamB: 'Team B',
         games: [
             {
                 gameId: '0022400577',
