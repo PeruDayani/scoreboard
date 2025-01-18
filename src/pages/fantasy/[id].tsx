@@ -6,6 +6,8 @@ import { FANTASY_DRAFTS, REFRESH_INTERVAL } from '@/utils/constants';
 import { useRouter } from 'next/router'
 import { MultiFantasyDraftResult } from '@/utils/types';
 import FantasyDraftResults from '@/components/FantasyDraftResults';
+import Link from 'next/link';
+import Navi from '@/components/Navi';
 
 const fetcher: Fetcher<MultiFantasyDraftResult> = (url: RequestInfo | URL) => fetch(url).then(r => r.json())
 
@@ -43,16 +45,9 @@ export default function Fantasy() {
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <link rel="icon" href="/basketball.ico" />
           </Head>
-    
-          <div className='p-10 flex justify-center'>
-            <div className="mx-auto text-lg py-2 italic text-center"> 
-                <p> 
-                  Welp, it was going to break someday. 
-                </p>
-                <p> 
-                  Let me know @ <span className='underline text-purple-600'> perudayani@berkeley.edu </span>
-                </p>
-              </div>
+
+          <div className='p-10 flex flex-col justify-center font-mono antialiased'>
+            <Navi label='Invalid Draft ID' />
           </div>
         </>
       )

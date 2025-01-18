@@ -7,7 +7,6 @@ import FancyStatDisplay from "./FantasyDraft/FancyStatDisplay";
 import StatLabel from "./FantasyDraft/StatLabel";
 import PlayersList from "./FantasyDraft/PlayersList";
 import Navi from "./Navi";
-import Link from "next/link";
 import GameLabel from "./FantasyDraft/GameLabel";
 
 type FancyParams = {
