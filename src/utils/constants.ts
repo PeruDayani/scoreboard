@@ -237,6 +237,30 @@ const FANTASY_TEAM_STATS_2025: Statistic[] = [
 
 export const FANTASY_DRAFTS: FantasyDraftConfig[] = [
     {
+        urlId: '2025-peru-hayden-alllstar',
+        title: `All Star 2025`,
+        stats: FANTASY_TEAM_STATS_2025,
+        captainTeamA: 'P. Dayani',
+        captainTeamB: 'H. Davila',
+        games: [
+            {
+                gameId: '0032400011',
+                playersTeamA: ['TBD'],
+                playersTeamB: ['TBD']
+            },
+            {
+                gameId: '0032400021',
+                playersTeamA: ['TBD'],
+                playersTeamB: ['TBD']
+            },
+            {
+                gameId: '0032400031',
+                playersTeamA: ['TBD'],
+                playersTeamB: ['TBD']
+            }
+        ] 
+    },
+    {
         urlId: '2025-peru-hayden-test',
         title: `B'day Party`,
         stats: FANTASY_TEAM_STATS_2025,
