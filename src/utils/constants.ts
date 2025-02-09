@@ -1,6 +1,6 @@
 import { StatisticID, FantasyDraftConfig, Statistic } from "./types"
 
-export const REFRESH_INTERVAL: number = 60*1000
+export const REFRESH_INTERVAL: number = 3*1000
 
 export const NAVI_CONFIG = [
     {
@@ -134,7 +134,7 @@ const FANTASY_TEAM_STATS_2022: Statistic[] = [
 const FANTASY_TEAM_STATS_2023: Statistic[] = [
     {
         id: 'twoPointersFreeThrows',
-        label: `Inside the Arc`
+        label: `Inside`
     },
     {
         id: 'threePointersMade',
@@ -269,13 +269,41 @@ export const FANTASY_DRAFTS: FantasyDraftConfig[] = [
         games: [
             {
                 gameId: '0022400746',
-                playersTeamA: ['TBD'],
-                playersTeamB: ['TBD']
+                playersTeamA: [
+                    "Jalen Williams",
+                    "Jaren Jackson Jr.",
+                    "Isaiah Joe",
+                    "Santi Aldama",
+                    "Jay Huff",
+                    "Jaylen Wells"
+                ],
+                playersTeamB: [
+                    "Shai Gilgeous-Alexander",
+                    "Ja Morant",
+                    "Isaiah Hartenstein",
+                    "Desmond Bane",
+                    "Aaron Wiggins",
+                    "Brandon Clarke"
+                ]
             },
             {
                 gameId: '0022400748',
-                playersTeamA: ['TBD'],
-                playersTeamB: ['TBD']
+                playersTeamA: [
+                    "Jalen Brunson",
+                    "Derrick White",
+                    "Karl-Anthony Towns",
+                    "Kristaps Porziņģis",
+                    "Jrue Holiday",
+                    "Al Horford",
+                ],
+                playersTeamB: [
+                    "Jayson Tatum",
+                    "Josh Hart",
+                    "Jaylen Brown",
+                    "Mikal Bridges",
+                    "Precious Achiuwa",
+                    "Miles McBride",
+                ]
             },
             {
                 gameId: '0022400749',

@@ -136,6 +136,13 @@ export function computeFantasyDraftResult(boxScore: BoxScore | null, config: Fan
         }
     })
 
+    // If we haven't drafted yet
+    // TODO: Clean up the zero index craziness in Fantasy Draft Results
+    if (playersTeamA.length == 0 && playersTeamB.length == 0) {
+        playersTeamA.push(...gameConfig.playersTeamA.map(createBasicPlayer))
+        playersTeamB.push(...gameConfig.playersTeamB.map(createBasicPlayer))
+    }
+
     // Calculate Fantasy Team results
 
     const statsTeamA: AllStatistics = calcTeamStats(playersTeamA)
