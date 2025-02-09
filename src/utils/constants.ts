@@ -292,9 +292,9 @@ export const FANTASY_DRAFTS: FantasyDraftConfig[] = [
                     "Jalen Brunson",
                     "Derrick White",
                     "Karl-Anthony Towns",
-                    "Kristaps Porziņģis",
                     "Jrue Holiday",
                     "Al Horford",
+                    "Sam Hauser",
                 ],
                 playersTeamB: [
                     "Jayson Tatum",
@@ -307,8 +307,22 @@ export const FANTASY_DRAFTS: FantasyDraftConfig[] = [
             },
             {
                 gameId: '0022400749',
-                playersTeamA: ['TBD'],
-                playersTeamB: ['TBD']
+                playersTeamA: [
+                    "Nikola Jokić",
+                    "Jamal Murray",
+                    "Christian Braun",
+                    "Royce O'Neale",
+                    "Mason Plumlee",
+                    "Trey Alexander"
+                ],
+                playersTeamB: [
+                    "Devin Booker",
+                    "Tyus Jones",
+                    "Aaron Gordon",
+                    "Ryan Dunn",
+                    "Collin Gillespie",
+                    "Julian Strawther"
+                ]
             }
         ] 
     },
