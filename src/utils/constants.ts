@@ -1,6 +1,6 @@
 import { StatisticID, FantasyDraftConfig, Statistic } from "./types"
 
-export const REFRESH_INTERVAL: number = 3*1000
+export const REFRESH_INTERVAL: number = 2*1000
 
 export const NAVI_CONFIG = [
     {
@@ -245,8 +245,26 @@ export const FANTASY_DRAFTS: FantasyDraftConfig[] = [
         games: [
             {
                 gameId: '0032400011',
-                playersTeamA: ['TBD'],
-                playersTeamB: ['TBD']
+                playersTeamA: [
+                    "Victor Wembanyama",
+                    "Shai Gilgeous-Alexander",
+                    "Darius Garland",
+                    "Jaren Jackson Jr.",
+                    "Jalen Williams",
+                    "Jalen Brunson",
+                    "Trae Young",
+                    "Alperen Sengun",
+                ],
+                playersTeamB: [
+                    "Donovan Mitchell", 
+                    "Karl-Anthony Towns",
+                    "Anthony Edwards",
+                    "Cade Cunningham",
+                    "Evan Mobley",
+                    "Pascal Siakam",
+                    "Nikola Jokić",
+                    "Tyler Herro"
+                ]
             },
             {
                 gameId: '0032400021',
