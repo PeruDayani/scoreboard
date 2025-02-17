@@ -268,8 +268,24 @@ export const FANTASY_DRAFTS: FantasyDraftConfig[] = [
             },
             {
                 gameId: '0032400021',
-                playersTeamA: ['TBD'],
-                playersTeamB: ['TBD']
+                playersTeamA: [
+                    "Stephen Curry",
+                    "Kevin Durant",
+                    "Dalton Knecht",
+                    "Kyrie Irving",
+                    "Trayce Jackson-Davis",
+                    "Stephon Castle",
+                    "Jaylen Wells",
+                ],
+                playersTeamB: [
+                    "Jayson Tatum",
+                    "Damian Lillard",
+                    "Amen Thompson",
+                    "Zach Edey",
+                    "Jaylen Brown",
+                    "Keyonte George",
+                    "James Harden",
+                ]
             },
             {
                 gameId: '0032400031',
