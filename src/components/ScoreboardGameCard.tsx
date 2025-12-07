@@ -69,7 +69,7 @@ export default function ScoreboardGameCard({game}: {game: Game}) {
                 <Image src={homeTeamImageSrc} width="80" height="80" alt="homeTeam"/>
             </div>
 
-            <div className="m-auto font-medium">
+            <div className="m-auto font-medium h-12 flex items-center justify-center">
                 { displayContent }
             </div>
         </div>
