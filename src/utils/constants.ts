@@ -235,7 +235,64 @@ const FANTASY_TEAM_STATS_2025: Statistic[] = [
     },
 ]
 
+const FANTASY_TEAM_STATS_2026: Statistic[] = [
+    {
+        id: 'twoPointersFreeThrows',
+        label: `Inside`
+    },
+    {
+        id: 'threePointersMade',
+        label: `Treys`
+    },
+    {
+        id: 'assists',
+        label: 'Assists'
+    },
+    {
+        id: 'reboundsTotal',
+        label: 'Rebounds'
+    },
+    {
+        id: 'stealsBlocksTurnovers',
+        label: `Hustle`
+    },
+    {
+        id: 'draftedAt',
+        label: `Drafted`,
+        ignore: true,
+    },
+]
+
 export const FANTASY_DRAFTS: FantasyDraftConfig[] = [
+    {
+        urlId: '2026-peru-hayden-allstar',
+        title: 'All Star 2026',
+        stats: FANTASY_TEAM_STATS_2026,
+        captainTeamA: 'P. Dayani',
+        captainTeamB: 'H. Davila',
+        games: [
+            {
+                gameId: '0032500011',
+                playersTeamA: [],
+                playersTeamB: [],
+            },
+            {
+                gameId: '0032500021',
+                playersTeamA: [],
+                playersTeamB: [],
+            },
+            {
+                gameId: '0032500031',
+                playersTeamA: [],
+                playersTeamB: [],
+            },
+            {
+                gameId: '0032500041',
+                playersTeamA: [],
+                playersTeamB: [],
+            }
+        ]
+    },
     {
         urlId: '2025-peru-hayden-alllstar',
         title: `All Star 2025`,
@@ -506,7 +563,45 @@ export const FANTASY_DRAFTS: FantasyDraftConfig[] = [
                     "Nikola Jokić",
                     "Spencer Jones"
                 ]
-            }
+            },
+            {
+                gameId: '0022400746',
+                playersTeamA: [
+                    "Jalen Williams",
+                    "Jaren Jackson Jr.",
+                    "Isaiah Joe",
+                    "Santi Aldama",
+                    "Jay Huff",
+                    "Jaylen Wells"
+                ],
+                playersTeamB: [
+                    "Shai Gilgeous-Alexander",
+                    "Ja Morant",
+                    "Isaiah Hartenstein",
+                    "Desmond Bane",
+                    "Aaron Wiggins",
+                    "Brandon Clarke"
+                ]
+            },
+            {
+                gameId: '0022400746',
+                playersTeamA: [
+                    "Jalen Williams",
+                    "Jaren Jackson Jr.",
+                    "Isaiah Joe",
+                    "Santi Aldama",
+                    "Jay Huff",
+                    "Jaylen Wells"
+                ],
+                playersTeamB: [
+                    "Shai Gilgeous-Alexander",
+                    "Ja Morant",
+                    "Isaiah Hartenstein",
+                    "Desmond Bane",
+                    "Aaron Wiggins",
+                    "Brandon Clarke"
+                ]
+            },
         ] 
     },
     {

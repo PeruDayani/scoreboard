@@ -26,11 +26,11 @@ type StatDisplayParams = {
 
 function StatDisplay({ winner, total, breakdown}: StatDisplayParams) {
     return (
-        <div className='w-1/3 min-w-fit flex flex-col gap-2 justify-center items-center'>
+        <div className='w-1/3 flex flex-col gap-2 justify-center items-center'>
             <div className={`${winner ? 'border-b-2 border-neutral-800' : ''}`}>
                 <SlotCounter value={total}/>
             </div>
-            <div className="text-xs overflow-visible">
+            <div className="text-xs text-center overflow-wrap">
                 {breakdown}
             </div>
         </div>
