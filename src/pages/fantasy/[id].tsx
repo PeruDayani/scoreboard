@@ -18,8 +18,6 @@ export default function Fantasy() {
     const { data, error, isLoading } = useSWR(id ? `/api/fantasy/${id}` : null, fetcher, { refreshInterval: REFRESH_INTERVAL })
     const config = FANTASY_DRAFTS.find((draft) => draft.urlId == id)
 
-    console.log("Fetched data: ", data)
-
     if (!data || isLoading) {
       return (
         <>
@@ -54,7 +52,7 @@ export default function Fantasy() {
       )
     }
 
-    if (data.draftResults.length < 1) {
+    if (data.status == 'Scheduled' || data.draftResults.length < 1) {
       return (
         <>
           <Head>

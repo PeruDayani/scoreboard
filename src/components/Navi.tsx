@@ -1,8 +1,6 @@
 import { NAVI_CONFIG } from "@/utils/constants"
-import { link } from "fs"
 import Link from "next/link"
 import { useRouter } from "next/router"
-import { useMemo } from "react"
 
 type NaviParams = {
     label: string
