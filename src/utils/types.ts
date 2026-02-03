@@ -119,3 +119,11 @@ export type MultiFantasyDraftResult = {
     results: StatResult[],
     draftResults: FantasyDraftResult[]
 }
+
+export type MockDraftData = {
+    gameDate: string,
+    gameId: string,
+    gameLabel: string,
+    homePlayers: string[],
+    awayPlayers: string[],
+}

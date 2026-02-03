@@ -1,7 +1,7 @@
-import { fetchPlayers } from '@/utils/cleanPlayersData'
+import { fetchMockDraftData } from '@/utils/cleanMockDraftData'
 import { cleanBoxscore } from '@/utils/cleanBoxscore'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { BoxScore } from '@/utils/types';
+import { MockDraftData } from '@/utils/types';
 
 export default async function handler(
   req: NextApiRequest,
@@ -16,9 +16,9 @@ export default async function handler(
     const data  = await fetch(url)
         .then((res) => res.json())
         .then((data) => cleanBoxscore(data))
-        .then((data) => fetchPlayers(data as BoxScore))
+        .then((data) => fetchMockDraftData(data))
 
-    res.status(200).json(data)
+    res.status(200).json(data as MockDraftData)
   } catch (error: any) {
     console.log("Error: ", error)
     res.status(404).json({error})
