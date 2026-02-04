@@ -27,6 +27,14 @@ export type AllStatistics = {
     stealsBlocks?: number,
     stealsBlocksTurnovers?: number,
     draftedAt?: number,
+
+    twoPointersFreeThrowsPer36?: number,
+    threePointersMadePer36?: number,
+    assistsPer36?: number,
+    reboundsTotalPer36?: number,
+    stealsBlocksTurnoversPer36?: number,
+
+    draftScore?: number,
 }
 
 export type StatisticID = keyof AllStatistics
@@ -126,4 +134,22 @@ export type MockDraftData = {
     gameLabel: string,
     homePlayers: string[],
     awayPlayers: string[],
+}
+
+export type AnalyzedPlayer = Player & {
+    gameId: string,
+    gameLabel: string,
+    gameDate: string,
+    teamName: string,
+}
+
+export type GameInfo = {
+    gameId: string,
+    gameLabel: string,
+    gameDate: string,
+}
+
+export type AnalyzeApiResponse = {
+    players: AnalyzedPlayer[],
+    games: GameInfo[],
 }

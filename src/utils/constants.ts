@@ -240,7 +240,7 @@ const FANTASY_TEAM_STATS_2025: Statistic[] = [
   }
 ]
 
-const FANTASY_TEAM_STATS_2026: Statistic[] = [
+export const FANTASY_TEAM_STATS_2026: Statistic[] = [
   {
     id: 'twoPointersFreeThrows',
     label: `Inside`
@@ -265,6 +265,29 @@ const FANTASY_TEAM_STATS_2026: Statistic[] = [
     id: 'draftedAt',
     label: `Drafted`,
     ignore: true
+  }
+]
+
+export const ANALYZE_STATS: Statistic[] = [
+  {
+    id: 'twoPointersFreeThrowsPer36',
+    label: `Inside per 36`
+  },
+  {
+    id: 'threePointersMadePer36',
+    label: `3PM per 36`
+  },
+  {
+    id: 'assistsPer36',
+    label: `AST per 36`
+  },
+  {
+    id: 'reboundsTotalPer36',
+    label: `REB per 36`
+  },
+  {
+    id: 'stealsBlocksTurnoversPer36',
+    label: `Hustle per 36`
   }
 ]
 
