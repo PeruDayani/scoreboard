@@ -3,8 +3,6 @@ import { addFantasyPlayerStats, comparePlayers } from '@/utils/computeFantasyDra
 import { ANALYZE_STATS } from '@/utils/constants'
 import { AnalyzedPlayer, AnalyzeApiResponse, BoxScore, GameInfo } from '@/utils/types'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import fs from 'fs'
-import path from 'path'
 
 const GAME_IDS = [
   '0032400011',
@@ -76,10 +74,6 @@ export default async function handler(
 
   // Get games array from map
   const games = Array.from(gamesMap.values())
-
-  // Save to JSON file (for backup/debugging)
-  const outputPath = path.join(process.cwd(), 'public', 'analyzed-players.json')
-  fs.writeFileSync(outputPath, JSON.stringify(rankedPlayers, null, 2))
 
   res.status(200).json({ players: rankedPlayers, games })
 }
