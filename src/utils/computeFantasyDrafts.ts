@@ -70,17 +70,43 @@ function createBasicPlayer(name: string): Player {
     }
 }
 
-function addFantasyPlayerStats(player: Player): Player {
+export function addFantasyPlayerStats(player: Player): Player {
+
+
+    const minutes = player.minutes || 0
+    const reboundsWeighted = player.reboundsDefensive + 2*player.reboundsOffensive
+    const twoPointersFreeThrows = player.freeThrowsMade + 2*player.twoPointersMade
+    const stealsBlocks = player.steals + player.blocks
+    const stealsBlocksTurnovers = player.steals + player.blocks - player.turnovers
+    const twoPointersFreeThrowsPer36 = twoPointersFreeThrows / minutes * 36
+    const assistsPer36 = player.assists / minutes * 36
+    const reboundsTotalPer36 = player.reboundsTotal / minutes * 36
+    const stealsBlocksTurnoversPer36 = stealsBlocksTurnovers / minutes * 36
+    const threePointersMadePer36 = player.threePointersMade / minutes * 36
+
+    const draftScore = 
+    (twoPointersFreeThrowsPer36 * 1.15) + 
+    (threePointersMadePer36 * 1.00) + 
+    (assistsPer36 * 1.05) + 
+    (reboundsTotalPer36 * 0.95) + 
+    (stealsBlocksTurnoversPer36 * 1.25)
+
     return {
         ...player,
-        reboundsWeighted: player.reboundsDefensive + 2*player.reboundsOffensive,
-        twoPointersFreeThrows: player.freeThrowsMade + 2*player.twoPointersMade,
-        stealsBlocks: player.steals + player.blocks,
-        stealsBlocksTurnovers: player.steals + player.blocks - player.turnovers,
+        reboundsWeighted,
+        twoPointersFreeThrows,
+        stealsBlocks,
+        stealsBlocksTurnovers,
+        twoPointersFreeThrowsPer36,
+        threePointersMadePer36,
+        assistsPer36,
+        reboundsTotalPer36,
+        stealsBlocksTurnoversPer36,
+        draftScore,
     }
 }
 
-function comparePlayers(playerA: Player, playerB: Player, stats: Statistic[]): number {
+export function comparePlayers(playerA: Player, playerB: Player, stats: Statistic[]): number {
     const results = stats.filter((s) => !s.ignore).map((stat: any) => {
         let playerAScore = playerA[stat.id as StatisticID] || 0
         let playerBScore = playerB[stat.id as StatisticID] || 0
