@@ -301,23 +301,42 @@ export const FANTASY_DRAFTS: FantasyDraftConfig[] = [
     games: [
       {
         gameId: '0032500011',
-        playersTeamA: [],
-        playersTeamB: []
+        playersTeamA: [
+          'Victor Wembanyama',
+          'Tyrese Maxey',
+          'Karl-Anthony Towns',
+          'Devin Booker',
+          'Norman Powell',
+          'Jalen Johnson',
+          'Pascal Siakam',
+          'Deni Avdija',
+          'Alperen Sengun',
+        ],
+        playersTeamB: [
+          'Cade Cunningham',
+          'Jamal Murray',
+          'Anthony Edwards',
+          'Jalen Duren',
+          'Luka Dončić',
+          'Nikola Jokić',
+          'Scottie Barnes',
+          'Chet Holmgren',
+        ]
       },
       {
         gameId: '0032500021',
-        playersTeamA: [],
-        playersTeamB: []
+        playersTeamA: [''],
+        playersTeamB: ['']
       },
       {
         gameId: '0032500031',
-        playersTeamA: [],
-        playersTeamB: []
+        playersTeamA: [''],
+        playersTeamB: ['']
       },
       {
         gameId: '0032500041',
-        playersTeamA: [],
-        playersTeamB: []
+        playersTeamA: [''],
+        playersTeamB: ['']
       }
     ]
   },
