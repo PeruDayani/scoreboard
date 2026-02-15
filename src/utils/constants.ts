@@ -310,7 +310,7 @@ export const FANTASY_DRAFTS: FantasyDraftConfig[] = [
           'Jalen Johnson',
           'Pascal Siakam',
           'Deni Avdija',
-          'Alperen Sengun',
+          'Alperen Sengun'
         ],
         playersTeamB: [
           'Cade Cunningham',
@@ -320,13 +320,32 @@ export const FANTASY_DRAFTS: FantasyDraftConfig[] = [
           'Luka Dončić',
           'Nikola Jokić',
           'Scottie Barnes',
-          'Chet Holmgren',
+          'Chet Holmgren'
         ]
       },
       {
         gameId: '0032500021',
-        playersTeamA: [''],
-        playersTeamB: ['']
+        playersTeamA: [
+          'Anthony Edwards',
+          'Jalen Duren',
+          'Kevin Durant',
+          'Donovan Mitchell',
+          'Kawhi Leonard',
+          'LeBron James',
+          'Jalen Johnson',
+          'Chet Holmgren',
+          'Stephen Curry'
+        ],
+        playersTeamB: [
+          'Jaylen Brown',
+          'Tyrese Maxey',
+          'Jalen Brunson',
+          'Devin Booker',
+          'Scottie Barnes',
+          'Cade Cunningham',
+          "De'Aaron Fox",
+          'Brandon Ingram'
+        ]
       },
       {
         gameId: '0032500031',
