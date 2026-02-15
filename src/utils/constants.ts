@@ -349,8 +349,30 @@ export const FANTASY_DRAFTS: FantasyDraftConfig[] = [
       },
       {
         gameId: '0032500031',
-        playersTeamA: [''],
-        playersTeamB: ['']
+        playersTeamA: [
+          'Victor Wembanyama',
+          'Kawhi Leonard',
+          'Karl-Anthony Towns',
+          'Jamal Murray',
+          'Donovan Mitchell',
+          'Pascal Siakam',
+          'Deni Avdija',
+          "De'Aaron Fox",
+          'Brandon Ingram',
+          'Giannis Antetokounmpo'
+        ],
+        playersTeamB: [
+          'Jaylen Brown',
+          'Kevin Durant',
+          'LeBron James',
+          'Jalen Brunson',
+          'Alperen Sengun',
+          'Nikola Jokić',
+          'Norman Powell',
+          'Luka Dončić',
+          'Stephen Curry',
+          'Shai Gilgeous-Alexander'
+        ]
       },
       {
         gameId: '0032500041',
