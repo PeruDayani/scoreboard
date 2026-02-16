@@ -5,12 +5,10 @@ import { AnalyzedPlayer, AnalyzeApiResponse, BoxScore, GameInfo } from '@/utils/
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 const GAME_IDS = [
-  '0032400011',
-  '0032400021',
-  '0032400031',
-  '0032300001',
-  '0032200001',
-  '0032100001'
+  '0032500011',
+  '0032500021',
+  '0032500031',
+  '0032500041'
 ]
 
 export default async function handler(
