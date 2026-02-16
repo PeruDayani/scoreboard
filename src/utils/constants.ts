@@ -376,8 +376,26 @@ export const FANTASY_DRAFTS: FantasyDraftConfig[] = [
       },
       {
         gameId: '0032500041',
-        playersTeamA: [''],
-        playersTeamB: ['']
+        playersTeamA: [
+          'Anthony Edwards',
+          'Jalen Duren',
+          'LeBron James',
+          'Scottie Barnes',
+          'Devin Booker',
+          "De'Aaron Fox",
+          'Jalen Johnson',
+          'Chet Holmgren'
+        ],
+        playersTeamB: [
+          'Kawhi Leonard',
+          'Tyrese Maxey',
+          'Kevin Durant',
+          'Cade Cunningham',
+          'Jaylen Brown',
+          'Donovan Mitchell',
+          'Jalen Brunson',
+          'Brandon Ingram'
+        ]
       }
     ]
   },
